@@ -1,0 +1,20 @@
+# Project: [SaaS Name]
+
+## What this is
+[One sentence: the job the product does for the user]
+
+## Core principles for this codebase
+- Modular monolith
+- Design system first (components/ui)
+- Information architecture and progressive disclosure before features
+- Multi-tenancy via tenant_id + RLS from day one
+- Empty, loading and error states are part of every feature
+
+## Gotchas
+- All UI must come from the design system
+- Never invent one-off styles
+- Auth context always carries tenant_id
+- Prefer composition over new components
+
+## Skills to use
+Always load the premium-saas-claude-code skill when adding features, screens or structure.
