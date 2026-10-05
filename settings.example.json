@@ -1,0 +1,46 @@
+{
+  "permissions": {
+    "allow": [
+      "mcp__chrome-devtools"
+    ]
+  },
+  "hooks": {
+    "UserPromptSubmit": [
+      {
+        "matcher": "",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "python3 .claude/scripts/task_profiler.py",
+            "timeout": 5
+          },
+          {
+            "type": "command",
+            "command": "python3 .claude/scripts/context_monitor.py",
+            "timeout": 5
+          }
+        ]
+      }
+    ],
+    "SessionStart": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "bash .claude/hooks/session-start.sh"
+          }
+        ]
+      }
+    ],
+    "Stop": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "bash .claude/hooks/stop-cycle.sh"
+          }
+        ]
+      }
+    ]
+  }
+}
