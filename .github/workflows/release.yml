@@ -1,0 +1,20 @@
+name: Release
+# Publishes the version below once; re-running is a no-op if the tag exists.
+on:
+  push:
+    branches: [main]
+    paths: ['.github/workflows/release.yml']
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Create v0.1.0
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          if gh release view v0.1.0 >/dev/null 2>&1; then echo "v0.1.0 already exists"; exit 0; fi
+          gh release create v0.1.0 --target "$GITHUB_SHA" --title "v0.1.0 — first public release" --notes "First public release of the Claude Code toolkit: 9 role subagents, 13 slash commands, 11 skills, session-start and stop-cycle hooks, and a context-window monitor with 19 tests."
