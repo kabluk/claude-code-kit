@@ -1,5 +1,7 @@
 # claude-code-kit
 
+![claude-code-kit](.github/social-preview.png)
+
 [![CI](https://github.com/kabluk/claude-code-kit/actions/workflows/ci.yml/badge.svg)](https://github.com/kabluk/claude-code-kit/actions/workflows/ci.yml)
 
 The Claude Code toolkit I reuse across 7+ repositories: role subagents, slash commands,
