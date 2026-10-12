@@ -19,3 +19,5 @@ and three options at the end of every cycle.
   `python3 scripts/context_monitor.test.py && bash -n hooks/*.sh scripts/*.sh skills/*/*.sh && bash scripts/check-catalog.sh`.
 - A new or renamed skill, agent or command gets its row in `skills/skill-catalog/SKILL.md`
   in the same commit.
+- A `description` containing `: ` breaks YAML frontmatter (CI's "Frontmatter parses"
+  step fails). Wrap it in single quotes; double quotes clash with quoted triggers.

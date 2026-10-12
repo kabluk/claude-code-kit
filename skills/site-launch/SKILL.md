@@ -1,6 +1,6 @@
 ---
 name: site-launch
-description: Launch checklist for a new public site or web service, proven against the live URL: one canonical HTTPS host, indexable (robots, sitemap, no noindex), page basics, analytics that actually receives an event, Search Console, legal pages, forms and email, monitoring. Use before announcing or opening a site to traffic, when moving a site to a new domain or host, when "nothing shows up in Google" or analytics is empty after launch, and for the day-7 check after launch.
+description: 'Launch checklist for a new public site or web service, proven against the live URL: one canonical HTTPS host, indexable (robots, sitemap, no noindex), page basics, analytics that actually receives an event, Search Console, legal pages, forms and email, monitoring. Use before announcing or opening a site to traffic, when moving a site to a new domain or host, when "nothing shows up in Google" or analytics is empty after launch, and for the day-7 check after launch.'
 ---
 
 # Site launch
