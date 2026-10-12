@@ -91,6 +91,7 @@ Source: **kit** = `kabluk/claude-code-kit`, **idea-gates** = `kabluk/idea-gates`
 
 | Name | Kind | Reach for it when | Source |
 |---|---|---|---|
+| `site-launch` | skill | Before opening a new site to traffic, moving domain or host, "nothing in Google" or empty analytics: live check, analytics event, Search Console, legal, forms, monitoring. | kit |
 | `growth-strategist` | agent | Positioning, launch plan, marketing experiments, content, growth metrics — once goal and audience are defined. | kit |
 
 ### 6. Access, credentials and environment
@@ -148,6 +149,5 @@ being told.
 Jobs that recur with no tool yet — `harvest` candidates, not tools to
 invent ahead of a real repeat:
 
-- launch checklist for a new site (domain, analytics, sitemap, Search Console, legal pages);
 - technical / on-page SEO audit of a live site;
 - product analytics setup (events, funnels) beyond the `data-engineer` role.

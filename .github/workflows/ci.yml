@@ -25,7 +25,7 @@ jobs:
 
       - name: Shell syntax (bash -n)
         run: |
-          for f in hooks/*.sh scripts/*.sh; do
+          for f in hooks/*.sh scripts/*.sh skills/*/*.sh; do
             echo "bash -n $f"
             bash -n "$f"
           done
