@@ -74,3 +74,4 @@ the same repeat builds it.
 ## Ledger
 
 <!-- date | project | repeat (count) → home -->
+2026-10-12 | claude-code-kit | skills existed in 5 repos but sessions never offered them; owner asked for one list by job (2+) → skill `skill-catalog` + `hooks/skill-catalog.sh` (injected at start) + `scripts/check-catalog.sh` (CI)

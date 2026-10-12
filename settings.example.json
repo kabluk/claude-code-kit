@@ -28,6 +28,10 @@
           {
             "type": "command",
             "command": "bash .claude/hooks/session-start.sh"
+          },
+          {
+            "type": "command",
+            "command": "bash .claude/hooks/skill-catalog.sh"
           }
         ]
       }

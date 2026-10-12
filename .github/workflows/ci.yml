@@ -30,6 +30,12 @@ jobs:
             bash -n "$f"
           done
 
+      - name: Skill catalog lists every skill, agent and command
+        run: bash scripts/check-catalog.sh
+
+      - name: Skill catalog hook prints the catalog
+        run: CLAUDE_PROJECT_DIR=$PWD bash hooks/skill-catalog.sh | grep -q '^## Skill catalog'
+
       - name: JSON is valid
         run: python -m json.tool settings.example.json > /dev/null
 

@@ -14,10 +14,17 @@ drift silently.
 |---|---|
 | `agents/` | 9 role subagents: backend, frontend, data, devops, QA, architect, product, growth, niche-finder |
 | `commands/` | 13 slash commands: `/analyze`, `/discover`, `/deepdive`, `/roadmap`, `/task-loop`, `/workflow-graph`, … |
-| `skills/` | 11 skills: `harvest`, `external-review`, `ui-from-screenshot` (Playwright pixel diff), `ux-ease-audit`, `writing-for-agents`, … |
-| `hooks/` | `session-start.sh` (start-of-session ritual), `stop-cycle.sh` (no finishing a cycle that had commits without next-step options and a harvest reminder) |
-| `scripts/` | `context_monitor.py` (warns before the context window fills, with tests), `orphan-branches.sh` |
+| `skills/` | 12 skills, indexed by job in [`skill-catalog`](skills/skill-catalog/SKILL.md): `harvest`, `external-review`, `ui-from-screenshot` (Playwright pixel diff), `ux-ease-audit`, `writing-for-agents`, … |
+| `hooks/` | `session-start.sh` (start-of-session ritual), `skill-catalog.sh` (prints the catalog into every session, marking what the repo lacks), `stop-cycle.sh` (no finishing a cycle that had commits without next-step options and a harvest reminder) |
+| `scripts/` | `context_monitor.py` (warns before the context window fills, with tests), `check-catalog.sh` (CI: every skill, agent and command has a catalog row), `orphan-branches.sh` |
 | `docs/playbook/` | `COLLABORATION.md` (the cross-project rules the hooks refer to), `HARVEST.md` (ledger of extracted lessons) |
+
+## Which skill for what
+
+[`skills/skill-catalog/SKILL.md`](skills/skill-catalog/SKILL.md) is the one list of every
+skill, subagent and command, grouped by job: validate an idea, plan, build a site or
+service, quality and UX, launch, access, process. Add a row there whenever you add a
+skill; CI fails otherwise.
 
 ## Install
 
@@ -45,6 +52,7 @@ cp ~/claude-code-kit/settings.example.json .claude/settings.json   # or merge in
 | Event | Command | What it does |
 |---|---|---|
 | `SessionStart` | `bash .claude/hooks/session-start.sh` | Injects the start ritual and the `caveman` style rules, lists which credentials are set (names only) |
+| `SessionStart` | `bash .claude/hooks/skill-catalog.sh` | Prints the skill catalog by job, marking skills this repo lacks, so the session offers the right one |
 | `UserPromptSubmit` | `python3 .claude/scripts/task_profiler.py` | Suggests Haiku / Sonnet / Opus for the prompt |
 | `UserPromptSubmit` | `python3 .claude/scripts/context_monitor.py` | Warns at 70 % context, hands over a new-session prompt at 85 % |
 | `Stop` | `bash .claude/hooks/stop-cycle.sh` | Blocks the end of a cycle that committed without three next-step options |
