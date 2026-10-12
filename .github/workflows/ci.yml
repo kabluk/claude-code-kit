@@ -36,6 +36,16 @@ jobs:
       - name: Skill catalog hook prints the catalog
         run: CLAUDE_PROJECT_DIR=$PWD bash hooks/skill-catalog.sh | grep -q '^## Skill catalog'
 
+      - name: kit-sync installs, updates and honours kit-local
+        run: |
+          p=$(mktemp -d); mkdir -p "$p/.claude/skills/harvest" "$p/.claude/skills/gate"
+          echo old > "$p/.claude/skills/harvest/SKILL.md"; echo old > "$p/.claude/skills/gate/SKILL.md"
+          echo 'skills/gate  # local on purpose' > "$p/.claude/kit-local"
+          bash scripts/kit-sync.sh update "$p" | grep -q '^updated  skills/harvest'
+          grep -q '^old$' "$p/.claude/skills/gate/SKILL.md"
+          (cd "$p" && bash "$GITHUB_WORKSPACE/scripts/kit-sync.sh" install skills/site-launch | grep -q '^installed  skills/site-launch')
+          test -f "$p/.claude/skills/site-launch/launch-check.sh"
+
       - name: JSON is valid
         run: python -m json.tool settings.example.json > /dev/null
 

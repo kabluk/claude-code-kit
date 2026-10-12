@@ -36,7 +36,7 @@ Source: **kit** = `kabluk/claude-code-kit`, **idea-gates** = `kabluk/idea-gates`
 
 | Name | Kind | Reach for it when | Source |
 |---|---|---|---|
-| `idea-gates` | skill | Any new idea, niche, "is X worth building": six founder-feasibility gates, then market, then red-team, then a verdict. Always first. | idea-gates |
+| `idea-gates` | skill | Any new idea, niche, "is X worth building": six founder-feasibility gates, then market, then red-team, then a verdict. Always first (in `lab` its Russian twin `blue-ocean` takes this place). | idea-gates |
 | `blue-ocean` | skill | Same job in Russian with DataForSEO scripts (`gap-scan`, `pain-scan`); used inside `lab`. | lab |
 | `idea-audit` | skill | An idea survived the gates; before committing a build week: ToS of data sources, confounders, multi-model kill-tests. | kit |
 | `idea-audit` | command | Same audit as a slash command. | kit |
@@ -116,20 +116,21 @@ Source: **kit** = `kabluk/claude-code-kit`, **idea-gates** = `kabluk/idea-gates`
 
 ## Install a missing one
 
-Cloud sessions don't follow symlinks; copy.
+Cloud sessions don't follow symlinks; copy. `scripts/kit-sync.sh` in the kit
+does it and shows what drifted:
 
 ```bash
-# from kit (skill, agent or command NAME):
 git clone --depth 1 https://github.com/kabluk/claude-code-kit /tmp/kit
-cp -r /tmp/kit/skills/NAME .claude/skills/        # skill
-cp /tmp/kit/agents/NAME.md .claude/agents/        # agent
-cp /tmp/kit/commands/NAME.md .claude/commands/    # command
+bash /tmp/kit/scripts/kit-sync.sh status                 # same / differs / missing / kept
+bash /tmp/kit/scripts/kit-sync.sh install skills/NAME    # or agents/NAME, commands/NAME, or all
+bash /tmp/kit/scripts/kit-sync.sh update                 # bring differing copies up to the kit
 # idea-gates lives in its own repo:
 git clone https://github.com/kabluk/idea-gates .claude/skills/idea-gates
 ```
 
-Copies drift. Before editing a copy in a project, check whether the kit
-version is newer; fix in the kit first, then copy out.
+A copy changed on purpose (a translation, a template rewrite) goes in
+`.claude/kit-local` with the reason; `update` leaves it alone. Shared
+behaviour gets fixed in the kit first, then copied out.
 
 ## Add, rename or retire a skill
 
