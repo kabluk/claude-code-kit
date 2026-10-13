@@ -1,0 +1,15 @@
+{
+  "name": "kabluk",
+  "description": "kabluk's Claude Code plugins: skills, subagents and commands from a solo builder's workshop.",
+  "owner": {
+    "name": "kabluk",
+    "url": "https://github.com/kabluk"
+  },
+  "plugins": [
+    {
+      "name": "solo-builder-kit",
+      "source": "./",
+      "description": "Skills, role subagents and slash commands from a solo builder's workshop."
+    }
+  ]
+}
