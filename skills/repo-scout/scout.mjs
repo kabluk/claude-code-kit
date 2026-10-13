@@ -76,7 +76,9 @@ for (const r of pool.values()) {
 
 // 3. Write the digest of candidates; the agent verifies each one before the owner sees it.
 const fmt = x => {
-  const r = x.r, delta = x.gained != null ? ` (+${x.gained} since last run)` : ` (new; ~${Math.round(x.velocity)}/day since creation)`
+  const r = x.r, young = (now - new Date(r.created_at)) / 864e5 <= DAYS
+  const delta = x.gained != null ? ` (+${x.gained} since last run)`
+    : ` (first sighting; ${young ? 'created ' + r.created_at.slice(0, 10) : 'established'}, ~${Math.round(x.velocity)}/day lifetime)`
   return `- [${r.full_name}](${r.html_url}) ★${r.stargazers_count}${delta} · ${r.language || '—'} · ${r.license?.spdx_id || 'no licence'} · pushed ${r.pushed_at.slice(0, 10)}\n` +
     `  ${(r.description || '').replace(/\s+/g, ' ').slice(0, 200)}\n  matched: ${x.hit.join(', ')} · score ${x.score.toFixed(1)}\n  verdict: _to verify_`
 }
