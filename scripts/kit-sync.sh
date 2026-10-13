@@ -10,7 +10,7 @@
 #           plus project-only items. Changes nothing.
 #   update  overwrites every differing item with the kit version, except
 #           those listed in <project>/.claude/kit-local; refreshes
-#           .claude/hooks/skill-catalog.sh when present. Installs nothing new.
+#           .claude/hooks/{skill-catalog,thread-check}.sh when present. Installs nothing new.
 #   install copies missing items in (e.g. skills/site-launch agents/qa-engineer),
 #           or every missing item with 'all'.
 #   diff    shows project-vs-kit diff for one item, e.g. skills/harvest.
@@ -72,11 +72,14 @@ for k in skills agents commands; do
   done
 done
 
-h="$dst/hooks/skill-catalog.sh"
-if [ -f "$h" ] && ! cmp -s "$h" "$kit/hooks/skill-catalog.sh"; then
-  if [ "$cmd" = update ]; then cp "$kit/hooks/skill-catalog.sh" "$h"; echo "updated  hooks/skill-catalog.sh"; changed=$((changed + 1))
-  else echo "differs  hooks/skill-catalog.sh"; fi
-fi
+# Generic hooks the kit owns outright (project hooks like session-start.sh are left alone).
+for hk in skill-catalog.sh thread-check.sh; do
+  h="$dst/hooks/$hk"
+  if [ -f "$h" ] && ! cmp -s "$h" "$kit/hooks/$hk"; then
+    if [ "$cmd" = update ]; then cp "$kit/hooks/$hk" "$h"; echo "updated  hooks/$hk"; changed=$((changed + 1))
+    else echo "differs  hooks/$hk"; fi
+  fi
+done
 
 echo
 echo "same: $n_same  differs: $n_diff  missing: $n_miss  kept (kit-local): $n_kept"

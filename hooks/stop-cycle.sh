@@ -66,7 +66,7 @@ for l in lines[start:]:
 
 if worked and not asked:
     need = [] if harvested else ["the `harvest` skill (P-09): what repeated, where it went, an entry in docs/playbook/HARVEST.md"]
-    need.append("three next-step options via AskUserQuestion (P-08)")
+    need.append("three next-step options via AskUserQuestion (P-08), each marked [here] or [new session: repo] with a ready prompt (P-17)")
     print(json.dumps({
         "decision": "block",
         "reason": "The work cycle is over (there were commits/merges), but not done yet: "

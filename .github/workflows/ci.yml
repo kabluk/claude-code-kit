@@ -46,6 +46,13 @@ jobs:
           (cd "$p" && bash "$GITHUB_WORKSPACE/scripts/kit-sync.sh" install skills/site-launch | grep -q '^installed  skills/site-launch')
           test -f "$p/.claude/skills/site-launch/launch-check.sh"
 
+      - name: thread-check hook finds the named thread
+        run: |
+          t=$(mktemp)
+          echo '{"type":"assistant","message":{"content":[{"type":"text","text":"**Thread:** demo · kit · done when green"}]}}' > "$t"
+          echo "{\"transcript_path\":\"$t\"}" | bash hooks/thread-check.sh | grep -q '^Session thread: demo · kit'
+          echo '{}' | bash hooks/thread-check.sh | grep -q '^No session thread named yet'
+
       - name: JSON is valid
         run: python -m json.tool settings.example.json > /dev/null
 

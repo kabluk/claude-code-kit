@@ -77,3 +77,4 @@ the same repeat builds it.
 2026-10-12 | claude-code-kit | skills existed in 5 repos but sessions never offered them; owner asked for one list by job (2+) → skill `skill-catalog` + `hooks/skill-catalog.sh` (injected at start) + `scripts/check-catalog.sh` (CI)
 2026-10-12 | claude-code-kit | launch checklist asked for on every new site; gap noted in skill-catalog → skill `site-launch` + `launch-check.sh` (live URL check)
 2026-10-12 | claude-code-kit | project copies of kit skills drifted silently in lab and solo-ai-workshop (2) → `scripts/kit-sync.sh` (status/update/install) + per-project `.claude/kit-local` for deliberate forks
+2026-10-13 | claude-code-kit | one session drifted across 5 topics (skills → site check → UX audit → site fixes → client message); owner: "every time it becomes a mess" → skill `session-focus` + `hooks/thread-check.sh` + playbook P-17; stop-cycle asks for routed options
