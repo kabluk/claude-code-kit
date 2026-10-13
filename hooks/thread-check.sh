@@ -42,7 +42,8 @@ if thread:
           "Check this message against it (session-focus): same thread or a step it needs -> do it; "
           "a short aside with no file change -> answer, then return to the thread; "
           "a different goal, repo or question -> do not start it, offer: new session with a ready prompt / "
-          "switch thread deliberately / park in INBOX.")
+          "switch thread deliberately / park in INBOX. Every file you change must live in its home in this repo "
+          "(map of homes in session-focus). Close the step with exactly three routed options via the picker.")
 else:
     print("No session thread named yet. In your first reply that does work, add the line "
           "'**Thread:** <goal> · <repo> · done when <result>' ('**Тема сессии:** …' in Russian), "

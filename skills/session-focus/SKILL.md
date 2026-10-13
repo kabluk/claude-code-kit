@@ -1,6 +1,6 @@
 ---
 name: session-focus
-description: 'One session, one thread. Use at the start of every session to name its thread, whenever a request may belong to a different project, repo or question than the current thread, when the owner says the session became a mess or drifted, and at the end of every work cycle to route the three next-step options: each one either continues here or opens a separate session with a ready prompt.'
+description: 'One session, one thread, every change in its home. Use at the start of every session to name its thread, whenever a request may belong to a different project, repo or question than the current thread, before creating or editing a file to check the file belongs in this repo, when the owner says the session became a mess or drifted, and at the end of every step to give exactly three routed next-step options: each one either continues here or opens a separate session with a ready prompt.'
 ---
 
 # Session focus
@@ -26,14 +26,19 @@ whose result would live in another repo, or answer another question, is a
    line in the transcript and repeats it before every owner message, so it
    survives long sessions and compaction. Done when the line is in the
    transcript. A session that resumes an old thread names it again the same way.
-2. **Check every request against the thread** before acting. Three cases:
+2. **Check every change against the map of homes** (below) before creating or
+   editing a file: the file lives in this repo, in the folder the map gives
+   it. A change whose home is another repo is a new thread, even when the
+   request sounded like part of this one. Done when every path you are about
+   to touch has its home named.
+3. **Check every request against the thread** before acting. Three cases:
    - *same thread*, including a sub-step it needs → do it;
    - *aside*: a question answered in a few lines with no file change and no
      commit → answer it, then say "back to: <thread>";
    - *new thread* → do not start it. Say in one line that it is a different
      thread and offer the routes below through the picker. Done when the owner
      picked a route, or the request is plainly the same thread.
-3. **Route a new thread** the way the owner picks:
+4. **Route a new thread** the way the owner picks:
    - **new session** (default) → write the handoff prompt (below); then create
      the session yourself when a session-creating tool exists
      (`create_session` with the repo and branch), else give the prompt in one
@@ -43,10 +48,33 @@ whose result would live in another repo, or answer another question, is a
    - **park** → one line in the repo's inbox file (`INBOX.md` at the root of
      the research folder, or `docs/INBOX.md`): date, the request, the repo it
      belongs to.
-4. **End every work cycle with three options, each routed** (P-08): mark each
-   `[here]` or `[new session: <owner/repo>]`. A `[new session]` option carries
-   its ready prompt. The recommended option comes first. Done when no option
-   would pull a second thread into this session.
+5. **End every step with exactly three options** (P-08), the way
+   `/project-orchestrator` closes an iteration: through the picker
+   (AskUserQuestion), recommended first and marked so, each with what it
+   changes and what it costs. A step is any reply that finished something:
+   a commit, a report, a decision, an answer the owner asked for; a
+   discussion with no commit counts too. Mark each option `[here]` or
+   `[new session: <owner/repo>]`; a `[new session]` option carries its ready
+   prompt. Done when the picker is shown and no option would pull a second
+   thread into this session.
+
+## Map of homes
+
+Architecture here means: every artefact has exactly one home, and a session
+only writes into homes in its own repo.
+
+| Artefact | Home |
+|---|---|
+| Shared skill, hook, script, playbook rule (any project uses it) | `claude-code-kit` — English, the source of truth; projects get copies through `kit-sync.sh` |
+| A project's copy of a kit item | that project's `.claude/` — never edited in place; fix in the kit, then `kit-sync.sh update`, or list it in `.claude/kit-local` with the reason |
+| Research, idea check, audit, verdict | the workshop repo (`lab`, `solo-ai-workshop`): `research/YYYY-MM-slug/REPORT.md`, raw data beside it |
+| Product code, deploy, product docs | the product's own repo; `docs/project/` lives only there |
+| The list of products | the workshop's `PROJECTS.md` |
+| A repo's own facts and gotchas | that repo's `CLAUDE.md` |
+
+A report about a product (a launch check, a UX audit) is research: it lives in
+the workshop; the fixes it asks for are product work: a new session in the
+product repo. The map is the default; a repo's `CLAUDE.md` can narrow it.
 
 ## Handoff prompt
 

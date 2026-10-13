@@ -106,7 +106,7 @@ Source: **kit** = `kabluk/claude-code-kit`, **idea-gates** = `kabluk/idea-gates`
 
 | Name | Kind | Reach for it when | Source |
 |---|---|---|---|
-| `session-focus` | skill | Every session: name its thread first; a request for another goal or repo goes to a new session with a ready prompt; end-of-cycle options marked here / new session. | kit |
+| `session-focus` | skill | Every session: name its thread first; each file change checked against the map of homes; another goal or repo goes to a new session with a ready prompt; every step ends with three routed options. | kit |
 | `skill-catalog` | skill | This list: picking a tool, adding or retiring one. | kit |
 | `harvest` | skill | End of every cycle, before handoff, whenever something repeats: turn it into a skill, rule or gotcha. | kit |
 | `writing-for-agents` | skill | Creating or editing any skill, `CLAUDE.md` or `AGENTS.md`. | kit |
