@@ -59,7 +59,7 @@ repos are named, their copies differ).
 |---|---|---|---|
 | `product-lead` | agent | Goal, users, requirements, scope, success criteria. | kit |
 | `software-architect` | agent | Module boundaries, contracts, cross-cutting technical decisions. | kit |
-| `project-orchestrator` | skill | Start of a product session: restore state from `docs/project/` (HANDOFF, STATUS, DECISIONS), split work across roles, keep project memory. The skill form of the command below. | carriertruth, detnav |
+| `project-orchestrator` | skill | Start of a product session: restore state from `docs/project/` (HANDOFF, STATUS, DECISIONS), split work across roles, keep project memory. The skill form of the command below. | kit |
 | `to-questionnaire` | skill | A decision you cannot answer yourself: turn it into a questionnaire someone else (a client, a partner) fills in. | carriertruth |
 | `project-orchestrator` | command | A large project: split work by role, keep memory in `docs/project/`, resume a project in a new session. | kit |
 | `workflow-graph` | command | Many tasks with dependencies: build `docs/project/GRAPH.yaml`. | kit |
@@ -77,9 +77,9 @@ repos are named, their copies differ).
 | `data-engineer` | agent | Data model, migrations, queries, analytics events, ETL. | kit |
 | `devops-engineer` | agent | CI/CD, containers, infra, deploy, observability. | kit |
 | `context-memory-engineering` | skill | Building an agent or LLM pipeline: what goes into one call vs. what persists. | kit |
-| `glass-stage` | skill | A dark premium hero or landing "like Linear / Stripe": real product screens in phones, glass, glow, floating cards, kie.ai backgrounds and 3D icons. | ivindex, detnav |
-| `mockup-in-skin` | skill | Show interface options built from the product's own files, not a page drawn from scratch: "show three variants", "that is not our design". | ivindex |
-| `skill-bakeoff` | skill | Blind comparison of design skills on one product: each draws the same pages from scratch on real data; the owner picks by screenshots. | ivindex, homeequitymath |
+| `glass-stage` | skill | A dark premium hero or landing "like Linear / Stripe": real product screens in phones, glass, glow, floating cards, kie.ai backgrounds and 3D icons. | kit |
+| `mockup-in-skin` | skill | Show interface options built from the product's own files, not a page drawn from scratch: "show three variants", "that is not our design". | kit |
+| `skill-bakeoff` | skill | Blind comparison of design skills on one product: each draws the same pages from scratch on real data; the owner picks by screenshots. | kit |
 | `claude-api` | env | Any code that calls Claude / the Anthropic SDK: models, pricing, caching, tools. | env |
 | `artifact-design` | env | A one-off page, report or prototype published as an Artifact. | env |
 | `dataviz` | env | Any chart, dashboard or KPI tile. | env |
@@ -90,9 +90,9 @@ repos are named, their copies differ).
 |---|---|---|---|
 | `gate` | skill | After fixing a bug or data defect: a test that fails with the fix mutated away, checked live. | kit |
 | `diagnosing-bugs` | skill | A hard bug or a performance regression: "debug this", something broken, throwing, failing or slow. | carriertruth |
-| `click-audit` | skill | "Do all the buttons work?": clicks every control on the listed pages, checks every link, classifies what each one actually did. | detnav |
+| `click-audit` | skill | "Do all the buttons work?": clicks every control on the listed pages, checks every link, classifies what each one actually did. | kit |
 | `ux-designer` | skill | UX/UI principles for building or critiquing: accessibility (WCAG, EAA), microcopy, forms, navigation, onboarding, i18n, design systems. | detnav |
-| `ux-signoff-loop` | skill | "Make it beautiful", "check it like a UX designer", or a big UI change: an independent reviewer against fixed rule sets, fix, repeat until sign-off. | homeequitymath |
+| `ux-signoff-loop` | skill | "Make it beautiful", "check it like a UX designer", or a big UI change: an independent reviewer against fixed rule sets, fix, repeat until sign-off. | kit |
 | `qa-engineer` | agent | Test strategy, acceptance criteria, regression audit after implementation. | kit |
 | `ux-ease-audit` | skill | "Rate the UX", "where will people get stuck", a re-audit before release: persona, tasks, 1–10 score. | kit |
 | `external-review` | skill | An outside opinion from other LLMs on a product or idea; pasted-back reviews to verify. | kit |
@@ -105,7 +105,7 @@ repos are named, their copies differ).
 | Name | Kind | Reach for it when | Source |
 |---|---|---|---|
 | `site-launch` | skill | Before opening a new site to traffic, moving domain or host, "nothing in Google" or empty analytics: live check, analytics event, Search Console, legal, forms, monitoring. | kit |
-| `project-pulse` | skill | Give a live project a pulse: daily metrics committed to the repo and a weekly analyst routine that sends the owner a diagnosis and actions. | carriertruth |
+| `project-pulse` | skill | Give a live project a pulse: daily metrics committed to the repo and a weekly analyst routine that sends the owner a diagnosis and actions. | kit |
 | `growth-strategist` | agent | Positioning, launch plan, marketing experiments, content, growth metrics — once goal and audience are defined. | kit |
 
 ### 6. Access, credentials and environment

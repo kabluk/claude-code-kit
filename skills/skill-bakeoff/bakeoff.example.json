@@ -1,0 +1,19 @@
+{
+  "_about": "Config of one comparison (sample from 03.10.2026). A copy lives in the comparison work folder next to BRIEF.md. work is the folder with out/ and final/ (relative to this file). pages: key = the html file name, scroll = a long page (the monitor is shot whole up to 3200 px, the picture shows desktopHeight), otherwise an app screen 1280×800. skills is a subset of the skill's skills.json.",
+  "project": "<your-project>",
+  "work": ".",
+  "pages": [
+    { "key": "home", "label": "Home", "scroll": true, "desktopHeight": 1700 },
+    { "key": "search", "label": "Map search · <city>", "scroll": false }
+  ],
+  "skills": [
+    { "slug": "frontend-design", "title": "Anthropic · frontend-design" },
+    { "slug": "ui-ux-pro-max", "title": "UI/UX Pro Max" },
+    { "slug": "open-design", "title": "OpenDesign" },
+    { "slug": "taste-skill", "title": "Taste Skill" },
+    { "slug": "impeccable", "title": "Impeccable" },
+    { "slug": "hallmark", "title": "Hallmark" },
+    { "slug": "huashu-design", "title": "Huashu Design" },
+    { "slug": "stitch-skills", "title": "Google Stitch skills" }
+  ]
+}
