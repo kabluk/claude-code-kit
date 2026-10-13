@@ -47,6 +47,10 @@ copies drifted or are missing; `update` and `install ITEM|all` fix them.
 | [`ui-from-screenshot`](skills/ui-from-screenshot/SKILL.md) | Reproduces a design 1:1 with a Playwright + pixelmatch loop until only font rasterisation differs. |
 | [`premium-saas-claude-code`](skills/premium-saas-claude-code/SKILL.md) | Structure for SaaS and apps that feel high-end from the first commit. |
 
+<img src="docs/img/glass-stage-night.jpg" alt="glass-stage demo in the night palette: a headline on the left, three phones with glass cards and a blue glow on the right" width="720">
+
+*`glass-stage` demo, `night` palette, rendered offline by `node demo.mjs night out/` (placeholder screens, CSS glow only; real product screens and generated art drop in with `--screens` and `--art`).*
+
 ### Check quality and UX
 
 | Skill | What it does |
@@ -57,6 +61,22 @@ copies drifted or are missing; `update` and `install ITEM|all` fix them.
 | [`gate`](skills/gate/SKILL.md) | Turns a bug fix into a test proven to fail with the fix removed. *Born on a day with five fixes whose tests all had to be proven by hand.* |
 | [`external-review`](skills/external-review/SKILL.md) | Collects critique from other LLMs and checks every checkable claim before acting on it. *Of five checkable claims from five models, four were wrong.* |
 
+<details><summary><code>click-audit</code> output on a test page</summary>
+
+```
+=== /
+links 4 · external 1 · dead 1
+  DEAD: Missing -> /missing/
+  changes content                    | Change text
+  writes state                       | Save
+  navigates: /about/                 | Go about
+  print                              | Print
+  NOTHING                            | Decorative
+  disabled (empty field is expected) | Submit
+click-audit: dead links 1, NOTHING buttons 1 (verify by hand)
+```
+</details>
+
 ### Launch and run
 
 | Skill | What it does |
@@ -64,6 +84,22 @@ copies drifted or are missing; `update` and `install ITEM|all` fix them.
 | [`site-launch`](skills/site-launch/SKILL.md) | A launch checklist proven against the live URL: one HTTPS host, robots, sitemap, a real 404, analytics that receives an event, legal pages. |
 | [`project-pulse`](skills/project-pulse/SKILL.md) | Daily metrics committed to the repo and a weekly analyst that sends the owner a diagnosis and actions. |
 | [`secrets-and-buttons`](skills/secrets-and-buttons/SKILL.md) | Probes what a token can really do and replaces owner-only buttons with push triggers. *Born on a day one pitfall fired three times.* |
+
+<details><summary><code>site-launch</code> live check on a real public site</summary>
+
+```
+PASS  home page 200 at https://www.python.org/
+PASS  http://python.org/ -> https://www.python.org/
+PASS  http redirect is permanent (301)
+PASS  robots.txt 200, no site-wide Disallow
+FAIL  sitemap https://www.python.org/sitemap.xml returns 404
+WARN  no rel=canonical on home
+PASS  missing page returns 404
+PASS  HSTS header
+…
+fails: 1  warns: 2
+```
+</details>
 
 ### Keep sessions focused and memory alive
 
