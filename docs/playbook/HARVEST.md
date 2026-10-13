@@ -79,3 +79,4 @@ the same repeat builds it.
 2026-10-12 | claude-code-kit | project copies of kit skills drifted silently in lab and solo-ai-workshop (2) → `scripts/kit-sync.sh` (status/update/install) + per-project `.claude/kit-local` for deliberate forks
 2026-10-13 | claude-code-kit | one session drifted across 5 topics (skills → site check → UX audit → site fixes → client message); owner: "every time it becomes a mess" → skill `session-focus` + `hooks/thread-check.sh` + playbook P-17; stop-cycle asks for routed options
 2026-10-13 | claude-code-kit | owner asked three times to merge PRs with only links, did not know what a merge changes → P-18 + 'Asking the owner' section in session-focus
+2026-10-13 | claude-code-kit | owner: 'many skills I created are not in the list' — catalog was built from kit, lab and idea-gates only; 11 skills lived only in product repos → catalog rows with their source repo (scan all 19 repos before declaring a catalog complete)
