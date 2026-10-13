@@ -32,9 +32,8 @@ new skill, not a reason to skip the catalog.
 Kind: **skill**, **agent** (subagent), **command** (slash command),
 **env** (ships with Claude Code / claude.ai, nothing to install).
 Source: **kit** = `kabluk/claude-code-kit`, **idea-gates** = `kabluk/idea-gates`,
-**lab** = `kabluk/lab` only. Any other source names the product repo whose
-`.claude/skills/` holds the skill today (not yet moved into the kit; when two
-repos are named, their copies differ).
+**lab** = `kabluk/lab` only. An `owner/repo` source is a third-party skill: install it from that public
+repository, keep its licence, and do not republish it as ours.
 
 ### 1. Idea and validation (before any code)
 
@@ -60,7 +59,7 @@ repos are named, their copies differ).
 | `product-lead` | agent | Goal, users, requirements, scope, success criteria. | kit |
 | `software-architect` | agent | Module boundaries, contracts, cross-cutting technical decisions. | kit |
 | `project-orchestrator` | skill | Start of a product session: restore state from `docs/project/` (HANDOFF, STATUS, DECISIONS), split work across roles, keep project memory. The skill form of the command below. | kit |
-| `to-questionnaire` | skill | A decision you cannot answer yourself: turn it into a questionnaire someone else (a client, a partner) fills in. | carriertruth |
+| `to-questionnaire` | skill | A decision you cannot answer yourself: turn it into a questionnaire someone else (a client, a partner) fills in. | mattpocock/skills |
 | `project-orchestrator` | command | A large project: split work by role, keep memory in `docs/project/`, resume a project in a new session. | kit |
 | `workflow-graph` | command | Many tasks with dependencies: build `docs/project/GRAPH.yaml`. | kit |
 | `task-loop` | command | Execute one GRAPH node in a bounded implement–verify–fix loop. | kit |
@@ -89,9 +88,9 @@ repos are named, their copies differ).
 | Name | Kind | Reach for it when | Source |
 |---|---|---|---|
 | `gate` | skill | After fixing a bug or data defect: a test that fails with the fix mutated away, checked live. | kit |
-| `diagnosing-bugs` | skill | A hard bug or a performance regression: "debug this", something broken, throwing, failing or slow. | carriertruth |
+| `diagnosing-bugs` | skill | A hard bug or a performance regression: "debug this", something broken, throwing, failing or slow. | mattpocock/skills |
 | `click-audit` | skill | "Do all the buttons work?": clicks every control on the listed pages, checks every link, classifies what each one actually did. | kit |
-| `ux-designer` | skill | UX/UI principles for building or critiquing: accessibility (WCAG, EAA), microcopy, forms, navigation, onboarding, i18n, design systems. | detnav |
+| `ux-designer` | skill | UX/UI principles for building or critiquing: accessibility (WCAG, EAA), microcopy, forms, navigation, onboarding, i18n, design systems. | szilu/ux-designer-skill |
 | `ux-signoff-loop` | skill | "Make it beautiful", "check it like a UX designer", or a big UI change: an independent reviewer against fixed rule sets, fix, repeat until sign-off. | kit |
 | `qa-engineer` | agent | Test strategy, acceptance criteria, regression audit after implementation. | kit |
 | `ux-ease-audit` | skill | "Rate the UX", "where will people get stuck", a re-audit before release: persona, tasks, 1–10 score. | kit |
@@ -125,7 +124,7 @@ repos are named, their copies differ).
 | `harvest` | skill | End of every cycle, before handoff, whenever something repeats: turn it into a skill, rule or gotcha. | kit |
 | `writing-for-agents` | skill | Creating or editing any skill, `CLAUDE.md` or `AGENTS.md`. | kit |
 | `skill-creator` | env | Evals and description tuning for a skill that triggers badly. | env |
-| `wait-what` | skill | The owner did not follow the last message: stop and re-pitch it plainly. | carriertruth |
+| `wait-what` | skill | The owner did not follow the last message: stop and re-pitch it plainly. | mattpocock/skills |
 | `task-profiler` | command | Choose Haiku / Sonnet / Opus for a request by complexity and risk. | kit |
 | `next-step-coach` | command | 2–3 next steps plus one web-dev term to learn, after a finished task. | kit |
 | `caveman` | skill | Terse output mode to save tokens. | kit |
@@ -142,9 +141,9 @@ bash /tmp/kit/scripts/kit-sync.sh install skills/NAME    # or agents/NAME, comma
 bash /tmp/kit/scripts/kit-sync.sh update                 # bring differing copies up to the kit
 # idea-gates lives in its own repo:
 git clone https://github.com/kabluk/idea-gates .claude/skills/idea-gates
-# a skill whose source is a product repo (e.g. carriertruth):
-git clone --depth 1 https://github.com/kabluk/carriertruth /tmp/src
-cp -r /tmp/src/.claude/skills/NAME .claude/skills/
+# a third-party skill (source owner/repo), with its LICENSE:
+git clone --depth 1 https://github.com/OWNER/REPO /tmp/src
+cp -r /tmp/src/skills/NAME .claude/skills/   # path inside the repo may differ
 ```
 
 A copy changed on purpose (a translation, a template rewrite) goes in
