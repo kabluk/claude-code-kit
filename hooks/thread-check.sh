@@ -46,9 +46,10 @@ if thread:
           "block (skill — what it does for this task). Every file you change must live in its home in this repo "
           "(map of homes in session-focus). Close the step with exactly three routed options via the picker.")
 else:
-    print("No session thread named yet. Open your first reply that does work with the start block "
-          "(session-focus): '**Thread:** <goal> · <repo> · done when <result>' and '**Skills:**' with one line per "
-          "skill from the skill-catalog, '`name` — what it does for this task' "
-          "(in Russian: '**Тема сессии:**' and '**Скиллы:**').")
+    print("No session thread named yet (session-focus). If the goal of this session is still unclear, "
+          "answer and clarify; change no file and make no commit. As soon as the goal is clear (usually after "
+          "one or two owner messages), give the start block: '**Thread:** <goal> · <repo> · done when <result>' and "
+          "'**Skills:**' with one line per skill from the skill-catalog, '`name` — what it does for this task' "
+          "(in Russian: '**Тема сессии:**' and '**Скиллы:**'). It must come before the first file change.")
 PY
 exit 0

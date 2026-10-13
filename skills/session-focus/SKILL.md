@@ -1,6 +1,6 @@
 ---
 name: session-focus
-description: 'One session, one thread, every change in its home. Use at the start of every session to name its thread, whenever a request may belong to a different project, repo or question than the current thread, before creating or editing a file to check the file belongs in this repo, when the owner says the session became a mess or drifted, and at the end of every step to give exactly three routed next-step options: each one either continues here or opens a separate session with a ready prompt.'
+description: 'One session, one thread, every change in its home. Use once the goal of a session becomes clear (usually after the first one or two owner messages, always before the first file change) to name its thread and the skills it will use, whenever a request may belong to a different project, repo or question than the current thread, before creating or editing a file to check the file belongs in this repo, when the owner says the session became a mess or drifted, and at the end of every step to give exactly three routed next-step options: each one either continues here or opens a separate session with a ready prompt.'
 ---
 
 # Session focus
@@ -20,7 +20,13 @@ whose result would live in another repo, or answer another question, is a
 
 ## Steps
 
-1. **Open with the start block** in your first reply that does work, and again
+1. **Give the start block once the goal is clear**, not before: a guessed
+   thread misleads more than none. The first owner message is often a
+   greeting, a vague wish or a question; answer and clarify until you can
+   say what the session is for — usually one or two owner messages, at once
+   when the first message already states a concrete task. While the goal is
+   unclear: talk, read, ask, but change no file and make no commit. The block
+   comes before the first file change or commit at the latest, and again
    whenever a new task starts inside the thread:
 
    ```
@@ -36,8 +42,9 @@ whose result would live in another repo, or answer another question, is a
    — <what is done by hand>`; a task that repeats without a skill is a
    `harvest` candidate. The `thread-check.sh` hook finds the `Thread:` line in
    the transcript and repeats it before every owner message, so it survives
-   long sessions and compaction. Done when both lines are in the transcript.
-   A session that resumes an old thread opens with the block again.
+   long sessions and compaction. Done when both lines are in the transcript
+   before anything is written. A session that resumes an old thread gives
+   the block again as soon as it is clear which thread it resumes.
 2. **Check every change against the map of homes** (below) before creating or
    editing a file: the file lives in this repo, in the folder the map gives
    it. A change whose home is another repo is a new thread, even when the

@@ -313,8 +313,9 @@ and a message for its owner. Every step was requested and none was refused; the
 two threads interleaved, a branch in the wrong repo was reset, and the first
 thread was never closed. The owner: "every time it becomes a mess".
 
-**Agreement.** Every session opens its first working reply, and every new task,
-with a start block: the **thread** (`**Thread:** goal · repo · done when …`) and
+**Agreement.** Once a session's goal is clear (usually after the first one or two
+owner messages; until then the assistant clarifies and changes no file), and for
+every new task, the assistant gives a start block: the **thread** (`**Thread:** goal · repo · done when …`) and
 the **skills** it will use (`**Skills:**`, one line each: what the skill does for
 this task). A request for another goal, repo or
 question is a new thread: the assistant does not start it, but offers a new

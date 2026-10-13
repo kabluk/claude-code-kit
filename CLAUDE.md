@@ -11,7 +11,8 @@ and three options at the end of every cycle.
 
 ## One session, one thread
 
-Open the first working reply, and every new task, with the start block:
+Once the session's goal is clear (usually after one or two owner messages,
+always before the first file change), and for every new task, give the start block:
 `**Thread:** goal · repo · done when …` and `**Skills:**` (one line per skill
 from the catalog: what it does for this task). Route any other goal to a new
 session with a ready prompt (P-17, `skills/session-focus/`). A request to merge
