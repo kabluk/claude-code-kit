@@ -313,8 +313,10 @@ and a message for its owner. Every step was requested and none was refused; the
 two threads interleaved, a branch in the wrong repo was reset, and the first
 thread was never closed. The owner: "every time it becomes a mess".
 
-**Agreement.** Every session names its **thread** in its first working reply
-(`**Thread:** goal · repo · done when …`). A request for another goal, repo or
+**Agreement.** Every session opens its first working reply, and every new task,
+with a start block: the **thread** (`**Thread:** goal · repo · done when …`) and
+the **skills** it will use (`**Skills:**`, one line each: what the skill does for
+this task). A request for another goal, repo or
 question is a new thread: the assistant does not start it, but offers a new
 session with a ready prompt (created by the assistant when it can), a deliberate
 switch, or parking it in the inbox. The three P-08 options are each marked

@@ -11,8 +11,10 @@ and three options at the end of every cycle.
 
 ## One session, one thread
 
-Name the session's thread in the first working reply and route any other goal to
-a new session with a ready prompt (P-17, `skills/session-focus/`).
+Open the first working reply, and every new task, with the start block:
+`**Thread:** goal · repo · done when …` and `**Skills:**` (one line per skill
+from the catalog: what it does for this task). Route any other goal to a new
+session with a ready prompt (P-17, `skills/session-focus/`).
 
 ## Working on this repo
 

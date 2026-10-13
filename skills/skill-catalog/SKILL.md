@@ -15,9 +15,11 @@ rather than remembered (P-16).
 1. **Match the task to a row.** Read the task, scan the table, pick at most
    two or three rows whose *Reach for it when* fits. Done when you can name
    each one in a sentence.
-2. **Say it before doing it.** One line to the owner: "Using `<name>` for
-   <reason>." When a row fits but is marked missing, give the install line
-   below as the first line and continue by hand meanwhile.
+2. **Say it before doing it, in the start block.** The skills go into the
+   `Skills:` part of the start block that `session-focus` defines: one line
+   per skill, `` `<name>` — what it does for this task ``, in the task's own
+   words, not the catalog's. When a row fits but is marked missing, add
+   "(not installed: <install line>)" and continue by hand meanwhile.
 3. **Load and follow.** Skills through the Skill tool, agents through the
    Agent tool, commands as `/<name>`. A row is a pointer; its own file holds
    the method.

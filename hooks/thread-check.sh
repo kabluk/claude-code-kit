@@ -42,11 +42,13 @@ if thread:
           "Check this message against it (session-focus): same thread or a step it needs -> do it; "
           "a short aside with no file change -> answer, then return to the thread; "
           "a different goal, repo or question -> do not start it, offer: new session with a ready prompt / "
-          "switch thread deliberately / park in INBOX. Every file you change must live in its home in this repo "
+          "switch thread deliberately / park in INBOX. A new task inside the thread opens with a 'Skills:' "
+          "block (skill — what it does for this task). Every file you change must live in its home in this repo "
           "(map of homes in session-focus). Close the step with exactly three routed options via the picker.")
 else:
-    print("No session thread named yet. In your first reply that does work, add the line "
-          "'**Thread:** <goal> · <repo> · done when <result>' ('**Тема сессии:** …' in Russian), "
-          "per the session-focus skill.")
+    print("No session thread named yet. Open your first reply that does work with the start block "
+          "(session-focus): '**Thread:** <goal> · <repo> · done when <result>' and '**Skills:**' with one line per "
+          "skill from the skill-catalog, '`name` — what it does for this task' "
+          "(in Russian: '**Тема сессии:**' and '**Скиллы:**').")
 PY
 exit 0

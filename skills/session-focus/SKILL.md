@@ -20,12 +20,24 @@ whose result would live in another repo, or answer another question, is a
 
 ## Steps
 
-1. **Name the thread** in your first reply that does work, as its own line:
-   `**Thread:** <goal> · <repo> · done when <observable result>`
-   (in Russian: `**Тема сессии:** …`). The `thread-check.sh` hook finds this
-   line in the transcript and repeats it before every owner message, so it
-   survives long sessions and compaction. Done when the line is in the
-   transcript. A session that resumes an old thread names it again the same way.
+1. **Open with the start block** in your first reply that does work, and again
+   whenever a new task starts inside the thread:
+
+   ```
+   **Thread:** <goal> · <repo> · done when <observable result>
+   **Skills:**
+   - `<name>` — what it does for this task, in one line
+   - `<name>` — …
+   ```
+
+   In Russian: `**Тема сессии:**` and `**Скиллы:**`. Pick the skills from the
+   `skill-catalog` (its index is printed at session start): two or three that
+   fit, each with what it will do *here*. None fits → `**Skills:** none fits
+   — <what is done by hand>`; a task that repeats without a skill is a
+   `harvest` candidate. The `thread-check.sh` hook finds the `Thread:` line in
+   the transcript and repeats it before every owner message, so it survives
+   long sessions and compaction. Done when both lines are in the transcript.
+   A session that resumes an old thread opens with the block again.
 2. **Check every change against the map of homes** (below) before creating or
    editing a file: the file lives in this repo, in the folder the map gives
    it. A change whose home is another repo is a new thread, even when the
