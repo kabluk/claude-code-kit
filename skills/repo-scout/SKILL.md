@@ -68,7 +68,8 @@ code and the licence first (`session-focus` routes it there).
 
 ## Schedule
 
-- Actions: `repo-scout.yml` with `cron: '23 14 */2 * *'` (UTC) and
+- Actions: `repo-scout.yml` with `cron: '23 14 */2 * *'` (UTC), a push trigger on
+  `scout/profiles.json` (a profile change rescans at once) and
   `workflow_dispatch`; it needs `contents: write` and the default
   `GITHUB_TOKEN`.
 - Claude routine: a fresh session in the registry repo an hour later, prompt
