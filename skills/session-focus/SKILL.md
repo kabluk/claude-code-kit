@@ -88,6 +88,27 @@ A report about a product (a launch check, a UX audit) is research: it lives in
 the workshop; the fixes it asks for are product work: a new session in the
 product repo. The map is the default; a repo's `CLAUDE.md` can narrow it.
 
+## Asking the owner to merge or press a button
+
+The owner is not a developer and is often on a phone. Every request to merge a
+PR, or to press any other button only the owner can press, comes as a short
+plain-language card, never as a bare link:
+
+1. **Link first**, on its own line.
+2. **What it is**, in one sentence, without jargon ("rules and helpers for how
+   sessions start", not "hooks and SKILL.md").
+3. **What changes after it**, from the owner's side: what new sessions, the
+   site, the clients will do differently. Name what does *not* change too
+   (nothing is deployed, the site is untouched) when that is the worry.
+4. **Risk and undo**: what could go wrong and how it is reverted ("one click:
+   Revert on the PR page").
+5. **The exact taps**: where to scroll, which button, which confirmation.
+6. **What happens next**: what you check after it, or that you can press it
+   yourself when the owner says so.
+
+Several buttons → one card each, in the order they must be pressed and why.
+Done when the owner can decide without asking what the button does.
+
 ## Handoff prompt
 
 A new session starts from the prompt alone, so it must stand alone:

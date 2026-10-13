@@ -3,7 +3,7 @@
 ## How we work (cross-project playbook)
 
 Process rules shared by every project live in `docs/playbook/COLLABORATION.md`
-(P-00…P-17): the start ritual (skills, context, key inventory — enforced by the
+(P-00…P-18): the start ritual (skills, context, key inventory — enforced by the
 `hooks/session-start.sh` hook), the access model (one scoped key for the life of
 the project, never in chat), autonomy with an exact reason for every manual step,
 checking against the live site/API, handing over the session at ~75 % context,
@@ -14,7 +14,9 @@ and three options at the end of every cycle.
 Open the first working reply, and every new task, with the start block:
 `**Thread:** goal · repo · done when …` and `**Skills:**` (one line per skill
 from the catalog: what it does for this task). Route any other goal to a new
-session with a ready prompt (P-17, `skills/session-focus/`).
+session with a ready prompt (P-17, `skills/session-focus/`). A request to merge
+or press an owner button explains in plain words what it changes and how to undo
+it (P-18).
 
 ## Working on this repo
 

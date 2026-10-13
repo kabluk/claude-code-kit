@@ -78,3 +78,4 @@ the same repeat builds it.
 2026-10-12 | claude-code-kit | launch checklist asked for on every new site; gap noted in skill-catalog → skill `site-launch` + `launch-check.sh` (live URL check)
 2026-10-12 | claude-code-kit | project copies of kit skills drifted silently in lab and solo-ai-workshop (2) → `scripts/kit-sync.sh` (status/update/install) + per-project `.claude/kit-local` for deliberate forks
 2026-10-13 | claude-code-kit | one session drifted across 5 topics (skills → site check → UX audit → site fixes → client message); owner: "every time it becomes a mess" → skill `session-focus` + `hooks/thread-check.sh` + playbook P-17; stop-cycle asks for routed options
+2026-10-13 | claude-code-kit | owner asked three times to merge PRs with only links, did not know what a merge changes → P-18 + 'Asking the owner' section in session-focus

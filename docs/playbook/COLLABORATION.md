@@ -323,6 +323,18 @@ switch, or parking it in the inbox. The three P-08 options are each marked
 `[here]` or `[new session: repo]`. Method: the `session-focus` skill; the
 `thread-check.sh` hook repeats the thread before every owner message.
 
+### P-18 — A button for the owner comes with an explanation
+
+**Problem.** The assistant asked the owner three times to "merge these PRs",
+with links and nothing else. The owner did not know what a merge would change,
+whether it would touch a live site, or how to undo it.
+
+**Agreement.** Every request to merge a PR or press another owner-only button is
+a plain-language card: link first; what it is in one sentence; what changes
+after it and what does not; the risk and how to undo it; the exact taps; what
+happens next. Method: the "Asking the owner" section of the `session-focus`
+skill.
+
 ---
 
 ## Closing ritual
