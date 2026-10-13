@@ -64,6 +64,7 @@ repository, keep its licence, and do not republish it as ours.
 | `workflow-graph` | command | Many tasks with dependencies: build `docs/project/GRAPH.yaml`. | kit |
 | `task-loop` | command | Execute one GRAPH node in a bounded implement–verify–fix loop. | kit |
 | `roadmap` | command | Directory build plan with milestones, KPIs, monetization timeline. | kit |
+| `repo-scout` | skill | Profile every project, then every two days GitHub repos gaining stars matched to each one, README-verified, with one concrete use per pick: "trending repos for our projects", set up or retune the scout. | kit |
 
 ### 3. Build a site, service or app
 

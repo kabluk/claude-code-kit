@@ -83,6 +83,7 @@ click-audit: dead links 1, NOTHING buttons 1 (verify by hand)
 |---|---|
 | [`site-launch`](skills/site-launch/SKILL.md) | A launch checklist proven against the live URL: one HTTPS host, robots, sitemap, a real 404, analytics that receives an event, legal pages. |
 | [`project-pulse`](skills/project-pulse/SKILL.md) | Daily metrics committed to the repo and a weekly analyst that sends the owner a diagnosis and actions. |
+| [`repo-scout`](skills/repo-scout/SKILL.md) | Every two days: GitHub repos gaining stars, matched to each of your projects by its profile, README-verified, one concrete use per pick, pushed to your phone. Search runs in Actions, judgement in a Claude routine. |
 | [`secrets-and-buttons`](skills/secrets-and-buttons/SKILL.md) | Probes what a token can really do and replaces owner-only buttons with push triggers. *Born on a day one pitfall fired three times.* |
 
 <details><summary><code>site-launch</code> live check on a real public site</summary>
