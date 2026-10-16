@@ -51,7 +51,11 @@ whose result would live in another repo, or answer another question, is a
    request sounded like part of this one. Done when every path you are about
    to touch has its home named.
 3. **Check every request against the thread** before acting. Three cases:
-   - *same thread*, including a sub-step it needs → do it;
+   - *same thread*, including a sub-step it needs → do it. Follow-ups in a
+     repo this session already works on (a fix, a rule, a finding about the
+     same tool) are the same thread: do not send them to a new session. A new
+     session is for another project or repo, or for a context near its limit
+     (~75 %, P-07), never only because a step finished;
    - *aside*: a question answered in a few lines with no file change and no
      commit → answer it, then say "back to: <thread>";
    - *new thread* → do not start it. Say in one line that it is a different
@@ -74,7 +78,8 @@ whose result would live in another repo, or answer another question, is a
    a commit, a report, a decision, an answer the owner asked for; a
    discussion with no commit counts too. Mark each option `[here]` or
    `[new session: <owner/repo>]`; a `[new session]` option carries its ready
-   prompt. Done when the picker is shown and no option would pull a second
+   prompt. Most options are `[here]`: owner, 2026-10-16, "why open a new
+   session every time? the context is not full". Done when the picker is shown and no option would pull a second
    thread into this session.
 
 ## Map of homes
@@ -94,6 +99,20 @@ only writes into homes in its own repo.
 A report about a product (a launch check, a UX audit) is research: it lives in
 the workshop; the fixes it asks for are product work: a new session in the
 product repo. The map is the default; a repo's `CLAUDE.md` can narrow it.
+
+## Merging: yours unless it reaches outside the repo
+
+The owner's rule (2026-10-16): a merge the session's work needs is the
+assistant's job, not a question. Merge it yourself and report one line when:
+
+- nothing outside the repository changes: no deploy from `main` (no workflow
+  deploying on push, no `wrangler.toml`, `vercel.json`, `netlify.toml` or host
+  serving `main`), no money, billing or secrets, no message to a client;
+- CI is green on the head and there is no conflict.
+
+Tooling and research repos (the kit, the workshop, the registry) are the usual
+case. A merge into a live site's `main`, a client's product, anything paid or
+irreversible stays the owner's button: give the card below.
 
 ## Asking the owner to merge or press a button
 
