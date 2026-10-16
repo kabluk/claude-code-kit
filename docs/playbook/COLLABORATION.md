@@ -305,6 +305,37 @@ The phrasing "X is available and should be used when appropriate" is not a rule 
 a hope. Related to P-12: data opens a gate, not a hand; here, the ritual performs
 the step, not memory.
 
+### P-17 — One session, one thread
+
+**Problem.** A session that began with "organise the skills" ended, by the same
+evening, with a client site's launch check, a UX audit, code fixes for that site
+and a message for its owner. Every step was requested and none was refused; the
+two threads interleaved, a branch in the wrong repo was reset, and the first
+thread was never closed. The owner: "every time it becomes a mess".
+
+**Agreement.** Once a session's goal is clear (usually after the first one or two
+owner messages; until then the assistant clarifies and changes no file), and for
+every new task, the assistant gives a start block: the **thread** (`**Thread:** goal · repo · done when …`) and
+the **skills** it will use (`**Skills:**`, one line each: what the skill does for
+this task). A request for another goal, repo or
+question is a new thread: the assistant does not start it, but offers a new
+session with a ready prompt (created by the assistant when it can), a deliberate
+switch, or parking it in the inbox. The three P-08 options are each marked
+`[here]` or `[new session: repo]`. Method: the `session-focus` skill; the
+`thread-check.sh` hook repeats the thread before every owner message.
+
+### P-18 — A button for the owner comes with an explanation
+
+**Problem.** The assistant asked the owner three times to "merge these PRs",
+with links and nothing else. The owner did not know what a merge would change,
+whether it would touch a live site, or how to undo it.
+
+**Agreement.** Every request to merge a PR or press another owner-only button is
+a plain-language card: link first; what it is in one sentence; what changes
+after it and what does not; the risk and how to undo it; the exact taps; what
+happens next. Method: the "Asking the owner" section of the `session-focus`
+skill.
+
 ---
 
 ## Closing ritual
@@ -327,4 +358,5 @@ the step, not memory.
 - At the end of a node or iteration the assistant always offers **exactly three**
   options for the next step, through the picker (AskUserQuestion), not in prose;
   the first is the recommended one, marked as such. The owner chooses, the
-  assistant executes.
+  assistant executes. Each option is marked `[here]` or `[new session: repo]`
+  with its ready prompt (P-17).

@@ -1,0 +1,21 @@
+{
+  "name": "solo-builder-kit",
+  "version": "0.2.0",
+  "description": "Skills, role subagents and slash commands from a solo builder's workshop: idea gates and kill-tests, live launch checks, UX audits through a persona, premium landing pages, project orchestration, session focus, harvesting repeats into skills.",
+  "author": {
+    "name": "kabluk",
+    "url": "https://github.com/kabluk"
+  },
+  "homepage": "https://github.com/kabluk/claude-code-kit",
+  "repository": "https://github.com/kabluk/claude-code-kit",
+  "license": "MIT",
+  "keywords": [
+    "skills",
+    "subagents",
+    "slash-commands",
+    "ux-audit",
+    "launch-checklist",
+    "idea-validation",
+    "orchestrator"
+  ]
+}

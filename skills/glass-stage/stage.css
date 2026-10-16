@@ -1,0 +1,164 @@
+/* glass-stage: the hero stage. Real product screens in phones with depth,
+   glass, light, floating cards. Lifted from a product's "Night" design and
+   generalised: colours are --gs-* tokens only, palettes live in palettes.json.
+   Images (optional; without them the CSS glow works):
+     --gs-bg-wide  hero background on desktop   (kie.ai "bg-wide", 16:9)
+     --gs-bg-tall  hero background on a phone   (kie.ai "bg-tall", 9:16)
+     --gs-ring     glass ring behind the phones (kie.ai "ring", 1:1)
+     --gs-aurora   aurora behind the pricing block (kie.ai "aurora", 21:9)
+   Everything sits inside @media screen: print stays light and image-free. */
+:root {
+  --gs-bg: #050912; --gs-bg2: #060c1e; --gs-panel: #0c1428; --gs-ink: #eef3ff; --gs-mute: #a9b8d8;
+  --gs-a: #1264f5; --gs-a-soft: #4d8dff; --gs-b: #6d5cff; --gs-b-soft: #9b8cff;
+  --gs-hi: #8fb6ff; --gs-hi2: #b7a8ff; --gs-ok: #39c774;
+  --gs-bg-wide: none; --gs-bg-tall: none; --gs-ring: none; --gs-aurora: none;
+}
+@media screen {
+  .gs-page { background: var(--gs-bg); color: var(--gs-ink); }
+
+  /* ── hero: background = image (if any) over the CSS glow ── */
+  .gs-hero {
+    position: relative; isolation: isolate; overflow: clip;
+    background:
+      var(--gs-bg-wide) right top / cover no-repeat,
+      radial-gradient(55% 70% at 78% 30%, color-mix(in srgb, var(--gs-a) 38%, transparent), transparent 70%),
+      radial-gradient(40% 55% at 92% 80%, color-mix(in srgb, var(--gs-b) 30%, transparent), transparent 70%),
+      var(--gs-bg2);
+  }
+  .gs-grain, .gs-lines, .gs-fade { position: absolute; inset: 0; z-index: 0; pointer-events: none; }
+  .gs-grain {
+    opacity: .07; mix-blend-mode: overlay;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 .55 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  }
+  .gs-lines {
+    opacity: .5;
+    background-image: linear-gradient(rgba(255,255,255,.045) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.045) 1px, transparent 1px);
+    background-size: 64px 64px;
+    -webkit-mask-image: radial-gradient(70% 70% at 70% 40%, #000, transparent 75%);
+    mask-image: radial-gradient(70% 70% at 70% 40%, #000, transparent 75%);
+  }
+  .gs-fade { top: auto; height: 140px; background: linear-gradient(180deg, transparent, var(--gs-bg)); }
+  .gs-copy { position: relative; z-index: 4; min-width: 0; }
+  /* label: fit-content, not max-content, so a long string does not bloat the column */
+  .gs-eyebrow {
+    display: inline-block; width: fit-content; max-width: 100%;
+    padding: 7px 14px; border-radius: 999px; font-weight: 700; font-size: 14px;
+    color: var(--gs-hi); background: rgba(255,255,255,.06); border: 1px solid rgba(255,255,255,.14);
+  }
+  .gs-grad { background: linear-gradient(90deg, var(--gs-hi), var(--gs-hi2)); -webkit-background-clip: text; background-clip: text; color: transparent; }
+  .gs-lead { color: color-mix(in srgb, var(--gs-ink) 78%, transparent); }
+  .gs-btn {
+    display: inline-flex; align-items: center; gap: 8px; padding: 14px 22px; border-radius: 14px;
+    font-weight: 700; color: var(--gs-on-a, #fff); text-decoration: none; /* a light accent (lime) needs dark text */
+    background: linear-gradient(180deg, var(--gs-a-soft), var(--gs-a));
+    box-shadow: 0 0 0 1px rgba(255,255,255,.18) inset, 0 14px 40px -8px color-mix(in srgb, var(--gs-a) 80%, transparent);
+  }
+  .gs-btn-ghost { color: #fff; background: rgba(255,255,255,.06); border: 1px solid rgba(255,255,255,.2); box-shadow: none; }
+
+  /* ── stage: three phones in perspective, ring, floor ── */
+  .gs-stage { position: relative; height: clamp(460px, 52vw, 620px); perspective: 1600px; perspective-origin: 60% 40%; }
+  .gs-ring {
+    position: absolute; z-index: 0; left: 56%; top: 46%; width: 200%; aspect-ratio: 1;
+    transform: translate(-50%, -50%); pointer-events: none; mix-blend-mode: screen; opacity: .95;
+    background: var(--gs-ring) center / contain no-repeat,
+      radial-gradient(closest-side, transparent 52%, color-mix(in srgb, var(--gs-a-soft) 22%, transparent) 60%, transparent 68%);
+    -webkit-mask-image: radial-gradient(closest-side, #000 70%, transparent 100%);
+    mask-image: radial-gradient(closest-side, #000 70%, transparent 100%);
+  }
+  .gs-floor {
+    position: absolute; z-index: 0; left: 8%; right: 0; bottom: 2%; height: 90px; border-radius: 50%;
+    background: radial-gradient(50% 50% at 50% 50%, color-mix(in srgb, var(--gs-a-soft) 45%, transparent), transparent 70%);
+    filter: blur(8px);
+  }
+  .gs-scene { position: absolute; inset: 0; z-index: 1; transform-style: preserve-3d; transform: rotateX(10deg) rotateY(-22deg) rotateZ(3deg); }
+  .gs-phone {
+    position: absolute; width: clamp(178px, 19vw, 250px); padding: 8px; border-radius: 44px;
+    background: linear-gradient(150deg, #3a4663 0%, #0b1220 38%, #050a16 62%, #27324c 100%);
+    box-shadow:
+      inset 0 0 0 1px color-mix(in srgb, var(--gs-hi) 30%, transparent),
+      inset 0 0 0 3px rgba(0,0,0,.6),
+      -10px 0 40px -18px color-mix(in srgb, var(--gs-a-soft) 70%, transparent),
+      0 70px 110px -30px rgba(0,0,0,.75),
+      0 30px 70px -30px color-mix(in srgb, var(--gs-a) 70%, transparent);
+  }
+  /* diagonal glass highlight */
+  .gs-phone::after {
+    content: ''; position: absolute; inset: 8px; border-radius: 36px; pointer-events: none;
+    background: linear-gradient(118deg, rgba(255,255,255,.22) 0%, rgba(255,255,255,.05) 26%, transparent 42%);
+  }
+  .gs-screen { position: relative; border-radius: 36px; overflow: hidden; background: var(--gs-bg); }
+  .gs-screen img { display: block; width: 100%; height: auto; aspect-ratio: 390 / 844; object-fit: cover; object-position: top; }
+  .gs-sb { height: 30px; display: flex; align-items: center; justify-content: space-between; padding: 0 20px 0 24px; background: var(--gs-bg2); color: var(--gs-ink); font: 700 12px/1 system-ui, sans-serif; }
+  .gs-sb i { width: 74px; height: 21px; border-radius: 12px; background: #000; margin-top: 2px; }
+  .gs-sb-r { display: flex; gap: 2px; align-items: flex-end; }
+  .gs-sb-r em { display: block; width: 3px; background: currentColor; border-radius: 1px; }
+  .gs-sb-r em:nth-child(1) { height: 5px; } .gs-sb-r em:nth-child(2) { height: 7px; } .gs-sb-r em:nth-child(3) { height: 9px; }
+  .gs-sb-r u { display: block; width: 20px; height: 9px; border: 1.5px solid currentColor; border-radius: 3px; margin-left: 5px; position: relative; }
+  .gs-sb-r u::after { content: ''; position: absolute; inset: 1.5px 4px 1.5px 1.5px; background: currentColor; border-radius: 1px; }
+  .gs-front { left: 34%; top: 4%; transform: translateZ(60px); }
+  .gs-left { left: 2%; top: 14%; transform: translateZ(-140px) rotateY(8deg); filter: brightness(.85) saturate(.9); }
+  .gs-right { left: 64%; top: 10%; transform: translateZ(-220px) rotateY(-6deg); filter: brightness(.8) saturate(.85); }
+
+  /* ── floating glass cards ── */
+  .gs-chip {
+    position: absolute; z-index: 3; display: flex; align-items: center; gap: 11px; padding: 11px 14px 11px 11px;
+    border-radius: 16px; font: 500 14px/1.3 inherit; white-space: nowrap; color: var(--gs-ink);
+    background: color-mix(in srgb, var(--gs-panel) 55%, transparent);
+    border: 1px solid rgba(255,255,255,.16);
+    box-shadow: inset 0 1px 0 rgba(255,255,255,.2), 0 24px 50px -16px rgba(0,0,0,.6);
+    -webkit-backdrop-filter: blur(18px) saturate(170%); backdrop-filter: blur(18px) saturate(170%);
+    animation: gs-float 7s ease-in-out infinite;
+  }
+  .gs-chip b { display: block; font-weight: 700; font-size: 14px; }
+  .gs-chip small { display: block; font-size: 13px; margin-top: 2px; color: color-mix(in srgb, var(--gs-ink) 78%, transparent); }
+  .gs-ci { flex: 0 0 auto; width: 34px; height: 34px; border-radius: 11px; display: grid; place-items: center; color: #fff; font-weight: 800; }
+  .gs-ci-a { background: linear-gradient(160deg, var(--gs-a-soft), var(--gs-a)); box-shadow: 0 0 22px -4px var(--gs-a-soft); }
+  .gs-ci-b { background: linear-gradient(160deg, var(--gs-b-soft), var(--gs-b)); box-shadow: 0 0 22px -4px var(--gs-b-soft); }
+  .gs-ci-ok { background: linear-gradient(160deg, color-mix(in srgb, var(--gs-ok) 80%, #fff), var(--gs-ok)); box-shadow: 0 0 22px -4px var(--gs-ok); }
+  .gs-c1 { right: 0; top: 3%; animation-delay: -1s; }
+  .gs-c2 { left: -2%; bottom: 18%; animation-delay: -3s; }
+  .gs-c3 { right: 2%; bottom: 4%; animation-delay: -5s; }
+  @keyframes gs-float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-7px); } }
+
+  /* ── sections below: one glass formula, aurora behind the prices ── */
+  .gs-glass {
+    background: linear-gradient(180deg, rgba(255,255,255,.065), rgba(255,255,255,.02));
+    border: 1px solid rgba(255,255,255,.09); border-radius: 20px;
+    box-shadow: inset 0 1px 0 rgba(255,255,255,.08), 0 30px 60px -30px rgba(0,0,0,.65);
+  }
+  .gs-glass-on { border-color: color-mix(in srgb, var(--gs-a-soft) 45%, transparent); box-shadow: inset 0 1px 0 rgba(255,255,255,.1), 0 0 0 1px color-mix(in srgb, var(--gs-a) 25%, transparent), 0 30px 80px -30px color-mix(in srgb, var(--gs-a) 60%, transparent); }
+  /* icon: a chip glowing in its own colour (the icon's color sets it) */
+  .gs-ic-glow { box-sizing: content-box; padding: 10px; border-radius: 12px; background: color-mix(in srgb, currentColor 16%, transparent); box-shadow: 0 0 26px -6px currentColor; }
+  .gs-aurora-host { position: relative; isolation: isolate; overflow: clip; }
+  .gs-aurora {
+    position: absolute; left: -10%; right: -10%; top: 18%; height: 72%; z-index: -1; pointer-events: none; opacity: .9;
+    background: var(--gs-aurora) center / cover no-repeat,
+      radial-gradient(45% 40% at 40% 50%, color-mix(in srgb, var(--gs-a) 35%, transparent), transparent 70%),
+      radial-gradient(40% 40% at 62% 50%, color-mix(in srgb, var(--gs-b) 32%, transparent), transparent 70%);
+    -webkit-mask-image: radial-gradient(60% 55% at 50% 50%, #000 45%, transparent 100%);
+    mask-image: radial-gradient(60% 55% at 50% 50%, #000 45%, transparent 100%);
+  }
+
+  /* ── phone: vertical background, two phones, smaller cards ── */
+  @media (max-width: 999px) {
+    .gs-hero { background: var(--gs-bg-tall) center bottom / 100% auto no-repeat, radial-gradient(80% 45% at 50% 78%, color-mix(in srgb, var(--gs-a) 36%, transparent), transparent 70%), radial-gradient(60% 35% at 70% 95%, color-mix(in srgb, var(--gs-b) 28%, transparent), transparent 70%), var(--gs-bg2); }
+    .gs-stage { height: 540px; margin: 6px 0 0; }
+    .gs-ring { width: 250%; top: 44%; left: 54%; }
+    .gs-scene { transform: rotateX(8deg) rotateY(-18deg) rotateZ(2deg); }
+    .gs-phone { width: 226px; border-radius: 40px; padding: 7px; }
+    .gs-phone::after { inset: 7px; border-radius: 31px; }
+    .gs-screen { border-radius: 31px; }
+    .gs-sb { height: 24px; font-size: 10px; padding: 0 16px 0 18px; }
+    .gs-sb i { width: 58px; height: 17px; }
+    .gs-front { left: 26%; top: 7%; }
+    .gs-left { left: -10%; top: 14%; }
+    .gs-right { display: none; }
+    .gs-chip { padding: 9px 12px 9px 9px; gap: 9px; border-radius: 14px; white-space: normal; max-width: min(250px, 68vw); }
+    .gs-chip b { font-size: 13px; } .gs-chip small { font-size: 12px; }
+    .gs-ci { width: 30px; height: 30px; border-radius: 10px; }
+    /* dim the aurora behind card text on a narrow screen: its bands cut through the lines */
+    .gs-aurora { opacity: .45; }
+    .gs-c1 { right: 4px; top: 1%; } .gs-c2 { left: 4px; bottom: 30%; } .gs-c3 { right: 4px; bottom: 4%; }
+  }
+  @media (prefers-reduced-motion: reduce) { .gs-chip { animation: none; } }
+}

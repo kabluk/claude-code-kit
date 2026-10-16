@@ -1,0 +1,21 @@
+{
+  "_about": "Eight design skills selected by stars and reviews (02.10.2026). Clone repo with `git clone --depth 1` into scratchpad/skills/<dir>; entry is what the agent reads first; drive is how to run the skill without its own harness. Take slug/title/entry/drive for bakeoff.json from here.",
+  "skills": [
+    { "slug": "frontend-design", "title": "Anthropic · frontend-design", "repo": "https://github.com/anthropics/skills", "dir": "anthropics_skills",
+      "entry": "skills/frontend-design/SKILL.md", "drive": "Read it fully; it has no other files besides the licence." },
+    { "slug": "ui-ux-pro-max", "title": "UI/UX Pro Max", "repo": "https://github.com/nextlevelbuilder/ui-ux-pro-max-skill", "dir": "nextlevelbuilder_ui-ux-pro-max-skill",
+      "entry": ".claude/skills/ui-ux-pro-max/SKILL.md", "drive": "Read it fully; run its search/design-system scripts with python3 as its SKILL.md instructs to pick style, palette and typography; save the generated design system into your folder." },
+    { "slug": "open-design", "title": "OpenDesign", "repo": "https://github.com/nexu-io/open-design", "dir": "nexu-io_open-design",
+      "entry": "AGENTS.md", "drive": "The repo is ~450 MB: never read it broadly, use targeted ls/grep. Follow skills/reference-design-contract and skills/design-brief, the craft/*.md rules they require, and pick one fitting system from design-systems/. Write the design contract (DESIGN.md) into your folder before building." },
+    { "slug": "taste-skill", "title": "Taste Skill", "repo": "https://github.com/Leonxlnx/taste-skill", "dir": "Leonxlnx_taste-skill",
+      "entry": "skills/taste-skill/SKILL.md", "drive": "Read it fully; glance at the repo README for its siblings but let taste-skill govern. It is written for React/Tailwind: apply its rules to static HTML." },
+    { "slug": "impeccable", "title": "Impeccable", "repo": "https://github.com/pbakaus/impeccable", "dir": "pbakaus_impeccable",
+      "entry": ".claude/skills/impeccable/SKILL.md", "drive": "Read it fully plus its reference files; apply its process (shape/craft, then critique/polish) as text guidance. Skip its scripts/impeccable launcher: it downloads a binary outside the output folder." },
+    { "slug": "hallmark", "title": "Hallmark", "repo": "https://github.com/Nutlope/hallmark", "dir": "Nutlope_hallmark",
+      "entry": "skills/hallmark/SKILL.md", "drive": "Read it fully plus the references its design flow names; run its slop test after the build." },
+    { "slug": "huashu-design", "title": "Huashu Design", "repo": "https://github.com/alchaincyf/huashu-design", "dir": "alchaincyf_huashu-design",
+      "entry": "SKILL.md", "drive": "Written in Chinese: follow it, the pages stay in the brief's language. Where it asks a human to choose a direction, decide yourself as it recommends and record why in direction-approved.md." },
+    { "slug": "stitch-skills", "title": "Google Stitch skills", "repo": "https://github.com/google-labs-code/stitch-skills", "dir": "google-labs-code_stitch-skills",
+      "entry": "plugins/stitch-utilities/skills/enhance-prompt/SKILL.md", "drive": "The Stitch MCP server is not available: use the offline skills. enhance-prompt turns the brief into PROMPT.md; design-md and taste-design (plugins/stitch-utilities/skills/) produce DESIGN.md; then implement the pages exactly to that DESIGN.md as Stitch would." }
+  ]
+}

@@ -1,0 +1,214 @@
+{
+  "_about": "glass-stage palettes. Tokens go into stage.css (--gs-*), words go into kie.ai prompts (colour in a prompt only in words, never hex). a/b are the two accents of the gradient and glow; hi/hi2 are the light ends of the gradient text; hint is a third faint tint at the bottom edge of the background. onA is the text colour on the accent button (white by default; a light accent such as lime needs a dark one).",
+  "night": {
+    "note": "Blue → violet. The reference palette the skill was lifted from.",
+    "bg": "#050912",
+    "bg2": "#060c1e",
+    "panel": "#0c1428",
+    "ink": "#eef3ff",
+    "mute": "#a9b8d8",
+    "a": "#1264f5",
+    "aSoft": "#4d8dff",
+    "b": "#6d5cff",
+    "bSoft": "#9b8cff",
+    "hi": "#8fb6ff",
+    "hi2": "#b7a8ff",
+    "ok": "#39c774",
+    "words": {
+      "bg": "deep midnight navy blue",
+      "a": "electric blue",
+      "b": "soft violet",
+      "hint": "cyan"
+    }
+  },
+  "emerald": {
+    "note": "Emerald → turquoise: health, money, \"everything under control\".",
+    "bg": "#03100c",
+    "bg2": "#061a14",
+    "panel": "#0b221b",
+    "ink": "#eafff6",
+    "mute": "#9fc7b8",
+    "a": "#0fbf7a",
+    "aSoft": "#3ddc9a",
+    "b": "#12a6c4",
+    "bSoft": "#5cc9e0",
+    "hi": "#7ff0c1",
+    "hi2": "#8fdcf0",
+    "ok": "#8be38b",
+    "words": {
+      "bg": "deep dark green almost black",
+      "a": "emerald green",
+      "b": "teal cyan",
+      "hint": "pale mint"
+    }
+  },
+  "ember": {
+    "note": "Amber → coral on warm dark: warmth, care, food, home.",
+    "bg": "#0e0806",
+    "bg2": "#170c08",
+    "panel": "#22130d",
+    "ink": "#fff3ea",
+    "mute": "#d4b3a2",
+    "a": "#ff7a2f",
+    "aSoft": "#ff9a5c",
+    "b": "#ff4d6d",
+    "bSoft": "#ff8296",
+    "hi": "#ffc08f",
+    "hi2": "#ff9fb0",
+    "ok": "#7fd67a",
+    "words": {
+      "bg": "deep warm brown almost black",
+      "a": "glowing amber orange",
+      "b": "soft coral rose",
+      "hint": "warm gold"
+    }
+  },
+  "orchid": {
+    "note": "Magenta → violet: creativity, media, a young audience.",
+    "bg": "#0b0512",
+    "bg2": "#12081d",
+    "panel": "#1b0d2a",
+    "ink": "#f8efff",
+    "mute": "#c3a9d8",
+    "a": "#d946ef",
+    "aSoft": "#e879f9",
+    "b": "#7c3aed",
+    "bSoft": "#a78bfa",
+    "hi": "#f0abfc",
+    "hi2": "#c4b5fd",
+    "ok": "#5eead4",
+    "words": {
+      "bg": "deep dark plum almost black",
+      "a": "glowing magenta",
+      "b": "deep violet",
+      "hint": "soft pink"
+    }
+  },
+  "gold": {
+    "note": "Champagne → gold on near black: finance, premium, law.",
+    "bg": "#080806",
+    "bg2": "#11100b",
+    "panel": "#1a1810",
+    "ink": "#fbf7ea",
+    "mute": "#c9c0a3",
+    "a": "#d4a53c",
+    "aSoft": "#e8c26a",
+    "b": "#b8894a",
+    "bSoft": "#d9b27e",
+    "hi": "#f3dc9b",
+    "hi2": "#e9c9a0",
+    "ok": "#8fd694",
+    "words": {
+      "bg": "near black with a warm tint",
+      "a": "soft champagne gold",
+      "b": "warm bronze",
+      "hint": "pale cream"
+    }
+  },
+  "ice": {
+    "note": "Silver → icy blue: engineering, B2B, \"quiet and precise\".",
+    "bg": "#06080c",
+    "bg2": "#0a0e15",
+    "panel": "#111722",
+    "ink": "#f1f5fb",
+    "mute": "#a8b4c6",
+    "a": "#7aa7d9",
+    "aSoft": "#a3c4e8",
+    "b": "#9aa6b8",
+    "bSoft": "#c3ccd8",
+    "hi": "#d6e6f7",
+    "hi2": "#e3e8ef",
+    "ok": "#7fd6a8",
+    "words": {
+      "bg": "near black graphite",
+      "a": "icy pale blue",
+      "b": "cool silver",
+      "hint": "white"
+    }
+  },
+  "saline": {
+    "note": "Saline: dark blue → aqua turquoise. Drop, water, clinic; for medicine and health (first used 02.10).",
+    "bg": "#03101a",
+    "bg2": "#061826",
+    "panel": "#0a2233",
+    "ink": "#ecfbff",
+    "mute": "#9cc3d1",
+    "a": "#0fb5c9",
+    "aSoft": "#4fd6e3",
+    "b": "#2f7fe0",
+    "bSoft": "#74aef0",
+    "hi": "#8ff0f5",
+    "hi2": "#a9cdfb",
+    "ok": "#5fe0a0",
+    "words": {
+      "bg": "deep midnight navy blue",
+      "a": "aqua teal",
+      "b": "clear sky blue",
+      "hint": "pale mint"
+    }
+  },
+  "amber-navy": {
+    "note": "Dark blue + amber: a continuation of a light brand with an amber accent in a dark theme; prices, indices, finance (first used 02.10).",
+    "bg": "#060b14",
+    "bg2": "#0b1424",
+    "panel": "#111d31",
+    "ink": "#fbf6ec",
+    "mute": "#c3b9a4",
+    "a": "#e0a23a",
+    "aSoft": "#f0c26a",
+    "b": "#c8743a",
+    "bSoft": "#e39c6c",
+    "hi": "#f6d58f",
+    "hi2": "#f1b58d",
+    "ok": "#7fd6a0",
+    "words": {
+      "bg": "deep navy blue almost black",
+      "a": "warm amber gold",
+      "b": "soft copper",
+      "hint": "pale cream"
+    }
+  },
+  "vitamin": {
+    "note": "Plum + coral: wellness, beauty lounge, energy; livelier, but further from \"clinic\" (first used 02.10).",
+    "bg": "#0e0712",
+    "bg2": "#170b1b",
+    "panel": "#221126",
+    "ink": "#fff1f3",
+    "mute": "#d2abb8",
+    "a": "#ff6b5e",
+    "aSoft": "#ff9486",
+    "b": "#d94fa0",
+    "bSoft": "#ec86c1",
+    "hi": "#ffb8a6",
+    "hi2": "#f6a7d6",
+    "ok": "#7fe0b0",
+    "words": {
+      "bg": "deep dark plum almost black",
+      "a": "glowing coral orange",
+      "b": "soft magenta pink",
+      "hint": "pale peach"
+    }
+  },
+  "forest-lime": {
+    "note": "Forest + lime: the dark pair to a light lime-accent design system (06.10). The same lime #9fe870 as the light site's button, so the stage and the site speak with one accent.",
+    "bg": "#07120a",
+    "bg2": "#0c1a0f",
+    "panel": "#132417",
+    "ink": "#f3fbe9",
+    "mute": "#a9bfa2",
+    "a": "#9fe870",
+    "aSoft": "#b9f08f",
+    "b": "#2fb98a",
+    "bSoft": "#6fd3ad",
+    "hi": "#d4f7b4",
+    "hi2": "#a8ecd2",
+    "ok": "#9fe870",
+    "words": {
+      "bg": "deep forest green almost black",
+      "a": "fresh lime green",
+      "b": "soft jade teal",
+      "hint": "pale mint"
+    },
+    "onA": "#163300"
+  }
+}

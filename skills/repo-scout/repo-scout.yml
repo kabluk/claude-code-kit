@@ -1,0 +1,53 @@
+# Copy to .github/workflows/repo-scout.yml in the repo that holds scout/profiles.json.
+# Collects trending candidates every two days and commits them to the `scout` branch.
+name: repo-scout
+
+on:
+  schedule:
+    - cron: '23 14 */2 * *'
+  workflow_dispatch:
+  push:                       # a profile change rescans at once
+    paths: ['scout/profiles.json', '.github/workflows/repo-scout.yml']
+
+permissions:
+  contents: write
+
+concurrency: repo-scout
+
+jobs:
+  scout:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+
+      - name: Switch to the scout branch (create it on first run)
+        run: |
+          git config user.name 'repo-scout'
+          git config user.email 'repo-scout@users.noreply.github.com'
+          cp -r .claude/skills/repo-scout /tmp/repo-scout
+          cp scout/profiles.json /tmp/profiles.json
+          if git ls-remote --exit-code --heads origin scout >/dev/null; then
+            git fetch origin scout && git checkout scout
+          else
+            git checkout --orphan scout && git rm -rq --cached . && git clean -fdq
+          fi
+          mkdir -p scout/candidates
+          cp /tmp/profiles.json scout/profiles.json
+
+      - name: Collect candidates
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: node /tmp/repo-scout/scout.mjs scout/profiles.json scout/state.json "scout/candidates/$(date -u +%F).md"
+
+      - name: Commit to the scout branch
+        run: |
+          git add scout
+          git diff --cached --quiet && { echo 'nothing new'; exit 0; }
+          git commit -qm "scout: candidates $(date -u +%F)"
+          git push -q origin scout

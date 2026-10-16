@@ -18,6 +18,11 @@
             "type": "command",
             "command": "python3 .claude/scripts/context_monitor.py",
             "timeout": 5
+          },
+          {
+            "type": "command",
+            "command": "bash .claude/hooks/thread-check.sh",
+            "timeout": 5
           }
         ]
       }
@@ -28,6 +33,10 @@
           {
             "type": "command",
             "command": "bash .claude/hooks/session-start.sh"
+          },
+          {
+            "type": "command",
+            "command": "bash .claude/hooks/skill-catalog.sh"
           }
         ]
       }
