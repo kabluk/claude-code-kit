@@ -72,8 +72,15 @@ code and the licence first (`session-focus` routes it there).
   `scout/profiles.json` (a profile change rescans at once) and
   `workflow_dispatch`; it needs `contents: write` and the default
   `GITHUB_TOKEN`.
-- Claude routine: a fresh session in the registry repo an hour later, prompt
-  "Run the repo-scout skill: verify the newest candidates on branch scout,
-  write the digest, push it, and summarise the top picks for the owner." Turn
-  push notifications on so the summary reaches the phone.
+- Claude routine: it must wake a **standing session created with the registry
+  repo as its source** (`create_session` with `source_url`, `source_revision`
+  and `outcome_branch` set to `scout`), via `create_trigger` with
+  `persistent_session_id`. A routine that spawns a fresh session per fire gets
+  no repository: a private repo can be neither cloned nor read from
+  raw.githubusercontent.com, and `add_repo` is not available there (the first
+  scheduled run failed exactly so). The standing session's first message holds
+  the full steps; each wake only says "new run". It sends the phone summary
+  itself with PushNotification.
+- Test the routine where it will run, not from the session that built it: send
+  the standing session its first run at once and check that the digest landed.
 - Change the cadence in both places together.

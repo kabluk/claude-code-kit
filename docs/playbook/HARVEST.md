@@ -81,3 +81,4 @@ the same repeat builds it.
 2026-10-13 | claude-code-kit | owner asked three times to merge PRs with only links, did not know what a merge changes → P-18 + 'Asking the owner' section in session-focus
 2026-10-13 | claude-code-kit | owner: 'many skills I created are not in the list' — catalog was built from kit, lab and idea-gates only; 11 skills lived only in product repos → catalog rows with their source repo (scan all 19 repos before declaring a catalog complete)
 2026-10-13 | claude-code-kit | owner wanted trending repos matched to each project on a schedule; session proxy blocks GitHub search → skill `repo-scout` (Actions collects, Claude routine verifies and digests)
+2026-10-16 | claude-code-kit | scheduled routine in a fresh session had no access to the private registry repo; tested only from the building session → repo-scout: routine wakes a standing session created with the repo as source; test where it runs
