@@ -95,6 +95,20 @@ A report about a product (a launch check, a UX audit) is research: it lives in
 the workshop; the fixes it asks for are product work: a new session in the
 product repo. The map is the default; a repo's `CLAUDE.md` can narrow it.
 
+## Merging: yours unless it reaches outside the repo
+
+The owner's rule (2026-10-16): a merge the session's work needs is the
+assistant's job, not a question. Merge it yourself and report one line when:
+
+- nothing outside the repository changes: no deploy from `main` (no workflow
+  deploying on push, no `wrangler.toml`, `vercel.json`, `netlify.toml` or host
+  serving `main`), no money, billing or secrets, no message to a client;
+- CI is green on the head and there is no conflict.
+
+Tooling and research repos (the kit, the workshop, the registry) are the usual
+case. A merge into a live site's `main`, a client's product, anything paid or
+irreversible stays the owner's button: give the card below.
+
 ## Asking the owner to merge or press a button
 
 The owner is not a developer and is often on a phone. Every request to merge a

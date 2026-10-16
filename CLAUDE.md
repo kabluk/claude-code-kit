@@ -15,9 +15,10 @@ Once the session's goal is clear (usually after one or two owner messages,
 always before the first file change), and for every new task, give the start block:
 `**Thread:** goal · repo · done when …` and `**Skills:**` (one line per skill
 from the catalog: what it does for this task). Route any other goal to a new
-session with a ready prompt (P-17, `skills/session-focus/`). A request to merge
-or press an owner button explains in plain words what it changes and how to undo
-it (P-18).
+session with a ready prompt (P-17, `skills/session-focus/`). A merge that stays
+inside the repo (CI green, nothing deploys from `main`) the assistant does
+itself; a merge or button that reaches outside (live site, client, money) comes
+as a plain-words card with what it changes and how to undo it (P-18).
 
 ## Working on this repo
 

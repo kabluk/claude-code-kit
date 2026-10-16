@@ -336,6 +336,12 @@ after it and what does not; the risk and how to undo it; the exact taps; what
 happens next. Method: the "Asking the owner" section of the `session-focus`
 skill.
 
+**Not a button: a merge that stays inside the repo.** After cards for four
+tooling PRs the owner asked "why ask me, if we need it anyway?". A merge whose
+effect stays inside the repository (CI green, no conflict, nothing deploys from
+`main`, no money, secrets or client touched) the assistant does itself and
+reports in one line. The card is only for merges and buttons that reach outside.
+
 ---
 
 ## Closing ritual
