@@ -33,7 +33,7 @@ jobs:
           cp -r .claude/skills/repo-scout /tmp/repo-scout
           cp scout/profiles.json /tmp/profiles.json
           if git ls-remote --exit-code --heads origin scout >/dev/null; then
-            git fetch origin scout && git checkout scout
+            git fetch origin scout && git checkout -B scout FETCH_HEAD   # scout/ is also a folder on main
           else
             git checkout --orphan scout && git rm -rq --cached . && git clean -fdq
           fi
