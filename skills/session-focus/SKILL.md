@@ -51,7 +51,11 @@ whose result would live in another repo, or answer another question, is a
    request sounded like part of this one. Done when every path you are about
    to touch has its home named.
 3. **Check every request against the thread** before acting. Three cases:
-   - *same thread*, including a sub-step it needs → do it;
+   - *same thread*, including a sub-step it needs → do it. Follow-ups in a
+     repo this session already works on (a fix, a rule, a finding about the
+     same tool) are the same thread: do not send them to a new session. A new
+     session is for another project or repo, or for a context near its limit
+     (~75 %, P-07), never only because a step finished;
    - *aside*: a question answered in a few lines with no file change and no
      commit → answer it, then say "back to: <thread>";
    - *new thread* → do not start it. Say in one line that it is a different
@@ -74,7 +78,8 @@ whose result would live in another repo, or answer another question, is a
    a commit, a report, a decision, an answer the owner asked for; a
    discussion with no commit counts too. Mark each option `[here]` or
    `[new session: <owner/repo>]`; a `[new session]` option carries its ready
-   prompt. Done when the picker is shown and no option would pull a second
+   prompt. Most options are `[here]`: owner, 2026-10-16, "why open a new
+   session every time? the context is not full". Done when the picker is shown and no option would pull a second
    thread into this session.
 
 ## Map of homes
