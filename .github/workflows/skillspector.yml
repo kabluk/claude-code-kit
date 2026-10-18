@@ -18,6 +18,7 @@ jobs:
   scan:
     runs-on: ubuntu-latest
     continue-on-error: true
+    timeout-minutes: 20
     steps:
       - uses: actions/checkout@v4
 
@@ -37,7 +38,7 @@ jobs:
             name=$(echo "${t%/}" | tr '/' '-')
             skillspector scan "$t" --no-llm --format markdown --output "report/$name.md" > /dev/null 2>"report/$name.err" || true
             skillspector scan "$t" --no-llm --format json --output "report/$name.json" > /dev/null 2>&1 || true
-            score=$(python3 -c "import json,sys; d=json.load(open(sys.argv[1])); print(d.get('risk_score', d.get('score', '?')))" "report/$name.json" 2>/dev/null || echo error)
+            score=$(python3 -c "import json,sys; r=json.load(open(sys.argv[1]))['risk_assessment']; print(r['score'], r['severity'])" "report/$name.json" 2>/dev/null || echo error)
             echo "- \`$t\` — risk $score" >> "$GITHUB_STEP_SUMMARY"
           done
 

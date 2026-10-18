@@ -39,8 +39,10 @@ The fix is in the binding, not the prompt:
 2. Create the Routine with that session's `persistent_session_id`: every run
    continues it instead of starting an empty one. `update_trigger` does not
    change the binding: delete the old Routine and create a new one.
-3. The prompt starts with a sync (`git checkout main && git fetch &&
-   git reset --hard origin/main`), not with a clone.
+3. The prompt starts with a sync, not with a clone: first `git status
+   --porcelain`; if it prints anything, stop and report the uncommitted files
+   instead of discarding them. Only on a clean tree: `git checkout main &&
+   git fetch && git reset --hard origin/main`.
 4. The repository's hooks run in the host session too, and nobody is there.
    A Stop hook that demands AskUserQuestion hangs the session forever: the
    Routine prompt starts with the marker `[[unattended]]`, and the hook stays
