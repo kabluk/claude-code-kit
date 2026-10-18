@@ -33,7 +33,9 @@ Kind: **skill**, **agent** (subagent), **command** (slash command),
 **env** (ships with Claude Code / claude.ai, nothing to install).
 Source: **kit** = `kabluk/claude-code-kit`, **idea-gates** = `kabluk/idea-gates`,
 **lab** = `kabluk/lab` only. An `owner/repo` source is a third-party skill: install it from that public
-repository, keep its licence, and do not republish it as ours.
+repository, keep its licence, and do not republish it as ours. A third-party skill
+vendored into the kit is **kit** and carries its `LICENSE` and a `NOTICE.md`
+(upstream repo, commit, kit changes) in its own folder.
 
 ### 1. Idea and validation (before any code)
 
@@ -107,6 +109,13 @@ repository, keep its licence, and do not republish it as ours.
 | `site-launch` | skill | Before opening a new site to traffic, moving domain or host, "nothing in Google" or empty analytics: live check, analytics event, Search Console, legal, forms, monitoring. | kit |
 | `project-pulse` | skill | Give a live project a pulse: daily metrics committed to the repo and a weekly analyst routine that sends the owner a diagnosis and actions. | kit |
 | `growth-strategist` | agent | Positioning, launch plan, marketing experiments, content, growth metrics — once goal and audience are defined. | kit |
+| `product-marketing` | skill | First marketing step in a project: write `.agents/product-marketing.md` (ICP, positioning, customer language, voice) that the marketing skills below read. | kit |
+| `marketing-plan` | skill | A 12-month go-to-market or growth plan by AARRR fitted to the real budget and team, or "is this market big enough" (TAM/SAM/SOM). | kit |
+| `marketing-ideas` | skill | Stuck on how to market something: 139 tactics filtered to stage, budget and team. | kit |
+| `co-marketing` | skill | Growth through partner companies: who shares our audience, which joint campaign to run with them. | kit |
+| `community-marketing` | skill | Word of mouth through a community or ambassadors (Telegram, Discord, forum): design, seed, run it. | kit |
+| `referrals` | skill | Users or partners should bring users: referral or affiliate programme, review campaign, replies to bad reviews. | kit |
+| `free-tools` | skill | A free calculator, generator or checker as a lead and traffic magnet: whether to build one, which, how to judge it. | kit |
 
 ### 6. Access, credentials and environment
 

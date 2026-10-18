@@ -102,6 +102,20 @@ fails: 1  warns: 2
 ```
 </details>
 
+### Market and grow (vendored)
+
+Seven skills from [coreyhaines31/marketingskills](https://github.com/coreyhaines31/marketingskills) (MIT), each with its `NOTICE.md` and `LICENSE`. Start with `product-marketing`; the rest read the context file it writes.
+
+| Skill | What it does |
+|---|---|
+| [`product-marketing`](skills/product-marketing/SKILL.md) | Writes `.agents/product-marketing.md`: ICP, positioning, customer language, voice. |
+| [`marketing-plan`](skills/marketing-plan/SKILL.md) | A 12-month AARRR plan fitted to the real budget and team, with market sizing and an idea bank by quarter. |
+| [`marketing-ideas`](skills/marketing-ideas/SKILL.md) | 139 tactics filtered to stage, budget and team. |
+| [`co-marketing`](skills/co-marketing/SKILL.md) | Partners who share your audience and the joint campaigns to run with them. |
+| [`community-marketing`](skills/community-marketing/SKILL.md) | A community or ambassador programme that drives word of mouth. |
+| [`referrals`](skills/referrals/SKILL.md) | Referral, affiliate and review programmes. |
+| [`free-tools`](skills/free-tools/SKILL.md) | A free calculator, generator or checker as a lead and traffic magnet. |
+
 ### Keep sessions focused and memory alive
 
 | Skill | What it does |
@@ -118,7 +132,7 @@ fails: 1  warns: 2
 |---|---|
 | `agents/` | 9 role subagents: backend, frontend, data, devops, QA, architect, product, growth, niche-finder |
 | `commands/` | 13 slash commands: `/analyze`, `/discover`, `/deepdive`, `/roadmap`, `/task-loop`, `/workflow-graph`, … |
-| `skills/` | 21 skills (above, plus two vendored ones), indexed by job in [`skill-catalog`](skills/skill-catalog/SKILL.md), which also lists recommended third-party skills |
+| `skills/` | 29 skills (above, plus two vendored process ones), indexed by job in [`skill-catalog`](skills/skill-catalog/SKILL.md), which also lists recommended third-party skills |
 | `hooks/` | `session-start.sh` (start-of-session ritual), `skill-catalog.sh` (prints the catalog into every session, marking what the repo lacks), `thread-check.sh` (repeats the session's thread before every message), `stop-cycle.sh` (no finishing a cycle that had commits without next-step options and a harvest reminder) |
 | `scripts/` | `context_monitor.py` (warns before the context window fills, with tests), `check-catalog.sh` (CI: every skill, agent and command has a catalog row), `kit-sync.sh` (install missing items into a project, update drifted copies, honour `.claude/kit-local`), `orphan-branches.sh` |
 | `docs/playbook/` | `COLLABORATION.md` (the cross-project rules the hooks refer to), `HARVEST.md` (ledger of extracted lessons) |
@@ -158,8 +172,10 @@ lessons into rules or skills first if that has not happened.
 
 ## Credits and license
 
-MIT. Two skills are vendored third-party work, each with its own notice and licence:
+MIT. Nine skills are vendored third-party work, each with its own notice and licence:
 `skills/writing-for-agents/` from [mattpocock/skills](https://github.com/mattpocock/skills)
-(see `skills/writing-for-agents/NOTICE.md`) and `skills/caveman/` from
+(see `skills/writing-for-agents/NOTICE.md`), `skills/caveman/` from
 [JuliusBrussee/caveman](https://github.com/JuliusBrussee/caveman) (see
-`skills/caveman/NOTICE.md`).
+`skills/caveman/NOTICE.md`), and the seven marketing skills above from
+[coreyhaines31/marketingskills](https://github.com/coreyhaines31/marketingskills)
+(see each folder's `NOTICE.md`).
