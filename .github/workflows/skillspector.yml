@@ -1,0 +1,49 @@
+# Security scan of every skill, agent and command with NVIDIA SkillSpector (static mode, no LLM, no keys).
+# Pilot, report only: findings go to the job summary and a downloadable artifact; the job never fails a PR.
+# After two weeks of runs, decide from the noise: make it blocking (with a baseline) or remove it.
+name: skillspector
+
+on:
+  pull_request:
+    paths: ['skills/**', 'agents/**', 'commands/**', '.github/workflows/skillspector.yml']
+  push:
+    branches: [main]
+    paths: ['skills/**', 'agents/**', 'commands/**', '.github/workflows/skillspector.yml']
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  scan:
+    runs-on: ubuntu-latest
+    continue-on-error: true
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      # Third-party code: pinned to the commit of tag v2.13.0, not to a branch.
+      - name: Install SkillSpector v2.13.0
+        run: pip install --quiet 'skillspector @ git+https://github.com/NVIDIA/skillspector.git@091a509b3d6ba8ff5be528966e1f43c2e68cf214'
+
+      - name: Scan
+        run: |
+          mkdir -p report
+          echo '## SkillSpector (static, report only)' >> "$GITHUB_STEP_SUMMARY"
+          for t in skills/*/ agents/*.md commands/*.md; do
+            name=$(echo "${t%/}" | tr '/' '-')
+            skillspector scan "$t" --no-llm --format markdown --output "report/$name.md" > /dev/null 2>"report/$name.err" || true
+            skillspector scan "$t" --no-llm --format json --output "report/$name.json" > /dev/null 2>&1 || true
+            score=$(python3 -c "import json,sys; r=json.load(open(sys.argv[1]))['risk_assessment']; print(r['score'], r['severity'])" "report/$name.json" 2>/dev/null || echo error)
+            echo "- \`$t\` — risk $score" >> "$GITHUB_STEP_SUMMARY"
+          done
+
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: skillspector-report
+          path: report/
