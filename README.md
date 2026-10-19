@@ -116,6 +116,15 @@ Seven skills from [coreyhaines31/marketingskills](https://github.com/coreyhaines
 | [`referrals`](skills/referrals/SKILL.md) | Referral, affiliate and review programmes. |
 | [`free-tools`](skills/free-tools/SKILL.md) | A free calculator, generator or checker as a lead and traffic magnet. |
 
+### Write for people (vendored)
+
+Two skills that strip AI tells from posts, emails and other text for people (both MIT, each with its `NOTICE.md` and `LICENSE`).
+
+| Skill | What it does |
+|---|---|
+| [`humanizer`](skills/humanizer/SKILL.md) | Rewrites AI-sounding text in the writer's voice without changing the facts. From [blader/humanizer](https://github.com/blader/humanizer). |
+| [`stop-slop`](skills/stop-slop/SKILL.md) | A short checklist of banned phrases and structures for drafting and review. From [hardikpandya/stop-slop](https://github.com/hardikpandya/stop-slop). |
+
 ### Keep sessions focused and memory alive
 
 | Skill | What it does |
@@ -172,10 +181,12 @@ lessons into rules or skills first if that has not happened.
 
 ## Credits and license
 
-MIT. Nine skills are vendored third-party work, each with its own notice and licence:
+MIT. Eleven skills are vendored third-party work, each with its own notice and licence:
 `skills/writing-for-agents/` from [mattpocock/skills](https://github.com/mattpocock/skills)
 (see `skills/writing-for-agents/NOTICE.md`), `skills/caveman/` from
 [JuliusBrussee/caveman](https://github.com/JuliusBrussee/caveman) (see
 `skills/caveman/NOTICE.md`), and the seven marketing skills above from
 [coreyhaines31/marketingskills](https://github.com/coreyhaines31/marketingskills)
-(see each folder's `NOTICE.md`).
+(see each folder's `NOTICE.md`), `skills/humanizer/` from
+[blader/humanizer](https://github.com/blader/humanizer) and `skills/stop-slop/` from
+[hardikpandya/stop-slop](https://github.com/hardikpandya/stop-slop) (see their `NOTICE.md`).

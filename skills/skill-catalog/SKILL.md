@@ -1,6 +1,6 @@
 ---
 name: skill-catalog
-description: The map of every skill, subagent and slash command we own, grouped by job (validate an idea, plan, build a site or service, check quality and UX, launch, access, process). Use at the start of any non-trivial task to pick the right tool before improvising, when starting a new site, service, app or project, when asked "which skill", "what do we have for X", "what tools/skills exist", when a skill listed here is missing from this repo, and when adding, renaming or retiring a skill.
+description: The map of every skill, subagent and slash command we own, grouped by job (validate an idea, plan, build a site or service, check quality and UX, launch, write for people, access, process). Use at the start of any non-trivial task to pick the right tool before improvising, when starting a new site, service, app or project, when asked "which skill", "what do we have for X", "what tools/skills exist", when a skill listed here is missing from this repo, and when adding, renaming or retiring a skill.
 ---
 
 # Skill catalog
@@ -117,7 +117,14 @@ vendored into the kit is **kit** and carries its `LICENSE` and a `NOTICE.md`
 | `referrals` | skill | Users or partners should bring users: referral or affiliate programme, review campaign, replies to bad reviews. | kit |
 | `free-tools` | skill | A free calculator, generator or checker as a lead and traffic magnet: whether to build one, which, how to judge it. | kit |
 
-### 6. Access, credentials and environment
+### 6. Writing and copywriting
+
+| Name | Kind | Reach for it when | Source |
+|---|---|---|---|
+| `humanizer` | skill | A draft for people (post, email, landing copy, reply) reads as AI-written: rewrite it in the writer's voice without changing the facts; the pattern list explains why each tell reads as AI. | kit |
+| `stop-slop` | skill | Writing or reviewing any prose for people and you want a short checklist: banned phrases and structures, a quick "does this sound like AI" pass before it goes out. | kit |
+
+### 7. Access, credentials and environment
 
 | Name | Kind | Reach for it when | Source |
 |---|---|---|---|
@@ -125,7 +132,7 @@ vendored into the kit is **kit** and carries its `LICENSE` and a `NOTICE.md`
 | `session-start-hook` | env | Setting a repo up for cloud sessions (deps, tests, linters at start). | env |
 | `update-config` | env | Hooks, permissions, env vars in `settings.json`. | env |
 
-### 7. Process, memory and writing for agents
+### 8. Process, memory and writing for agents
 
 | Name | Kind | Reach for it when | Source |
 |---|---|---|---|
