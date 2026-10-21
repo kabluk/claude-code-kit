@@ -73,6 +73,7 @@ vendored into the kit is **kit** and carries its `LICENSE` and a `NOTICE.md`
 | Name | Kind | Reach for it when | Source |
 |---|---|---|---|
 | `premium-saas-claude-code` | skill | Starting or structuring a SaaS, dashboard or web app that must not look AI-generic: IA, design system, components. | kit |
+| `first-mobile-app` | skill | The owner wants a mobile app (iOS/Android) or has an app idea no user has seen: web prototype first, flows, PRD, builder checks, flow-by-flow build, TestFlight. | kit |
 | `ui-from-screenshot` | skill | Reproduce a screenshot or design 1:1 as code, with a Playwright pixel-diff loop. | kit |
 | `frontend-engineer` | agent | UI, client state, accessibility, API integration. | kit |
 | `backend-engineer` | agent | Server logic, APIs, integrations, background jobs. | kit |
