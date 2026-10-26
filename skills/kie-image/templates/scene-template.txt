@@ -1,0 +1,15 @@
+A single photograph of the person from the reference images. The first reference is their character
+sheet, the others are real photos of them: take the face from all of them.
+
+IDENTITY LOCK: this is the exact person in the reference images. Keep their face unchanged: face
+shape, eye shape and colour, eyebrows, nose, lips, jaw, ears, skin tone, moles and marks, hairline,
+hair colour and length. Same age, same body. Do not beautify, slim, age or restyle them. Do not blend
+them with anyone else. If a detail is unclear, copy it from the references, do not invent it.
+
+CHARACTER: {{CHARACTER}}
+WARDROBE: {{WARDROBE}}
+
+SCENE (follow it exactly: place, action, pose, framing, light): {{SCENE}}
+
+One person in the frame, natural photographic look, true-to-life skin texture, sharp focus on the face.
+No text, no logos, no watermarks, no collage, no split frames.

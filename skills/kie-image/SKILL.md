@@ -14,6 +14,7 @@ measure it, and where the measure lies.
 | `scripts/pipeline.mjs` | kie.ai client: upload refs, create task, poll, download; the `MODELS` table (photo field and limit per model) |
 | `scripts/face-score.py` | ArcFace likeness of every face on a sheet to the refs' centroid, the real-photo ceiling, face count |
 | `templates/character-sheet.txt` | five-view sheet prompt with an IDENTITY LOCK block; `{{CHARACTER}}`, `{{WARDROBE}}` |
+| `templates/scene-template.txt` | one shot of the character in a scene; adds `{{SCENE}}` |
 | `templates/characters/example.json` | values for the placeholders; expression goes into `CHARACTER` |
 
 ## Rules
@@ -24,7 +25,10 @@ measure it, and where the measure lies.
   `.gitignore` before the first run; `pipeline.mjs` refuses to read or write
   inside a work tree where they are not ignored.
 - **The key.** `KIE_API_KEY` from the environment only (see `secrets-and-buttons`).
-  Uploads are free and expire after 24 h; generations cost credits.
+  Uploads are free and expire after 24 h; generations cost credits
+  (`wan/2-7-image-pro` ≈ 48 per call of four images). `pipeline.mjs` prints the
+  balance change for the whole batch: parallel runs share it, so per run is
+  batch ÷ runs.
 
 ## Steps
 
@@ -50,6 +54,12 @@ measure it, and where the measure lies.
 5. **Show the owner.** The kept sheets side by side with refs, scores and the
    ceiling. The owner decides whether it is the person.
    Done when the owner has picked one or asked for another round.
+6. **Scenes**, when the owner wants shots of the character. Refs: the chosen
+   sheet first, then three real photos, as a list:
+   `--refs out/<sheet>,refs/a.jpg,refs/b.jpg,refs/c.jpg --template templates/scene-template.txt --character <json> --scene "<place, action, framing>" --tag <shot-name>`.
+   Score with `--faces 1` and judge as in step 4: the scene done as written
+   first, the score second.
+   Done when every shot the owner asked for has a kept frame shown to them.
 
 ## Models
 
@@ -73,8 +83,9 @@ then a row in `MODELS`, or `--field` and `--max` for a one-off.
 ## Reading the score
 
 - **Cheated layouts score higher.** Three front views in place of a profile beat
-  an honest sheet, because a frontal face is easiest to match. Compare numbers
-  only among sheets with the right layout (step 4).
+  an honest sheet, and a frame that ignored its scene for a plain portrait beats
+  one that followed it, because a frontal face is easiest to match. Compare
+  numbers only among results that did what the prompt asked (steps 4 and 6).
 - **More faces than the template draws** (`broken layout`: six on this template)
   means repeated or extra views. Fewer is usually a profile the detector missed.
 - **Above the ceiling** is suspect, not better: refs disagree with each other more
@@ -89,3 +100,5 @@ the project. A lesson repeated twice moves into the rules or the code.
 
 - 26.10 · lab · picked by score alone, the "best" sheet had three front views
   in place of a profile → step 4 looks first, ranks second.
+- 26.10 · lab · second time: the scene frame with the top score (0.782) had
+  ignored the scene → the rule now covers scenes (step 6, "Reading the score").

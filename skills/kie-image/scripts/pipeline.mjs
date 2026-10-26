@@ -4,11 +4,14 @@
 //
 //   node pipeline.mjs --models                                   → the model table
 //   node pipeline.mjs --model <id> --refs <dir|file,file> --template <txt> --character <json> [options]
+//   node pipeline.mjs --model <id> --refs <sheet,photo,…> --template <scene.txt> --character <json> --scene "<text>" --tag <name>
 //   node pipeline.mjs --model <id> --refs <dir> --prompt "<text>" [options]
 //
 // Options:
 //   --out <dir>        where results go (default out/)
 //   --runs <n>         independent tasks of the same request, in parallel (default 1)
+//   --scene "<text>"   fills {{SCENE}} in the template (scene mode: one shot of the character)
+//   --tag <name>       output file prefix (default: character file name + model)
 //   --set key=value    extra field into `input` (aspect_ratio=3:4, resolution=2K, …); repeatable
 //   --field <name>     override the model's photo field; --max <n> its reference limit
 //   --dry              print the request that would be sent, with placeholders for uploads; no key, no network
@@ -88,6 +91,7 @@ let prompt = opt.prompt
 if (!prompt) {
   if (!opt.template || !opt.character) die('give --prompt, or --template and --character')
   const vars = JSON.parse(readFileSync(opt.character, 'utf8'))
+  if (opt.scene) vars.SCENE = opt.scene
   prompt = readFileSync(opt.template, 'utf8').replace(/\{\{(\w+)\}\}/g, (m, k) => (k in vars ? String(vars[k]).trim() : m))
   const left = prompt.match(/\{\{\w+\}\}/g)
   if (left) die(`${opt.character} has no value for ${[...new Set(left)].join(', ')}`)
@@ -95,7 +99,7 @@ if (!prompt) {
 prompt = prompt.trim()
 
 const slug = (s) => s.replace(/[^a-z0-9]+/gi, '-').replace(/^-|-$/g, '').toLowerCase()
-const tag = `${slug(opt.character ? basename(opt.character, '.json') : 'prompt')}-${slug(opt.model)}`
+const tag = opt.tag ? slug(opt.tag) : `${slug(opt.character ? basename(opt.character, '.json') : 'prompt')}-${slug(opt.model)}`
 const request = (urls) => ({ model: opt.model, input: { prompt, [field]: urls, ...opt.set } })
 
 if (opt.dry) {
@@ -159,9 +163,15 @@ async function task(urls, run) {
   throw new Error(`run ${run}: timeout after 10 min (task ${id})`)
 }
 
+const credit = () => { try { return Number(call('https://api.kie.ai/api/v1/chat/credit')) } catch { return NaN } }
+
 mkdirSync(outDir, { recursive: true })
+const before = credit()
 const urls = refs.map(upload)
 // in parallel: kie.ai holds the queue; one after another would take N times longer
 const res = await Promise.allSettled(Array.from({ length: runs }, (_, i) => task(urls, i + 1)))
 for (const r of res) r.status === 'fulfilled' ? r.value.forEach((f) => console.log(f)) : console.error(String(r.reason.message || r.reason))
+// the balance is per account: this is the whole batch (and anything else spending at the same time), not per run
+const spent = before - credit()
+if (Number.isFinite(spent)) console.error(`credits spent by this batch of ${runs}: ${spent}`)
 process.exitCode = res.some((r) => r.status === 'rejected') ? 1 : 0
