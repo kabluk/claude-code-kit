@@ -11,6 +11,7 @@
 //   --out <dir>        where results go (default out/)
 //   --runs <n>         independent tasks of the same request, in parallel (default 1)
 //   --scene "<text>"   fills {{SCENE}} in the template (scene mode: one shot of the character)
+//   --wardrobe "<text>" replaces WARDROBE from the character file (clothes for this scene)
 //   --tag <name>       output file prefix (default: character file name + model)
 //   --set key=value    extra field into `input` (aspect_ratio=3:4, resolution=2K, …); repeatable
 //   --field <name>     override the model's photo field; --max <n> its reference limit
@@ -92,6 +93,7 @@ if (!prompt) {
   if (!opt.template || !opt.character) die('give --prompt, or --template and --character')
   const vars = JSON.parse(readFileSync(opt.character, 'utf8'))
   if (opt.scene) vars.SCENE = opt.scene
+  if (opt.wardrobe) vars.WARDROBE = opt.wardrobe
   prompt = readFileSync(opt.template, 'utf8').replace(/\{\{(\w+)\}\}/g, (m, k) => (k in vars ? String(vars[k]).trim() : m))
   const left = prompt.match(/\{\{\w+\}\}/g)
   if (left) die(`${opt.character} has no value for ${[...new Set(left)].join(', ')}`)
