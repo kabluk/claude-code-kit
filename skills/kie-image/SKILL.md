@@ -55,8 +55,9 @@ measure it, and where the measure lies.
    ceiling. The owner decides whether it is the person.
    Done when the owner has picked one or asked for another round.
 6. **Scenes**, when the owner wants shots of the character. Refs: the chosen
-   sheet first, then three real photos, as a list:
-   `--refs out/<sheet>,refs/a.jpg,refs/b.jpg,refs/c.jpg --template templates/scene-template.txt --character <json> --scene "<place, action, framing>" --tag <shot-name>`.
+   sheet first, then three real photos, as a list. Leave out any real photo of a
+   similar scene, and give the scene its own clothes with `--wardrobe`:
+   `--refs out/<sheet>,refs/a.jpg,refs/b.jpg,refs/c.jpg --template templates/scene-template.txt --character <json> --scene "<place, action, framing>" --wardrobe "<clothes>" --tag <shot-name>`.
    Score with `--faces 1` and judge as in step 4: the scene done as written
    first, the score second.
    Done when every shot the owner asked for has a kept frame shown to them.
@@ -86,6 +87,9 @@ then a row in `MODELS`, or `--field` and `--max` for a one-off.
   an honest sheet, and a frame that ignored its scene for a plain portrait beats
   one that followed it, because a frontal face is easiest to match. Compare
   numbers only among results that did what the prompt asked (steps 4 and 6).
+- **A copied ref scores higher.** With a real photo of the same scene among the
+  refs (a selfie in a car for a car scene), Wan 2.7 Pro redraws that photo almost
+  as is, and the score jumps (0.83–0.88). Such a frame is a copy, not a result.
 - **More faces than the template draws** (`broken layout`: six on this template)
   means repeated or extra views. Fewer is usually a profile the detector missed.
 - **Above the ceiling** is suspect, not better: refs disagree with each other more
@@ -102,3 +106,5 @@ the project. A lesson repeated twice moves into the rules or the code.
   in place of a profile → step 4 looks first, ranks second.
 - 26.10 · lab · second time: the scene frame with the top score (0.782) had
   ignored the scene → the rule now covers scenes (step 6, "Reading the score").
+- 26.10 · lab · a real car selfie among the refs for a car scene came back nearly
+  copied, scored 0.83–0.88 → step 6 drops similar-scene photos and changes clothes.
