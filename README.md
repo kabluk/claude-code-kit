@@ -125,6 +125,21 @@ Two skills that strip AI tells from posts, emails and other text for people (bot
 | [`humanizer`](skills/humanizer/SKILL.md) | Rewrites AI-sounding text in the writer's voice without changing the facts. From [blader/humanizer](https://github.com/blader/humanizer). |
 | [`stop-slop`](skills/stop-slop/SKILL.md) | A short checklist of banned phrases and structures for drafting and review. From [hardikpandya/stop-slop](https://github.com/hardikpandya/stop-slop). |
 
+### Build and write without AI tells (vendored)
+
+Six skills from one release that filter generic AI output out of interfaces, copy and code comments. They filter, they do not design: UI work needs a `DESIGN.md` for direction. MIT, each with its `NOTICE.md` and `LICENSE`. Refresh all six together. The core's first-run wizard offers to write a pointer block into the project's `CLAUDE.md`; decline it when the kit already routes to the skills.
+
+| Skill | What it does |
+|---|---|
+| [`antislop`](skills/antislop/SKILL.md) | The core filter and its usage modes. |
+| [`antislop-ui`](skills/antislop-ui/SKILL.md) | Generic AI visual patterns, each with a fix. |
+| [`antislop-layoutmobile`](skills/antislop-layoutmobile/SKILL.md) | Responsive layouts: breakpoints, scale, tap targets. |
+| [`antislop-human`](skills/antislop-human/SKILL.md) | Contrast, keyboard, focus and states, with `contrast-check.py`. |
+| [`antislop-copywriting`](skills/antislop-copywriting/SKILL.md) | Landing-page and UI copy without AI vocabulary. |
+| [`antislop-code`](skills/antislop-code/SKILL.md) | Removes generic AI comments from code. |
+
+From [miqdadbadjuber/anti-slop](https://github.com/miqdadbadjuber/anti-slop).
+
 ### Keep sessions focused and memory alive
 
 | Skill | What it does |
@@ -182,7 +197,7 @@ lessons into rules or skills first if that has not happened.
 
 ## Credits and license
 
-MIT. Eleven skills are vendored third-party work, each with its own notice and licence:
+MIT. Seventeen skills are vendored third-party work, each with its own notice and licence:
 `skills/writing-for-agents/` from [mattpocock/skills](https://github.com/mattpocock/skills)
 (see `skills/writing-for-agents/NOTICE.md`), `skills/caveman/` from
 [JuliusBrussee/caveman](https://github.com/JuliusBrussee/caveman) (see
@@ -190,4 +205,5 @@ MIT. Eleven skills are vendored third-party work, each with its own notice and l
 [coreyhaines31/marketingskills](https://github.com/coreyhaines31/marketingskills)
 (see each folder's `NOTICE.md`), `skills/humanizer/` from
 [blader/humanizer](https://github.com/blader/humanizer) and `skills/stop-slop/` from
-[hardikpandya/stop-slop](https://github.com/hardikpandya/stop-slop) (see their `NOTICE.md`).
+[hardikpandya/stop-slop](https://github.com/hardikpandya/stop-slop) (see their `NOTICE.md`), and the six `antislop*` skills from
+[miqdadbadjuber/anti-slop](https://github.com/miqdadbadjuber/anti-slop) (see each `NOTICE.md`).
