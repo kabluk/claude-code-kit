@@ -85,6 +85,8 @@ vendored into the kit is **kit** and carries its `LICENSE` and a `NOTICE.md`
 | `claude-api` | env | Any code that calls Claude / the Anthropic SDK: models, pricing, caching, tools. | env |
 | `artifact-design` | env | A one-off page, report or prototype published as an Artifact. | env |
 | `dataviz` | env | Any chart, dashboard or KPI tile. | env |
+| `antislop-ui` | skill | Building or reviewing a page or app UI and it must not look generated: a list of generic AI visual patterns (gradients, glass, bento, template layout, invented stats), each with the fix. Needs a `DESIGN.md` for direction; it filters, it does not design. | kit |
+| `antislop-layoutmobile` | skill | A layout has to reflow from phone to desktop: breakpoints, scale, grids, overflow, tap targets, checked against the same anti-template rules. | kit |
 
 ### 4. Quality, UX and review
 
@@ -101,6 +103,7 @@ vendored into the kit is **kit** and carries its `LICENSE` and a `NOTICE.md`
 | `code-review` | env | Review a diff or PR for correctness bugs. | env |
 | `security-review` | env | Security pass over pending changes. | env |
 | `simplify` | env | Cleanup of changed code: reuse, simplification, efficiency. | env |
+| `antislop-human` | skill | Checking a UI works for different eyes, hands and setups: contrast (ships `contrast-check.py`), keyboard, focus, states. | kit |
 
 ### 5. Launch and growth
 
@@ -123,6 +126,9 @@ vendored into the kit is **kit** and carries its `LICENSE` and a `NOTICE.md`
 |---|---|---|---|
 | `humanizer` | skill | A draft for people (post, email, landing copy, reply) reads as AI-written: rewrite it in the writer's voice without changing the facts; the pattern list explains why each tell reads as AI. | kit |
 | `stop-slop` | skill | Writing or reviewing any prose for people and you want a short checklist: banned phrases and structures, a quick "does this sound like AI" pass before it goes out. | kit |
+| `antislop` | skill | The core filter and usage modes for the `antislop-*` skills; load it first for any UI or copy work that must not read as AI-made. Its first-run wizard offers to write a pointer block into the project's `CLAUDE.md`: say no if the kit already routes there. | kit |
+| `antislop-copywriting` | skill | Landing-page, product and UI copy: empty AI vocabulary, invented specifics, rule-of-three and staccato rhythm. Overlaps `stop-slop` and `humanizer`; use it for marketing and UI text, those two for prose and rewrites. | kit |
+| `antislop-code` | skill | Code comments written by AI: remove the generic ones, keep the useful ones, never touch the code. | kit |
 
 ### 7. Access, credentials and environment
 
