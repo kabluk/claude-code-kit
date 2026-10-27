@@ -73,7 +73,7 @@ vendored into the kit is **kit** and carries its `LICENSE` and a `NOTICE.md`
 | Name | Kind | Reach for it when | Source |
 |---|---|---|---|
 | `premium-saas-claude-code` | skill | Starting or structuring a SaaS, dashboard or web app that must not look AI-generic: IA, design system, components. | kit |
-| `ui-from-screenshot` | skill | Reproduce a screenshot or design 1:1 as code, with a Playwright pixel-diff loop. | kit |
+| `ui-from-screenshot` | skill | Reproduce a screenshot or design 1:1 as code, with a Playwright pixel-diff loop; contrast over photos and a type/tap-target scale audit. | kit |
 | `frontend-engineer` | agent | UI, client state, accessibility, API integration. | kit |
 | `backend-engineer` | agent | Server logic, APIs, integrations, background jobs. | kit |
 | `data-engineer` | agent | Data model, migrations, queries, analytics events, ETL. | kit |
@@ -90,7 +90,7 @@ vendored into the kit is **kit** and carries its `LICENSE` and a `NOTICE.md`
 
 | Name | Kind | Reach for it when | Source |
 |---|---|---|---|
-| `gate` | skill | After fixing a bug or data defect: a test that fails with the fix mutated away, checked live. | kit |
+| `gate` | skill | After fixing a bug or data defect, when writing any test, CI gate or check script, and before saying "green" or "done" (also after a subagent reports success): a gate that fails with the fix mutated away, an honest exit code, checked live. | kit |
 | `diagnosing-bugs` | skill | A hard bug or a performance regression: "debug this", something broken, throwing, failing or slow. | mattpocock/skills |
 | `click-audit` | skill | "Do all the buttons work?": clicks every control on the listed pages, checks every link, classifies what each one actually did. | kit |
 | `ux-designer` | skill | UX/UI principles for building or critiquing: accessibility (WCAG, EAA), microcopy, forms, navigation, onboarding, i18n, design systems. | szilu/ux-designer-skill |
@@ -128,7 +128,7 @@ vendored into the kit is **kit** and carries its `LICENSE` and a `NOTICE.md`
 
 | Name | Kind | Reach for it when | Source |
 |---|---|---|---|
-| `secrets-and-buttons` | skill | A task needs a token, a workflow fails silently, or the next step is an owner-only button. | kit |
+| `secrets-and-buttons` | skill | A task needs a token, a workflow fails silently, or the next step is an owner-only button; `probe-cloudflare.sh` asks the provider what a token can do. | kit |
 | `session-start-hook` | env | Setting a repo up for cloud sessions (deps, tests, linters at start). | env |
 | `update-config` | env | Hooks, permissions, env vars in `settings.json`. | env |
 
@@ -139,6 +139,7 @@ vendored into the kit is **kit** and carries its `LICENSE` and a `NOTICE.md`
 | `session-focus` | skill | Every session: name its thread first; each file change checked against the map of homes; another goal or repo goes to a new session with a ready prompt; every step ends with three routed options. | kit |
 | `skill-catalog` | skill | This list: picking a tool, adding or retiring one. | kit |
 | `harvest` | skill | End of every cycle, before handoff, whenever something repeats: turn it into a skill, rule or gotcha. | kit |
+| `portfolio-audit` | skill | "What is going on across all repos", lost lessons or rules, unmerged branches, skills drifted from the kit; the weekly backup run; before rolling a playbook, hook or skill change out to several repos. | kit |
 | `writing-for-agents` | skill | Creating or editing any skill, `CLAUDE.md` or `AGENTS.md`. | kit |
 | `skill-creator` | env | Evals and description tuning for a skill that triggers badly. | env |
 | `wait-what` | skill | The owner did not follow the last message: stop and re-pitch it plainly. | mattpocock/skills |

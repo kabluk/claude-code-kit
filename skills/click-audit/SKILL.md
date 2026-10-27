@@ -22,12 +22,17 @@ node .claude/skills/click-audit/audit.mjs --base http://127.0.0.1:4173 --dist ./
 ```
 
 Without `--base` the script serves `--dist` (default `./dist`) itself, with the
-headers from its `_headers` file. Playwright is resolved from the project
-(then `NODE_PATH`); the browser binary comes from the `CHROMIUM` environment
-variable, `--exe` is a synonym, and with neither Playwright uses its own
-download. `--out report.json` writes the full report. Exit code 1 only on dead
-internal links: a NOTHING verdict stays a hypothesis (see false findings
-below).
+headers from its `_headers` file (`BASE` in the environment works like
+`--base`). Playwright is resolved from the project (then `NODE_PATH`, then a
+global install). The browser: the `CHROMIUM` environment variable (`--exe` is
+a synonym), else the browser your Playwright expects, else the newest Chromium
+in a Playwright cache (`~/.cache/ms-playwright`, `/opt/pw-browsers`, …), else
+an error saying what to install. Never write a machine's `chromium-<rev>` path
+into a project script. `--out report.json` writes the full report. Exit code 1
+only on dead internal links: a NOTHING verdict stays a hypothesis (see false
+findings below). For a project you audit often, wrap it in a script
+(`"audit:click": "node .claude/skills/click-audit/audit.mjs / /app/ …"`) whose
+page list is the closed list from step 2, so a run needs no arguments.
 
 ## Steps
 
