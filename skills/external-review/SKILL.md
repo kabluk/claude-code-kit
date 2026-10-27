@@ -1,6 +1,6 @@
 ---
 name: external-review
-description: Use when the owner wants an outside opinion on the product from other LLMs, pastes back one or more such reviews, or asks what to do with them. Prepares a fact-loaded prompt, verifies every checkable claim against the live product before acting, and keeps a per-model table so agreement and contradiction are visible.
+description: Use when the owner wants an outside opinion from other LLMs on a product or an idea, pastes back one or more such reviews, or asks what to do with them. Prepares a fact-loaded prompt, verifies every checkable claim against the live product (or the research data) before acting, and keeps a per-model table so agreement and contradiction are visible.
 ---
 
 # External review
@@ -13,8 +13,8 @@ one is checked with your own tool**.
 
 ## Preparing the prompt — steps
 
-1. **Collect FACTS from the live product, not from memory.** Every number is
-   checked today: counters from the home page, traffic from the metrics sheet,
+1. **Collect FACTS from the live product (for an idea, from its research
+   folder), not from memory.** Every number is checked today: counters from the home page, traffic from the metrics sheet,
    the snapshot date from its stamp, revenue from BACKLOG. A stale number is
    worse than a missing one: the model will build a conclusion on it and will
    not warn you.
@@ -48,9 +48,10 @@ one is checked with your own tool**.
 5. **What not to do even on unanimous advice:** anything irreversible (tear
    out a layer, delete pages) without a single number on what it brings in.
    Unanimity about a priority says nothing about being right in the details.
-6. **Record it** in `docs/project/domains/review-<month>.md`: attribution
-   (which model), verdicts, the table, what was rejected and why. Items go to
-   BACKLOG; rejected ideas go to DECISIONS with the reason.
+6. **Record it**: for a product, in `docs/project/domains/review-<month>.md`;
+   for an idea, in its research folder (`research/YYYY-MM-slug/review.md`).
+   Attribution (which model), verdicts, the table, what was rejected and why.
+   Items go to BACKLOG; rejected ideas go to DECISIONS with the reason.
 
 ## How this differs from "just asking"
 

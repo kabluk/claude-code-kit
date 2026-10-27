@@ -35,7 +35,10 @@ The fix is in the binding, not the prompt:
 1. `create_session` with the repository's `source_url`: a persistent host
    session where the repository is already checked out, with GitHub tools and
    push rights. Verify it OBSERVABLY, not from its description: have it push
-   a test branch and read the latest workflow run.
+   a test branch and read the latest workflow run. A host that got stuck
+   (a question left hanging, a probe branch still checked out) is not
+   repaired in place: archive it, start a new one from a `main` that already
+   carries the fixes, and rebind the Routines to it.
 2. Create the Routine with that session's `persistent_session_id`: every run
    continues it instead of starting an empty one. `update_trigger` does not
    change the binding: delete the old Routine and create a new one.
@@ -49,7 +52,10 @@ The fix is in the binding, not the prompt:
    silent when it sees it. The marker arrives through TWO channels, as a plain
    string or as a notification body inside a ReadNotifications tool_result;
    the hook must see both, and is verified against a transcript of the
-   channel the prompt actually travels by in production.
+   channel the prompt actually travels by in production. The marker counts
+   only when it arrived after the last real owner message; a marker quoted
+   inside tool output (a trigger listing printed as JSON) does not, so the
+   owner's own sessions keep their checks.
 5. A Routine bound to a persistent session has NO completion notifications
    (the server rejects them). The delivery channel is a comment on a GitHub
    issue (the "log"): the owner gets an email, and the assistant needs no new
@@ -91,6 +97,14 @@ project's memory.
      line rather than substituting it for the line's date; fetch "today minus
      lag", not "yesterday". Headless access to Search Console is a service
      account (a JWT signed with RS256 needs no dependencies).
+   - a source that back-fills late (Search Console again): a daily line is a
+     snapshot taken once and never rewritten, so a late day stays a zero
+     forever (in the origin project two days of impressions were lost this
+     way). Add a weekly workflow that commits a range report for the last 28
+     days (`data/metrics/gsc-range.md`) on the evening before the analyst
+     runs, with margin for cron delays; `DIGEST.md` treats it as the primary
+     source for that metric and falls back to the daily lines when it is
+     missing or older than 8 days.
    Run the edge cases (zeros, nulls, a repeated run) through real bash/jq
    before committing.
 2. **Analyst.** First the host session with the repository (`create_session`,

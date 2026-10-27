@@ -223,6 +223,8 @@ The agent writes the details to the matching `docs/project/domains/*.md`, not in
 
 **Roll back an agent's work only after stopping it.** An agent whose work was rolled back (`git checkout`, a patch set aside) but not stopped keeps writing to the same files, and the rollback is quietly undone (in one project two translation agents wrote 4,000 lines on top of a rollback). Order: TaskStop → save the patch → roll back → `git status` clean for their files.
 
+**An agent that fails on the environment is not restarted a second time.** When a subagent stops on infrastructure (a session limit, a sandbox that cannot install a browser, a network block) rather than on its task, a second identical launch fails the same way and burns the same budget. Finish the remaining work in the main session and report two failure kinds separately: CODE FAILURE (the work was wrong) and ENVIRONMENT FAILURE (the work never ran).
+
 **A failed batch is not a negative result.** When some parallel fan-out batches fail for an external reason (API session limit, network failure, timeout, not an error of method or prompt), their items stay "not checked", which is a DIFFERENT status from "checked and rejected". Keep the two piles apart and count the queue as empty only when every batch returned: split N_rejected / N_not_started explicitly in the report and in `domains/*.md`, otherwise undone work quietly reads as a negative result (open-world assumption: no check is not the same as a check that said "no").
 
 ## Step 7. Integration and quality control

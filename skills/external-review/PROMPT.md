@@ -6,6 +6,10 @@ English-speaking: models have more context there and can visit the site.
 For an answer in another language, the owner adds a last line such as
 `Answer in Spanish.`
 
+For an *idea* rather than a live product, replace the site and traffic
+blocks with the facts from the research folder and its go/no-go criteria,
+and point questions 2–5 at the idea's weakest assumption.
+
 ```
 You are acting as a skeptical product advisor with deep knowledge of {{DOMAIN — e.g. B2B logistics, public-records products, SEO-driven marketplaces}}. I run a live product and I want a hard, specific critique — not encouragement.
 

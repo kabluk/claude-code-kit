@@ -58,7 +58,7 @@ copies drifted or are missing; `update` and `install ITEM|all` fix them.
 | [`ux-ease-audit`](skills/ux-ease-audit/SKILL.md) | Walks real tasks through a concrete persona's eyes: taps, seconds, dead ends, a 1–10 score, and a re-run that compares against it. |
 | [`ux-signoff-loop`](skills/ux-signoff-loop/SKILL.md) | An independent reviewer against fixed rule sets: fix, repeat until it signs off, turn each bug class into a build gate. |
 | [`click-audit`](skills/click-audit/SKILL.md) | Clicks every button and checks every link, then says what each control actually did. Finds the button that does nothing. |
-| [`gate`](skills/gate/SKILL.md) | Turns a bug fix into a test proven to fail with the fix removed. *Born on a day with five fixes whose tests all had to be proven by hand.* |
+| [`gate`](skills/gate/SKILL.md) | Turns a bug fix into a test proven to fail with the fix removed; `mutate.sh` runs the mutation and restores the file. *Born on a day with five fixes whose tests all had to be proven by hand.* |
 | [`external-review`](skills/external-review/SKILL.md) | Collects critique from other LLMs and checks every checkable claim before acting on it. *Of five checkable claims from five models, four were wrong.* |
 
 <details><summary><code>click-audit</code> output on a test page</summary>
@@ -132,6 +132,7 @@ Two skills that strip AI tells from posts, emails and other text for people (bot
 | [`project-orchestrator`](skills/project-orchestrator/SKILL.md) | Restores a project's state at session start, splits work across the role subagents, keeps memory in `docs/project/`. |
 | [`session-focus`](skills/session-focus/SKILL.md) | One session, one thread: names the goal and the skills it will use, routes other work to a new session, ends every step with three options. *Born on a day one session drifted through five topics.* |
 | [`skill-catalog`](skills/skill-catalog/SKILL.md) | One map of every skill, printed at session start, so the right tool is offered instead of improvised. |
+| [`portfolio-audit`](skills/portfolio-audit/SKILL.md) | Sweeps every repo of the owner: collects playbook lessons that never reached the canon, unmerged branches, skills drifted from the kit. *Born when the first sweep found 222 lessons that lived in one repo each.* |
 | [`harvest`](skills/harvest/SKILL.md) | Turns every repeat into a skill, a rule or a gotcha, and logs it so the next project does not start from zero. *Born after six projects that each started from a blank sheet.* |
 | [`context-memory-engineering`](skills/context-memory-engineering/SKILL.md) | Separates what goes into one model call from what persists across calls. |
 
