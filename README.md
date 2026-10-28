@@ -42,6 +42,7 @@ copies drifted or are missing; `update` and `install ITEM|all` fix them.
 | Skill | What it does |
 |---|---|
 | [`glass-stage`](skills/glass-stage/SKILL.md) | A dark premium hero "like Linear or Stripe": real product screens in phones, glass, glow, floating cards, generated backgrounds, in any palette. |
+| [`kie-image`](skills/kie-image/SKILL.md) | One person or character kept consistent from reference photos through kie.ai: a five-view character sheet and scene shots, scored by ArcFace likeness, then checked by eye. *Born when the sheet with the top score had three front views in place of a profile.* |
 | [`mockup-in-skin`](skills/mockup-in-skin/SKILL.md) | Shows interface options built from the product's own files, not a page drawn from scratch. |
 | [`skill-bakeoff`](skills/skill-bakeoff/SKILL.md) | A blind contest between design skills on one product; the owner picks by screenshots, desktop and phone. |
 | [`ui-from-screenshot`](skills/ui-from-screenshot/SKILL.md) | Reproduces a design 1:1 with a Playwright + pixelmatch loop until only font rasterisation differs. |

@@ -83,4 +83,3 @@ the same repeat builds it.
 2026-10-13 | claude-code-kit | owner wanted trending repos matched to each project on a schedule; session proxy blocks GitHub search → skill `repo-scout` (Actions collects, Claude routine verifies and digests)
 2026-10-16 | claude-code-kit | scheduled routine in a fresh session had no access to the private registry repo; tested only from the building session → repo-scout: routine wakes a standing session created with the repo as source; test where it runs
 2026-10-16 | claude-code-kit | owner: 'why ask me to merge if we need it anyway?' after cards for 4 tooling PRs → P-18 + session-focus: merges that stay inside the repo are the assistant's
-2026-10-26 | lab | character from reference photos through kie.ai done by hand in lab (25.10 candidate `kie-image`); nine models measured, picking by score alone chose a cheated layout → skill `kie-image` (pipeline.mjs + face-score.py + model table); lab candidate closed
