@@ -87,6 +87,8 @@ vendored into the kit is **kit** and carries its `LICENSE` and a `NOTICE.md`
 | `dataviz` | env | Any chart, dashboard or KPI tile. | env |
 | `antislop-ui` | skill | Building or reviewing a page or app UI and it must not look generated: a list of generic AI visual patterns (gradients, glass, bento, template layout, invented stats), each with the fix. Needs a `DESIGN.md` for direction; it filters, it does not design. | kit |
 | `antislop-layoutmobile` | skill | A layout has to reflow from phone to desktop: breakpoints, scale, grids, overflow, tap targets, checked against the same anti-template rules. | kit |
+| `frontend-design` | skill | Building a new UI or reshaping an existing one and it needs a deliberate visual direction (aesthetic, typography, layout) rather than template defaults; wins over `redesign-existing-projects` where they disagree. Vendored from anthropics/skills, unmodified. | kit |
+| `redesign-existing-projects` | skill | Upgrading an existing site or app in place: scan the stack, audit generic AI patterns and missing states, fix without a rewrite. Local rules for real clients: content and photos from the client (visible `[no data: …]` markers, labelled empty frames), fonts and colours from their brand. Vendored from Leonxlnx/taste-skill. | kit |
 
 ### 4. Quality, UX and review
 

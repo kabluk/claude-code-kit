@@ -140,6 +140,15 @@ Six skills from one release that filter generic AI output out of interfaces, cop
 
 From [miqdadbadjuber/anti-slop](https://github.com/miqdadbadjuber/anti-slop).
 
+### Design an interface (vendored)
+
+Two skills that set a visual direction and upgrade an existing UI. Each has its `NOTICE.md` (upstream, commit, licence, changes) and its licence file.
+
+| Skill | What it does |
+|---|---|
+| [`frontend-design`](skills/frontend-design/SKILL.md) | A deliberate aesthetic direction, typography and layout for a new or reshaped UI, instead of template defaults. From [anthropics/skills](https://github.com/anthropics/skills) (Apache-2.0), unmodified. |
+| [`redesign-existing-projects`](skills/redesign-existing-projects/SKILL.md) | Audits an existing site or app for generic AI patterns and fixes them in the current stack, without a rewrite. From [Leonxlnx/taste-skill](https://github.com/Leonxlnx/taste-skill) (MIT), plus local rules for real clients: content and photos from the client, fonts and colours from their brand, `frontend-design` wins on conflict. |
+
 ### Keep sessions focused and memory alive
 
 | Skill | What it does |
@@ -157,7 +166,7 @@ From [miqdadbadjuber/anti-slop](https://github.com/miqdadbadjuber/anti-slop).
 |---|---|
 | `agents/` | 9 role subagents: backend, frontend, data, devops, QA, architect, product, growth, niche-finder |
 | `commands/` | 13 slash commands: `/analyze`, `/discover`, `/deepdive`, `/roadmap`, `/task-loop`, `/workflow-graph`, … |
-| `skills/` | 29 skills (above, plus two vendored process ones), indexed by job in [`skill-catalog`](skills/skill-catalog/SKILL.md), which also lists recommended third-party skills |
+| `skills/` | 40 skills (19 of them vendored, each with its `NOTICE.md`), indexed by job in [`skill-catalog`](skills/skill-catalog/SKILL.md), which also lists recommended third-party skills |
 | `hooks/` | `session-start.sh` (start-of-session ritual), `skill-catalog.sh` (prints the catalog into every session, marking what the repo lacks), `thread-check.sh` (repeats the session's thread before every message), `stop-cycle.sh` (no finishing a cycle that had commits without next-step options and a harvest reminder) |
 | `scripts/` | `context_monitor.py` (warns before the context window fills, with tests), `check-catalog.sh` (CI: every skill, agent and command has a catalog row), `kit-sync.sh` (install missing items into a project, update drifted copies, honour `.claude/kit-local`), `orphan-branches.sh` |
 | `docs/playbook/` | `COLLABORATION.md` (the cross-project rules the hooks refer to), `HARVEST.md` (ledger of extracted lessons) |
@@ -197,7 +206,7 @@ lessons into rules or skills first if that has not happened.
 
 ## Credits and license
 
-MIT. Seventeen skills are vendored third-party work, each with its own notice and licence:
+MIT. Nineteen skills are vendored third-party work, each with its own notice and licence:
 `skills/writing-for-agents/` from [mattpocock/skills](https://github.com/mattpocock/skills)
 (see `skills/writing-for-agents/NOTICE.md`), `skills/caveman/` from
 [JuliusBrussee/caveman](https://github.com/JuliusBrussee/caveman) (see
@@ -206,4 +215,7 @@ MIT. Seventeen skills are vendored third-party work, each with its own notice an
 (see each folder's `NOTICE.md`), `skills/humanizer/` from
 [blader/humanizer](https://github.com/blader/humanizer) and `skills/stop-slop/` from
 [hardikpandya/stop-slop](https://github.com/hardikpandya/stop-slop) (see their `NOTICE.md`), and the six `antislop*` skills from
-[miqdadbadjuber/anti-slop](https://github.com/miqdadbadjuber/anti-slop) (see each `NOTICE.md`).
+[miqdadbadjuber/anti-slop](https://github.com/miqdadbadjuber/anti-slop) (see each `NOTICE.md`),
+`skills/frontend-design/` from [anthropics/skills](https://github.com/anthropics/skills)
+(Apache-2.0, see its `NOTICE.md` and `LICENSE.txt`) and `skills/redesign-existing-projects/` from
+[Leonxlnx/taste-skill](https://github.com/Leonxlnx/taste-skill) (MIT, see its `NOTICE.md`).
