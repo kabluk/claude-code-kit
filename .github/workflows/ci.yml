@@ -46,6 +46,16 @@ jobs:
           (cd "$p" && bash "$GITHUB_WORKSPACE/scripts/kit-sync.sh" install skills/site-launch | grep -q '^installed  skills/site-launch')
           test -f "$p/.claude/skills/site-launch/launch-check.sh"
 
+      - name: kit-sync holds a skill whose extra file project code uses
+        run: |
+          p=$(mktemp -d); mkdir -p "$p/.claude/skills/harvest" "$p/.github/workflows"
+          echo old > "$p/.claude/skills/harvest/SKILL.md"; echo x > "$p/.claude/skills/harvest/local.sh"
+          echo 'run: bash .claude/skills/harvest/local.sh' > "$p/.github/workflows/audit.yml"
+          bash scripts/kit-sync.sh status "$p" | grep -q '^warning  skills/harvest: .*local.sh <- .github/workflows/audit.yml'
+          bash scripts/kit-sync.sh update "$p" | grep -q '^held  skills/harvest'
+          test -f "$p/.claude/skills/harvest/local.sh"
+          bash scripts/kit-sync.sh update --overwrite-referenced "$p" | grep -q '^updated  skills/harvest'
+
       - name: thread-check hook finds the named thread
         run: |
           t=$(mktemp)
