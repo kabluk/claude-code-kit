@@ -1,0 +1,16 @@
+Character reference sheet of ONE person, photographic, on a plain light-grey studio background.
+
+IDENTITY LOCK: this is the exact person in the reference photos. Keep their face unchanged in every
+view: face shape, eye shape and colour, eyebrows, nose, lips, jaw, ears, skin tone, moles and marks,
+hairline, hair colour and length. Same age, same body. Do not beautify, slim, age or restyle them.
+Do not blend them with anyone else. If a detail is unclear, copy it from the photos, do not invent it.
+
+CHARACTER: {{CHARACTER}}
+WARDROBE (identical in every view): {{WARDROBE}}
+
+LAYOUT, exactly five views of the same person, nothing else on the sheet:
+top row, three head-and-shoulders portraits: 1) front view facing the camera; 2) three-quarter view
+turned to the left; 3) strict left profile, nose pointing at the left edge.
+bottom row, two full-body shots, head to shoes visible: 4) front view standing; 5) back view standing.
+Even soft studio light, the same light in every view. Sharp focus, true-to-life skin texture.
+No text, no labels, no numbers, no borders, no extra people, no repeated views.

@@ -80,6 +80,7 @@ vendored into the kit is **kit** and carries its `LICENSE` and a `NOTICE.md`
 | `devops-engineer` | agent | CI/CD, containers, infra, deploy, observability. | kit |
 | `context-memory-engineering` | skill | Building an agent or LLM pipeline: what goes into one call vs. what persists. | kit |
 | `glass-stage` | skill | A dark premium hero or landing "like Linear / Stripe": real product screens in phones, glass, glow, floating cards, kie.ai backgrounds and 3D icons. | kit |
+| `kie-image` | skill | One person or character kept consistent from reference photos through kie.ai: character sheet, AI model or influencer from a reference; picks the model by a measured ArcFace score and checks the layout by eye. | kit |
 | `mockup-in-skin` | skill | Show interface options built from the product's own files, not a page drawn from scratch: "show three variants", "that is not our design". | kit |
 | `skill-bakeoff` | skill | Blind comparison of design skills on one product: each draws the same pages from scratch on real data; the owner picks by screenshots. | kit |
 | `claude-api` | env | Any code that calls Claude / the Anthropic SDK: models, pricing, caching, tools. | env |

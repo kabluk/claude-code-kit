@@ -98,7 +98,7 @@ jobs:
 
       - name: Node syntax
         run: |
-          for f in skills/*/*.mjs; do
+          for f in skills/*/*.mjs skills/*/scripts/*.mjs; do
             echo "node --check $f"
             node --check "$f"
           done
