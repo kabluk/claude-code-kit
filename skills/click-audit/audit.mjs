@@ -12,11 +12,16 @@
 // A NOTHING verdict is a hypothesis: check it against the code; a choice marked
 // only by a class does not change the page text.
 //
-// Browser: CHROMIUM env var (or --exe) is the Chromium binary; Playwright is
-// resolved from the project (cwd), then from NODE_PATH.
+// Browser: CHROMIUM env var (or --exe), else the browser the installed Playwright
+// expects, else the newest Chromium in a Playwright cache (PLAYWRIGHT_BROWSERS_PATH,
+// ~/.cache/ms-playwright, ~/Library/Caches/ms-playwright, %LOCALAPPDATA%, /opt/pw-browsers),
+// else an error saying what to install. Playwright is resolved from the project (cwd),
+// then NODE_PATH, then a global install next to the node binary.
+// --base is also read from the BASE env var.
 import path from 'node:path'
 import fs from 'node:fs'
 import http from 'node:http'
+import os from 'node:os'
 import { createRequire } from 'node:module'
 
 const argv = process.argv.slice(2)
@@ -35,17 +40,67 @@ if (PAGES.length === 0) {
 }
 
 // --- browser ---------------------------------------------------------------
-async function launchChromium() {
+const isFile = (p) => { try { return fs.statSync(p).isFile() } catch { return false } }
+function loadPlaywright() {
   const req = createRequire(path.join(process.cwd(), 'package.json'))
-  let pw
-  try { pw = req('playwright') } catch {
-    try { pw = req('playwright-core') } catch {
-      console.error('click-audit: playwright not found (install it in the project or set NODE_PATH)')
-      process.exit(2)
+  const globalDir = path.join(path.dirname(process.execPath), '..', 'lib', 'node_modules')
+  for (const name of ['playwright', 'playwright-core']) {
+    try { return req(name) } catch { /* next */ }
+    try { return req(path.join(globalDir, name)) } catch { /* next */ }
+  }
+  console.error('click-audit: playwright not found (install it in the project or set NODE_PATH)')
+  process.exit(2)
+}
+// Newest chromium-*/chromium_headless_shell-* revision in a known Playwright cache, full
+// Chromium before headless shell: covers a project Playwright whose own browser revision
+// is not downloaded while another one is (typical in cloud sessions).
+function scanCaches() {
+  const home = os.homedir()
+  const dirs = []
+  const env = process.env.PLAYWRIGHT_BROWSERS_PATH
+  if (env && env !== '0') dirs.push(env)
+  dirs.push(path.join(home, 'Library/Caches/ms-playwright'))
+  dirs.push(path.join(process.env.XDG_CACHE_HOME || path.join(home, '.cache'), 'ms-playwright'))
+  if (process.env.LOCALAPPDATA) dirs.push(path.join(process.env.LOCALAPPDATA, 'ms-playwright'))
+  dirs.push('/opt/pw-browsers')
+  const FULL = ['chrome', 'chrome.exe', 'Chromium.app/Contents/MacOS/Chromium', 'Google Chrome for Testing.app/Contents/MacOS/Google Chrome for Testing']
+  const SHELL = ['chrome-headless-shell', 'chrome-headless-shell.exe', 'headless_shell', 'headless_shell.exe']
+  const found = []
+  for (const dir of [...new Set(dirs)].filter((d) => fs.existsSync(d))) {
+    for (const rev of fs.readdirSync(dir)) {
+      const m = /^(chromium|chromium_headless_shell)-(\d+)$/.exec(rev)
+      if (!m) continue
+      const shell = m[1] !== 'chromium'
+      let subs = []
+      try { subs = fs.readdirSync(path.join(dir, rev)).filter((s) => s.startsWith('chrome')) } catch { continue }
+      for (const sub of subs) for (const bin of shell ? SHELL : FULL) {
+        const p = path.join(dir, rev, sub, bin)
+        if (isFile(p)) found.push({ p, rev: Number(m[2]), shell })
+      }
     }
   }
-  const executablePath = process.env.CHROMIUM || undefined
-  return pw.chromium.launch({ executablePath })
+  found.sort((a, b) => Number(a.shell) - Number(b.shell) || b.rev - a.rev)
+  return found.map((f) => f.p)
+}
+async function launchChromium() {
+  const pw = loadPlaywright()
+  const chromium = pw.chromium ?? pw.default?.chromium
+  let executablePath
+  if (process.env.CHROMIUM) {
+    if (!isFile(process.env.CHROMIUM)) { console.error(`click-audit: CHROMIUM=${process.env.CHROMIUM}: no such file`); process.exit(2) }
+    executablePath = process.env.CHROMIUM
+  } else {
+    let own = ''
+    try { own = chromium.executablePath() } catch { /* scan below */ }
+    if (!own || !isFile(own)) {
+      executablePath = scanCaches()[0]
+      if (!executablePath) {
+        console.error('click-audit: Chromium not found. Set CHROMIUM=/path/to/chrome, run `npx playwright install chromium`, or point PLAYWRIGHT_BROWSERS_PATH at the browsers directory.')
+        process.exit(2)
+      }
+    }
+  }
+  return chromium.launch(executablePath ? { executablePath } : {})
 }
 
 // --- static server for --dist, with headers from a Cloudflare/Netlify-style _headers file
@@ -64,7 +119,8 @@ function parseHeaders(dir) {
 }
 const TYPES = { '.html': 'text/html; charset=utf-8', '.js': 'text/javascript', '.mjs': 'text/javascript', '.css': 'text/css', '.json': 'application/json', '.svg': 'image/svg+xml', '.png': 'image/png', '.jpg': 'image/jpeg', '.jpeg': 'image/jpeg', '.webp': 'image/webp', '.ico': 'image/x-icon', '.txt': 'text/plain', '.xml': 'application/xml', '.woff2': 'font/woff2' }
 async function siteFrom() {
-  if (flag('base')) return { base: new URL(flag('base')).origin, close: async () => {} }
+  const base = flag('base', process.env.BASE)
+  if (base) return { base: new URL(base).origin, close: async () => {} }
   if (!fs.existsSync(DIST)) { console.error(`click-audit: no --base and ${DIST} does not exist`); process.exit(2) }
   const rules = parseHeaders(DIST)
   const match = (pattern, p) => {
@@ -86,7 +142,7 @@ async function siteFrom() {
     fs.createReadStream(file).pipe(res)
   })
   await new Promise((r) => server.listen(0, '127.0.0.1', r))
-  return { base: `http://127.0.0.1:${server.address().port}`, close: () => new Promise((r) => server.close(r)) }
+  return { base: `http://127.0.0.1:${server.address().port}`, close: () => new Promise((r) => { server.closeAllConnections?.(); server.close(r) }) }
 }
 
 const site = await siteFrom()

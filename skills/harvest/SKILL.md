@@ -34,9 +34,16 @@ time".
    own; a rule with the problem and the agreement; a gotcha with the symptom
    and the fix. Done when the next session of any project will find it
    without the owner's prompting.
-4. **Record it in the ledger** [`docs/playbook/HARVEST.md`](../../../docs/playbook/HARVEST.md):
-   date, project, what repeated, where it went. The ledger travels with the
-   playbook to every repo; that is the cross-project memory.
+4. **Record it in the ledger**: the local
+   [`docs/playbook/HARVEST.md`](../../../docs/playbook/HARVEST.md) of the repo
+   you are working in. One entry: date, project, what repeated, where it went.
+   Every repo keeps its own copy of the playbook; the canon lives in the
+   owner's HQ repo, and a weekly sync (`playbook_sync.py`) merges what each
+   copy added into the canon and lays the canon back out to every repo. That
+   round trip is the cross-project memory: write locally, the sync carries it.
+   Append a new entry rather than rewriting an old one: an entry changed both
+   in a copy and in the canon is a conflict the sync does not merge, and that
+   copy is left out of the round until someone resolves it by hand.
 5. **Offer it to the owner**, one line per candidate, inside the three P-08
    options, not as a separate essay. Done when the owner sees
    "repeat X → skill Y" and can say yes or no.

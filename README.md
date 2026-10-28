@@ -58,7 +58,7 @@ copies drifted or are missing; `update` and `install ITEM|all` fix them.
 | [`ux-ease-audit`](skills/ux-ease-audit/SKILL.md) | Walks real tasks through a concrete persona's eyes: taps, seconds, dead ends, a 1–10 score, and a re-run that compares against it. |
 | [`ux-signoff-loop`](skills/ux-signoff-loop/SKILL.md) | An independent reviewer against fixed rule sets: fix, repeat until it signs off, turn each bug class into a build gate. |
 | [`click-audit`](skills/click-audit/SKILL.md) | Clicks every button and checks every link, then says what each control actually did. Finds the button that does nothing. |
-| [`gate`](skills/gate/SKILL.md) | Turns a bug fix into a test proven to fail with the fix removed. *Born on a day with five fixes whose tests all had to be proven by hand.* |
+| [`gate`](skills/gate/SKILL.md) | Turns a bug fix into a test proven to fail with the fix removed; `mutate.sh` runs the mutation and restores the file. *Born on a day with five fixes whose tests all had to be proven by hand.* |
 | [`external-review`](skills/external-review/SKILL.md) | Collects critique from other LLMs and checks every checkable claim before acting on it. *Of five checkable claims from five models, four were wrong.* |
 
 <details><summary><code>click-audit</code> output on a test page</summary>
@@ -125,6 +125,30 @@ Two skills that strip AI tells from posts, emails and other text for people (bot
 | [`humanizer`](skills/humanizer/SKILL.md) | Rewrites AI-sounding text in the writer's voice without changing the facts. From [blader/humanizer](https://github.com/blader/humanizer). |
 | [`stop-slop`](skills/stop-slop/SKILL.md) | A short checklist of banned phrases and structures for drafting and review. From [hardikpandya/stop-slop](https://github.com/hardikpandya/stop-slop). |
 
+### Build and write without AI tells (vendored)
+
+Six skills from one release that filter generic AI output out of interfaces, copy and code comments. They filter, they do not design: UI work needs a `DESIGN.md` for direction. MIT, each with its `NOTICE.md` and `LICENSE`. Refresh all six together. The core's first-run wizard offers to write a pointer block into the project's `CLAUDE.md`; decline it when the kit already routes to the skills.
+
+| Skill | What it does |
+|---|---|
+| [`antislop`](skills/antislop/SKILL.md) | The core filter and its usage modes. |
+| [`antislop-ui`](skills/antislop-ui/SKILL.md) | Generic AI visual patterns, each with a fix. |
+| [`antislop-layoutmobile`](skills/antislop-layoutmobile/SKILL.md) | Responsive layouts: breakpoints, scale, tap targets. |
+| [`antislop-human`](skills/antislop-human/SKILL.md) | Contrast, keyboard, focus and states, with `contrast-check.py`. |
+| [`antislop-copywriting`](skills/antislop-copywriting/SKILL.md) | Landing-page and UI copy without AI vocabulary. |
+| [`antislop-code`](skills/antislop-code/SKILL.md) | Removes generic AI comments from code. |
+
+From [miqdadbadjuber/anti-slop](https://github.com/miqdadbadjuber/anti-slop).
+
+### Design an interface (vendored)
+
+Two skills that set a visual direction and upgrade an existing UI. Each has its `NOTICE.md` (upstream, commit, licence, changes) and its licence file.
+
+| Skill | What it does |
+|---|---|
+| [`frontend-design`](skills/frontend-design/SKILL.md) | A deliberate aesthetic direction, typography and layout for a new or reshaped UI, instead of template defaults. From [anthropics/skills](https://github.com/anthropics/skills) (Apache-2.0), unmodified. |
+| [`redesign-existing-projects`](skills/redesign-existing-projects/SKILL.md) | Audits an existing site or app for generic AI patterns and fixes them in the current stack, without a rewrite. From [Leonxlnx/taste-skill](https://github.com/Leonxlnx/taste-skill) (MIT), plus local rules for real clients: content and photos from the client, fonts and colours from their brand, `frontend-design` wins on conflict. |
+
 ### Keep sessions focused and memory alive
 
 | Skill | What it does |
@@ -132,6 +156,7 @@ Two skills that strip AI tells from posts, emails and other text for people (bot
 | [`project-orchestrator`](skills/project-orchestrator/SKILL.md) | Restores a project's state at session start, splits work across the role subagents, keeps memory in `docs/project/`. |
 | [`session-focus`](skills/session-focus/SKILL.md) | One session, one thread: names the goal and the skills it will use, routes other work to a new session, ends every step with three options. *Born on a day one session drifted through five topics.* |
 | [`skill-catalog`](skills/skill-catalog/SKILL.md) | One map of every skill, printed at session start, so the right tool is offered instead of improvised. |
+| [`portfolio-audit`](skills/portfolio-audit/SKILL.md) | Sweeps every repo of the owner: collects playbook lessons that never reached the canon, unmerged branches, skills drifted from the kit. *Born when the first sweep found 222 lessons that lived in one repo each.* |
 | [`harvest`](skills/harvest/SKILL.md) | Turns every repeat into a skill, a rule or a gotcha, and logs it so the next project does not start from zero. *Born after six projects that each started from a blank sheet.* |
 | [`context-memory-engineering`](skills/context-memory-engineering/SKILL.md) | Separates what goes into one model call from what persists across calls. |
 
@@ -141,7 +166,7 @@ Two skills that strip AI tells from posts, emails and other text for people (bot
 |---|---|
 | `agents/` | 9 role subagents: backend, frontend, data, devops, QA, architect, product, growth, niche-finder |
 | `commands/` | 13 slash commands: `/analyze`, `/discover`, `/deepdive`, `/roadmap`, `/task-loop`, `/workflow-graph`, … |
-| `skills/` | 29 skills (above, plus two vendored process ones), indexed by job in [`skill-catalog`](skills/skill-catalog/SKILL.md), which also lists recommended third-party skills |
+| `skills/` | 40 skills (19 of them vendored, each with its `NOTICE.md`), indexed by job in [`skill-catalog`](skills/skill-catalog/SKILL.md), which also lists recommended third-party skills |
 | `hooks/` | `session-start.sh` (start-of-session ritual), `skill-catalog.sh` (prints the catalog into every session, marking what the repo lacks), `thread-check.sh` (repeats the session's thread before every message), `stop-cycle.sh` (no finishing a cycle that had commits without next-step options and a harvest reminder) |
 | `scripts/` | `context_monitor.py` (warns before the context window fills, with tests), `check-catalog.sh` (CI: every skill, agent and command has a catalog row), `kit-sync.sh` (install missing items into a project, update drifted copies, honour `.claude/kit-local`), `orphan-branches.sh` |
 | `docs/playbook/` | `COLLABORATION.md` (the cross-project rules the hooks refer to), `HARVEST.md` (ledger of extracted lessons) |
@@ -181,7 +206,7 @@ lessons into rules or skills first if that has not happened.
 
 ## Credits and license
 
-MIT. Eleven skills are vendored third-party work, each with its own notice and licence:
+MIT. Nineteen skills are vendored third-party work, each with its own notice and licence:
 `skills/writing-for-agents/` from [mattpocock/skills](https://github.com/mattpocock/skills)
 (see `skills/writing-for-agents/NOTICE.md`), `skills/caveman/` from
 [JuliusBrussee/caveman](https://github.com/JuliusBrussee/caveman) (see
@@ -189,4 +214,8 @@ MIT. Eleven skills are vendored third-party work, each with its own notice and l
 [coreyhaines31/marketingskills](https://github.com/coreyhaines31/marketingskills)
 (see each folder's `NOTICE.md`), `skills/humanizer/` from
 [blader/humanizer](https://github.com/blader/humanizer) and `skills/stop-slop/` from
-[hardikpandya/stop-slop](https://github.com/hardikpandya/stop-slop) (see their `NOTICE.md`).
+[hardikpandya/stop-slop](https://github.com/hardikpandya/stop-slop) (see their `NOTICE.md`), and the six `antislop*` skills from
+[miqdadbadjuber/anti-slop](https://github.com/miqdadbadjuber/anti-slop) (see each `NOTICE.md`),
+`skills/frontend-design/` from [anthropics/skills](https://github.com/anthropics/skills)
+(Apache-2.0, see its `NOTICE.md` and `LICENSE.txt`) and `skills/redesign-existing-projects/` from
+[Leonxlnx/taste-skill](https://github.com/Leonxlnx/taste-skill) (MIT, see its `NOTICE.md`).

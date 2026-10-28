@@ -73,7 +73,7 @@ vendored into the kit is **kit** and carries its `LICENSE` and a `NOTICE.md`
 | Name | Kind | Reach for it when | Source |
 |---|---|---|---|
 | `premium-saas-claude-code` | skill | Starting or structuring a SaaS, dashboard or web app that must not look AI-generic: IA, design system, components. | kit |
-| `ui-from-screenshot` | skill | Reproduce a screenshot or design 1:1 as code, with a Playwright pixel-diff loop. | kit |
+| `ui-from-screenshot` | skill | Reproduce a screenshot or design 1:1 as code, with a Playwright pixel-diff loop; contrast over photos and a type/tap-target scale audit. | kit |
 | `frontend-engineer` | agent | UI, client state, accessibility, API integration. | kit |
 | `backend-engineer` | agent | Server logic, APIs, integrations, background jobs. | kit |
 | `data-engineer` | agent | Data model, migrations, queries, analytics events, ETL. | kit |
@@ -86,12 +86,16 @@ vendored into the kit is **kit** and carries its `LICENSE` and a `NOTICE.md`
 | `claude-api` | env | Any code that calls Claude / the Anthropic SDK: models, pricing, caching, tools. | env |
 | `artifact-design` | env | A one-off page, report or prototype published as an Artifact. | env |
 | `dataviz` | env | Any chart, dashboard or KPI tile. | env |
+| `antislop-ui` | skill | Building or reviewing a page or app UI and it must not look generated: a list of generic AI visual patterns (gradients, glass, bento, template layout, invented stats), each with the fix. Needs a `DESIGN.md` for direction; it filters, it does not design. | kit |
+| `antislop-layoutmobile` | skill | A layout has to reflow from phone to desktop: breakpoints, scale, grids, overflow, tap targets, checked against the same anti-template rules. | kit |
+| `frontend-design` | skill | Building a new UI or reshaping an existing one and it needs a deliberate visual direction (aesthetic, typography, layout) rather than template defaults; wins over `redesign-existing-projects` where they disagree. Vendored from anthropics/skills, unmodified. | kit |
+| `redesign-existing-projects` | skill | Upgrading an existing site or app in place: scan the stack, audit generic AI patterns and missing states, fix without a rewrite. Local rules for real clients: content and photos from the client (visible `[no data: …]` markers, labelled empty frames), fonts and colours from their brand. Vendored from Leonxlnx/taste-skill. | kit |
 
 ### 4. Quality, UX and review
 
 | Name | Kind | Reach for it when | Source |
 |---|---|---|---|
-| `gate` | skill | After fixing a bug or data defect: a test that fails with the fix mutated away, checked live. | kit |
+| `gate` | skill | After fixing a bug or data defect, when writing any test, CI gate or check script, and before saying "green" or "done" (also after a subagent reports success): a gate that fails with the fix mutated away, an honest exit code, checked live. | kit |
 | `diagnosing-bugs` | skill | A hard bug or a performance regression: "debug this", something broken, throwing, failing or slow. | mattpocock/skills |
 | `click-audit` | skill | "Do all the buttons work?": clicks every control on the listed pages, checks every link, classifies what each one actually did. | kit |
 | `ux-designer` | skill | UX/UI principles for building or critiquing: accessibility (WCAG, EAA), microcopy, forms, navigation, onboarding, i18n, design systems. | szilu/ux-designer-skill |
@@ -102,6 +106,7 @@ vendored into the kit is **kit** and carries its `LICENSE` and a `NOTICE.md`
 | `code-review` | env | Review a diff or PR for correctness bugs. | env |
 | `security-review` | env | Security pass over pending changes. | env |
 | `simplify` | env | Cleanup of changed code: reuse, simplification, efficiency. | env |
+| `antislop-human` | skill | Checking a UI works for different eyes, hands and setups: contrast (ships `contrast-check.py`), keyboard, focus, states. | kit |
 
 ### 5. Launch and growth
 
@@ -124,12 +129,15 @@ vendored into the kit is **kit** and carries its `LICENSE` and a `NOTICE.md`
 |---|---|---|---|
 | `humanizer` | skill | A draft for people (post, email, landing copy, reply) reads as AI-written: rewrite it in the writer's voice without changing the facts; the pattern list explains why each tell reads as AI. | kit |
 | `stop-slop` | skill | Writing or reviewing any prose for people and you want a short checklist: banned phrases and structures, a quick "does this sound like AI" pass before it goes out. | kit |
+| `antislop` | skill | The core filter and usage modes for the `antislop-*` skills; load it first for any UI or copy work that must not read as AI-made. Its first-run wizard offers to write a pointer block into the project's `CLAUDE.md`: say no if the kit already routes there. | kit |
+| `antislop-copywriting` | skill | Landing-page, product and UI copy: empty AI vocabulary, invented specifics, rule-of-three and staccato rhythm. Overlaps `stop-slop` and `humanizer`; use it for marketing and UI text, those two for prose and rewrites. | kit |
+| `antislop-code` | skill | Code comments written by AI: remove the generic ones, keep the useful ones, never touch the code. | kit |
 
 ### 7. Access, credentials and environment
 
 | Name | Kind | Reach for it when | Source |
 |---|---|---|---|
-| `secrets-and-buttons` | skill | A task needs a token, a workflow fails silently, or the next step is an owner-only button. | kit |
+| `secrets-and-buttons` | skill | A task needs a token, a workflow fails silently, or the next step is an owner-only button; `probe-cloudflare.sh` asks the provider what a token can do. | kit |
 | `session-start-hook` | env | Setting a repo up for cloud sessions (deps, tests, linters at start). | env |
 | `update-config` | env | Hooks, permissions, env vars in `settings.json`. | env |
 
@@ -140,6 +148,7 @@ vendored into the kit is **kit** and carries its `LICENSE` and a `NOTICE.md`
 | `session-focus` | skill | Every session: name its thread first; each file change checked against the map of homes; another goal or repo goes to a new session with a ready prompt; every step ends with three routed options. | kit |
 | `skill-catalog` | skill | This list: picking a tool, adding or retiring one. | kit |
 | `harvest` | skill | End of every cycle, before handoff, whenever something repeats: turn it into a skill, rule or gotcha. | kit |
+| `portfolio-audit` | skill | "What is going on across all repos", lost lessons or rules, unmerged branches, skills drifted from the kit; the weekly backup run; before rolling a playbook, hook or skill change out to several repos. | kit |
 | `writing-for-agents` | skill | Creating or editing any skill, `CLAUDE.md` or `AGENTS.md`. | kit |
 | `skill-creator` | env | Evals and description tuning for a skill that triggers badly. | env |
 | `wait-what` | skill | The owner did not follow the last message: stop and re-pitch it plainly. | mattpocock/skills |
