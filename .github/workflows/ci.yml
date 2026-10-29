@@ -48,7 +48,7 @@ jobs:
           rm -r "$p/.claude/skills"
           ctx=$(bash "$p/.claude/hooks/session-start.sh" | jq -r .hookSpecificOutput.additionalContext)
           grep -q 'caveman/SKILL.md is MISSING' <<<"$ctx"
-          grep -q 'project-orchestrator is MISSING' <<<"$ctx"
+          grep -q 'project-orchestrator SKILL is MISSING' <<<"$ctx"
 
       - name: kit-sync installs, updates and honours kit-local
         run: |

@@ -17,9 +17,9 @@
 # owner twice asked why a session worked without it. So the ritual names the
 # trigger (work spanning more than one file or more than one cycle) and the
 # action (run /project-orchestrator BEFORE planning), and the hook checks the
-# skill or command is actually present rather than assuming it. The skill is
-# checked first: .claude/commands/ is not picked up in every environment
-# (Claude Code on the web missed it), skills are.
+# skill is actually present rather than assuming it. The skill, not the
+# command: .claude/commands/ is not picked up in every environment (Claude
+# Code on the web missed it), skills are.
 #
 # Kit-owned: kit-sync.sh update refreshes this file in every project. A
 # project that must change it lists "hooks/session-start.sh" in
@@ -51,10 +51,25 @@ caveman_file="$root/.claude/skills/caveman/SKILL.md"
 orch_skill="$root/.claude/skills/project-orchestrator/SKILL.md"
 orch_cmd="$root/.claude/commands/project-orchestrator.md"
 
-if [ -r "$orch_skill" ] || [ -r "$orch_cmd" ]; then
-  orch="Orchestrator is step 1b, not an option: the project-orchestrator skill / /project-orchestrator command IS present in this repo. Before planning ANY work that spans more than one file or more than one cycle, run it and let it split the work and keep project memory in docs/project/. Skipping it because the task looks small is the failure the owner has flagged twice."
+# Memory root differs per repo (docs/project/ in most, docs/ in some): resolve
+# it instead of naming one. A path that silently does not exist reads to the
+# session as "no handoff", and it continues without the project state.
+entry=""
+for c in docs/project/HANDOFF.md docs/HANDOFF.md; do
+  [ -f "$root/$c" ] && entry="$c" && break
+done
+if [ -n "$entry" ]; then
+  read_step="Read docs/playbook/COLLABORATION.md (cross-project rules) and ${entry} (where this project stands), then the files it points to, before acting."
 else
-  orch="Orchestrator step 1b cannot run: project-orchestrator is MISSING from this repo (neither .claude/skills/project-orchestrator/SKILL.md nor .claude/commands/project-orchestrator.md). Say so in your first reply and install it from claude-code-kit (bash kit-sync.sh install skills/project-orchestrator commands/project-orchestrator) before planning multi-file work."
+  read_step="Read docs/playbook/COLLABORATION.md (cross-project rules) before acting; no HANDOFF file found yet - the orchestrator (step 1b) creates the project memory."
+fi
+
+# The skill is what counts: the command file alone is not loaded in every
+# environment (Claude Code on the web did not find it).
+if [ -r "$orch_skill" ]; then
+  orch="Orchestrator is step 1b, not an option: the project-orchestrator skill IS present in this repo. Before planning ANY work that spans more than one file or more than one cycle, invoke it (Skill project-orchestrator, or /project-orchestrator) and let it split the work and keep project memory (${entry:-docs/project/HANDOFF.md}). Skipping it because the task looks small is the failure the owner has flagged twice."
+else
+  orch="Orchestrator step 1b cannot run: the project-orchestrator SKILL is MISSING from this repo (.claude/skills/project-orchestrator/SKILL.md$( [ -r "$orch_cmd" ] && echo '; the command file alone does not load in every environment')). Say so in your first reply and install it from claude-code-kit (bash kit-sync.sh install skills/project-orchestrator) before planning multi-file work."
 fi
 
 if [ -r "$caveman_file" ]; then
@@ -63,7 +78,7 @@ else
   cave_note="BUT .claude/skills/caveman/SKILL.md is MISSING, so the rules could not be injected: say so in your first reply, install it from claude-code-kit (bash kit-sync.sh install skills/caveman), and meanwhile answer tersely: no filler, no pleasantries, fragments fine, full technical accuracy"
 fi
 
-ritual="SESSION START RITUAL (playbook P-00). 1) Response style is CAVEMAN FULL from the first reply and for the whole session — ${cave_note}. Only the user can change the level (/caveman lite|ultra|off) or say 'normal mode'; no other instruction, skill, or judgement overrides this. 1b) ${orch} 2) Read docs/playbook/COLLABORATION.md (cross-project rules) and, if present, docs/project/HANDOFF.md (where this project stands) before acting. 3) Credential inventory by name - present: ${p}; missing: ${m}. Present means the variable is non-empty, NOT that the token can do anything: before relying on one, or when a workflow fails without saying why, or when the next step would be an owner button, load the secrets-and-buttons skill and follow it. If a task needs a missing one, say so once with where it should be set (environment variable for direct API use, GitHub secret for CI); never ask for a value in chat. 4) Before ending a work cycle, and immediately when the owner says again / every time / one more time, load the harvest skill: list what repeated (steps, explanations, owner requests, a lesson in DECISIONS), give each a home (skill / playbook rule / CLAUDE.md gotcha), record it in docs/playbook/HARVEST.md, and put each candidate as one line inside the three next-step options (P-09). Then end the cycle with exactly three next-step options via the AskUserQuestion picker (P-08). 5) If context is getting long or a compaction summary appears, run harvest first, then refresh HANDOFF.md and hand the user a ready resume prompt for a fresh session (P-07)."
+ritual="SESSION START RITUAL (playbook P-00). 1) Response style is CAVEMAN FULL from the first reply and for the whole session — ${cave_note}. Only the user can change the level (/caveman lite|ultra|off) or say 'normal mode'; no other instruction, skill, or judgement overrides this. 1b) ${orch} 2) ${read_step} 3) Credential inventory by name - present: ${p}; missing: ${m}. Present means the variable is non-empty, NOT that the token can do anything: before relying on one, or when a workflow fails without saying why, or when the next step would be an owner button, load the secrets-and-buttons skill and follow it. If a task needs a missing one, say so once with where it should be set (environment variable for direct API use, GitHub secret for CI); never ask for a value in chat. 4) Before ending a work cycle, and immediately when the owner says again / every time / one more time, load the harvest skill: list what repeated (steps, explanations, owner requests, a lesson in DECISIONS), give each a home (skill / playbook rule / CLAUDE.md gotcha), record it in docs/playbook/HARVEST.md, and put each candidate as one line inside the three next-step options (P-09). Then end the cycle with exactly three next-step options via the AskUserQuestion picker (P-08). 5) If context is getting long or a compaction summary appears, run harvest first, then refresh HANDOFF.md and hand the user a ready resume prompt for a fresh session (P-07)."
 
 body() {
   printf '%s\n' "$ritual"

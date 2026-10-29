@@ -27,7 +27,7 @@ In every repository that uses it, the start hook `.claude/hooks/session-start.sh
    missing, the hook says so in context instead of dropping the rules silently.
    **Names the orchestrator step (1b).** Before planning any work that touches
    more than one file or more than one cycle, run `/project-orchestrator`; the
-   hook checks that the skill or command exists and reports it if not (P-16).
+   hook checks that the skill exists (a command file alone does not load on the web) and reports it if not (P-16).
    The hook is kit-owned: `kit-sync.sh update` refreshes it in every project.
 2. **Reads context.** `docs/playbook/COLLABORATION.md` (this file) and
    `docs/project/HANDOFF.md` (where the project stopped), before any action.
