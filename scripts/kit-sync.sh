@@ -10,12 +10,14 @@
 #           plus project-only items. Changes nothing.
 #   update  overwrites every differing item with the kit version, except
 #           those listed in <project>/.claude/kit-local; refreshes
-#           .claude/hooks/{skill-catalog,thread-check}.sh when present. Installs nothing new.
+#           .claude/hooks/{session-start,stop-cycle,skill-catalog,thread-check}.sh
+#           when present. Installs nothing new; reports a missing session-start.sh
+#           and any kit hook that .claude/settings.json does not run.
 #           status and update list files inside a skill that the kit lacks
 #           (update deletes them); update holds back a skill with a
 #           referenced extra file (below) unless --overwrite-referenced.
-#   install copies missing items in (e.g. skills/site-launch agents/qa-engineer),
-#           or every missing item with 'all'.
+#   install copies missing items in (e.g. skills/site-launch agents/qa-engineer
+#           hooks/session-start.sh), or every missing item with 'all'.
 #   diff    shows project-vs-kit diff for one item, e.g. skills/harvest.
 #
 # .claude/kit-local lists items a project changed on purpose (a translation,
@@ -39,7 +41,7 @@ if [ "$cmd" = update ] && [ "${2:-}" = --overwrite-referenced ]; then force_refs
 case "$cmd" in status|update) proj="${2:-${CLAUDE_PROJECT_DIR:-$PWD}}" ;;
   install) shift; [ $# -gt 0 ] || { echo "install needs items or 'all'"; exit 2; }; want=" $* "; proj="${CLAUDE_PROJECT_DIR:-$PWD}" ;;
   diff) item="${2:?diff needs an item, e.g. skills/harvest}"; proj="${3:-${CLAUDE_PROJECT_DIR:-$PWD}}" ;;
-  *) sed -n '2,32p' "$0"; exit 2 ;;
+  *) sed -n '2,34p' "$0"; exit 2 ;;
 esac
 proj="$(cd "$proj" && pwd)"
 dst="$proj/.claude"
@@ -111,12 +113,25 @@ for k in skills agents commands; do
   done
 done
 
-# Generic hooks the kit owns outright (project hooks like session-start.sh are left alone).
-for hk in skill-catalog.sh thread-check.sh; do
-  h="$dst/hooks/$hk"
-  if [ -f "$h" ] && ! cmp -s "$h" "$kit/hooks/$hk"; then
-    if [ "$cmd" = update ]; then cp "$kit/hooks/$hk" "$h"; echo "updated  hooks/$hk"; changed=$((changed + 1))
-    else echo "differs  hooks/$hk"; fi
+# Hooks the kit owns. session-start.sh carries the ritual (caveman rules,
+# orchestrator step); it used to be left to each project, and fixes made in
+# one project never reached the others or the kit. Now update refreshes it
+# like the rest; list "hooks/session-start.sh" in kit-local to keep a local one.
+for hk in session-start.sh stop-cycle.sh skill-catalog.sh thread-check.sh; do
+  h="$dst/hooks/$hk"; it="hooks/${hk%.sh}"
+  if [ ! -f "$h" ]; then
+    if [ "$cmd" = install ] && { [ "$want" = " all " ] || [[ "$want" == *" $it "* ]] || [[ "$want" == *" hooks/$hk "* ]]; }; then
+      mkdir -p "$dst/hooks"; cp "$kit/hooks/$hk" "$h"; echo "installed  hooks/$hk"; changed=$((changed + 1))
+    elif [ "$hk" = session-start.sh ]; then
+      echo "missing  hooks/$hk  (no caveman, no orchestrator step: install hooks/session-start.sh)"
+    fi
+  elif cmp -s "$h" "$kit/hooks/$hk"; then :
+  elif kept "hooks/$hk" || kept "$it"; then echo "kept  hooks/$hk"
+  elif [ "$cmd" = update ]; then cp "$kit/hooks/$hk" "$h"; echo "updated  hooks/$hk"; changed=$((changed + 1))
+  else echo "differs  hooks/$hk"; fi
+  # A hook file is useless unless settings.json runs it.
+  if [ -f "$h" ] && ! grep -qF ".claude/hooks/$hk" "$dst/settings.json" 2>/dev/null; then
+    echo "not wired  hooks/$hk  (add it to .claude/settings.json hooks, see settings.example.json in the kit)"
   fi
 done
 

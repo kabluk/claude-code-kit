@@ -23,8 +23,12 @@ In every repository that uses it, the start hook `.claude/hooks/session-start.sh
    `caveman` rules (level full) into context verbatim from
    `.claude/skills/caveman/SKILL.md`; there is no longer a "load it as your first
    action" step, because that step can be skipped (a model once did exactly that
-   for a whole session). Only the user changes the level. `project-orchestrator`
-   is for large multi-role work.
+   for a whole session). Only the user changes the level. If the skill file is
+   missing, the hook says so in context instead of dropping the rules silently.
+   **Names the orchestrator step (1b).** Before planning any work that touches
+   more than one file or more than one cycle, run `/project-orchestrator`; the
+   hook checks that the skill or command exists and reports it if not (P-16).
+   The hook is kit-owned: `kit-sync.sh update` refreshes it in every project.
 2. **Reads context.** `docs/playbook/COLLABORATION.md` (this file) and
    `docs/project/HANDOFF.md` (where the project stopped), before any action.
 3. **Checks the key inventory, by name, not by value.** The hook prints which
@@ -125,8 +129,9 @@ to be connected (as an environment variable) rather than silently working around
 ### P-06 — Default skills
 
 - Every session runs in `caveman` from the first reply (the hook injects the
-  rules, there is nothing to step over), keeps `project-orchestrator` available
-  and runs it for large multi-role work, instead of pulling everything into one thread.
+  rules, there is nothing to step over) and runs `project-orchestrator` before
+  planning any work that touches more than one file or more than one cycle
+  (ritual step 1b, P-16), instead of pulling everything into one thread.
 
 ---
 
