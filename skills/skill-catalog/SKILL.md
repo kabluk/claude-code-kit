@@ -67,6 +67,8 @@ vendored into the kit is **kit** and carries its `LICENSE` and a `NOTICE.md`
 | `task-loop` | command | Execute one GRAPH node in a bounded implement–verify–fix loop. | kit |
 | `roadmap` | command | Directory build plan with milestones, KPIs, monetization timeline. | kit |
 | `repo-scout` | skill | Profile every project, then every two days GitHub repos gaining stars matched to each one, README-verified, with one concrete use per pick: "trending repos for our projects", set up or retune the scout. | kit |
+| `spec-driven-development` | skill | A feature or project with no written spec yet: objective, commands, structure, boundaries and tests, in gated phases with a human review at each (spec, plan, tasks, implement). Hands over to the two skills below. | kit |
+| `planning-and-task-breakdown` | skill | A spec exists and the work must be split into ordered, verifiable tasks with dependencies and acceptance criteria; also when a task feels too big to start. | kit |
 
 ### 3. Build a site, service or app
 
@@ -90,6 +92,7 @@ vendored into the kit is **kit** and carries its `LICENSE` and a `NOTICE.md`
 | `antislop-layoutmobile` | skill | A layout has to reflow from phone to desktop: breakpoints, scale, grids, overflow, tap targets, checked against the same anti-template rules. | kit |
 | `frontend-design` | skill | Building a new UI or reshaping an existing one and it needs a deliberate visual direction (aesthetic, typography, layout) rather than template defaults; wins over `redesign-existing-projects` where they disagree. Vendored from anthropics/skills, unmodified. | kit |
 | `redesign-existing-projects` | skill | Upgrading an existing site or app in place: scan the stack, audit generic AI patterns and missing states, fix without a rewrite. Local rules for real clients: content and photos from the client (visible `[no data: …]` markers, labelled empty frames), fonts and colours from their brand. Vendored from Leonxlnx/taste-skill. | kit |
+| `incremental-implementation` | skill | Any change that touches more than one file: build in thin slices, test and commit each, never a big-bang diff. | kit |
 
 ### 4. Quality, UX and review
 
@@ -107,6 +110,11 @@ vendored into the kit is **kit** and carries its `LICENSE` and a `NOTICE.md`
 | `security-review` | env | Security pass over pending changes. | env |
 | `simplify` | env | Cleanup of changed code: reuse, simplification, efficiency. | env |
 | `antislop-human` | skill | Checking a UI works for different eyes, hands and setups: contrast (ships `contrast-check.py`), keyboard, focus, states. | kit |
+| `test-driven-development` | skill | Implementing logic or fixing a bug: red, green, refactor; a bug fix starts with a test that fails. Complements `gate`, which checks that a guard can fail. | kit |
+| `constraint-driven-development` | skill | Before an autonomous or long agent run: write the quality bar (floors for tests, types, accessibility, security) as a contract and add a check that stops the agent from lowering it. Ships `scripts/quality-gate.mjs` for semgrep and axe reports. | kit |
+| `doubt-driven-development` | skill | In flight, on a non-trivial decision: a fresh-context agent cross-examines it before it stands. Not a replacement for `code-review`, which judges a finished diff. | kit |
+| `performance-optimization` | skill | A speed requirement or a suspected regression (slow queries, payload size, Core Web Vitals): measure first, then fix. | kit |
+| `security-and-hardening` | skill | Building input handling, auth, uploads, secrets or integrations: security as a build step. `security-review` (env) judges pending changes; this one shapes the code before. | kit |
 
 ### 5. Launch and growth
 

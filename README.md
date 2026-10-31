@@ -150,6 +150,21 @@ Two skills that set a visual direction and upgrade an existing UI. Each has its 
 | [`frontend-design`](skills/frontend-design/SKILL.md) | A deliberate aesthetic direction, typography and layout for a new or reshaped UI, instead of template defaults. From [anthropics/skills](https://github.com/anthropics/skills) (Apache-2.0), unmodified. |
 | [`redesign-existing-projects`](skills/redesign-existing-projects/SKILL.md) | Audits an existing site or app for generic AI patterns and fixes them in the current stack, without a rewrite. From [Leonxlnx/taste-skill](https://github.com/Leonxlnx/taste-skill) (MIT), plus local rules for real clients: content and photos from the client, fonts and colours from their brand, `frontend-design` wins on conflict. |
 
+### Engineering workflow: spec, plan, test, doubt, harden (vendored)
+
+Eight skills from [addyosmani/agent-skills](https://github.com/addyosmani/agent-skills) (MIT, each with its `NOTICE.md` and `LICENSE`): the process half of building, not the UI half. Each folder carries its own `references/`, so it can be copied on its own. Not vendored on purpose: the upstream slash commands, agent personas and hooks (the `sdd-cache` and `simplify-ignore` hooks rewrite files or fetch pages during a session).
+
+| Skill | What it does |
+|---|---|
+| [`spec-driven-development`](skills/spec-driven-development/SKILL.md) | A written spec before code: objective, commands, structure, boundaries, with a human review gate at each phase. |
+| [`planning-and-task-breakdown`](skills/planning-and-task-breakdown/SKILL.md) | Splits a spec into ordered, verifiable tasks with dependencies. |
+| [`incremental-implementation`](skills/incremental-implementation/SKILL.md) | Builds in thin slices, each tested and committed. |
+| [`test-driven-development`](skills/test-driven-development/SKILL.md) | Red, green, refactor; a bug fix starts with a test that fails. |
+| [`constraint-driven-development`](skills/constraint-driven-development/SKILL.md) | A written quality bar and a gate that stops an agent from quietly lowering it (ships a 45-line report checker for semgrep and axe). |
+| [`doubt-driven-development`](skills/doubt-driven-development/SKILL.md) | A fresh-context sceptic cross-examines each non-trivial decision before it stands. |
+| [`performance-optimization`](skills/performance-optimization/SKILL.md) | Measure first, then fix queries, caching, payloads and Core Web Vitals. |
+| [`security-and-hardening`](skills/security-and-hardening/SKILL.md) | Build security in: input boundaries, secrets, uploads, SSRF, rate limits, dependency audit. |
+
 ### Keep sessions focused and memory alive
 
 | Skill | What it does |
@@ -207,7 +222,7 @@ lessons into rules or skills first if that has not happened.
 
 ## Credits and license
 
-MIT. Nineteen skills are vendored third-party work, each with its own notice and licence:
+MIT. Twenty-seven skills are vendored third-party work, each with its own notice and licence:
 `skills/writing-for-agents/` from [mattpocock/skills](https://github.com/mattpocock/skills)
 (see `skills/writing-for-agents/NOTICE.md`), `skills/caveman/` from
 [JuliusBrussee/caveman](https://github.com/JuliusBrussee/caveman) (see
@@ -219,4 +234,5 @@ MIT. Nineteen skills are vendored third-party work, each with its own notice and
 [miqdadbadjuber/anti-slop](https://github.com/miqdadbadjuber/anti-slop) (see each `NOTICE.md`),
 `skills/frontend-design/` from [anthropics/skills](https://github.com/anthropics/skills)
 (Apache-2.0, see its `NOTICE.md` and `LICENSE.txt`) and `skills/redesign-existing-projects/` from
-[Leonxlnx/taste-skill](https://github.com/Leonxlnx/taste-skill) (MIT, see its `NOTICE.md`).
+[Leonxlnx/taste-skill](https://github.com/Leonxlnx/taste-skill) (MIT, see its `NOTICE.md`), and the eight engineering-workflow skills above from
+[addyosmani/agent-skills](https://github.com/addyosmani/agent-skills) (MIT, see each `NOTICE.md`).
