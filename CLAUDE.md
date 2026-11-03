@@ -27,7 +27,7 @@ as a plain-words card with what it changes and how to undo it (P-18).
 - English only. Keep frontmatter valid for Claude Code (`name`, `description`,
   `tools`, `model`, …).
 - Before committing, run what CI runs:
-  `python3 scripts/context_monitor.test.py && bash -n hooks/*.sh scripts/*.sh skills/*/*.sh && bash scripts/check-catalog.sh`.
+  `python3 scripts/context_monitor.test.py && python3 scripts/bash-guard.test.py && bash -n hooks/*.sh scripts/*.sh skills/*/*.sh && bash scripts/check-catalog.sh`.
 - A new or renamed skill, agent or command gets its row in `skills/skill-catalog/SKILL.md`
   in the same commit.
 - A `description` containing `: ` breaks YAML frontmatter (CI's "Frontmatter parses"

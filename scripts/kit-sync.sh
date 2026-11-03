@@ -10,7 +10,7 @@
 #           plus project-only items. Changes nothing.
 #   update  overwrites every differing item with the kit version, except
 #           those listed in <project>/.claude/kit-local; refreshes
-#           .claude/hooks/{session-start,stop-cycle,skill-catalog,thread-check}.sh
+#           .claude/hooks/{session-start,stop-cycle,skill-catalog,thread-check,bash-guard}.sh
 #           when present. Installs nothing new; reports a missing session-start.sh
 #           and any kit hook that .claude/settings.json does not run.
 #           status and update list files inside a skill that the kit lacks
@@ -117,7 +117,7 @@ done
 # orchestrator step); it used to be left to each project, and fixes made in
 # one project never reached the others or the kit. Now update refreshes it
 # like the rest; list "hooks/session-start.sh" in kit-local to keep a local one.
-for hk in session-start.sh stop-cycle.sh skill-catalog.sh thread-check.sh; do
+for hk in session-start.sh stop-cycle.sh skill-catalog.sh thread-check.sh bash-guard.sh; do
   h="$dst/hooks/$hk"; it="hooks/${hk%.sh}"
   if [ ! -f "$h" ]; then
     if [ "$cmd" = install ] && { [ "$want" = " all " ] || [[ "$want" == *" $it "* ]] || [[ "$want" == *" hooks/$hk "* ]]; }; then

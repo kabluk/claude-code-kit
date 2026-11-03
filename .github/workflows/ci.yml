@@ -20,6 +20,9 @@ jobs:
       - name: context_monitor tests
         run: python scripts/context_monitor.test.py
 
+      - name: bash-guard hook allow/block table
+        run: python scripts/bash-guard.test.py
+
       - name: Python syntax
         run: python -m py_compile scripts/*.py
 
