@@ -183,8 +183,8 @@ Eight skills from [addyosmani/agent-skills](https://github.com/addyosmani/agent-
 | `agents/` | 9 role subagents: backend, frontend, data, devops, QA, architect, product, growth, niche-finder |
 | `commands/` | 13 slash commands: `/analyze`, `/discover`, `/deepdive`, `/roadmap`, `/task-loop`, `/workflow-graph`, … |
 | `skills/` | 40 skills (19 of them vendored, each with its `NOTICE.md`), indexed by job in [`skill-catalog`](skills/skill-catalog/SKILL.md), which also lists recommended third-party skills |
-| `hooks/` | `session-start.sh` (start-of-session ritual), `skill-catalog.sh` (prints the catalog into every session, marking what the repo lacks), `thread-check.sh` (repeats the session's thread before every message), `stop-cycle.sh` (no finishing a cycle that had commits without next-step options and a harvest reminder) |
-| `scripts/` | `context_monitor.py` (warns before the context window fills, with tests), `check-catalog.sh` (CI: every skill, agent and command has a catalog row), `kit-sync.sh` (install missing items into a project, update drifted copies and the kit hooks (session-start too), flag hooks settings.json does not run, honour `.claude/kit-local`), `orphan-branches.sh` |
+| `hooks/` | `session-start.sh` (start-of-session ritual), `skill-catalog.sh` (prints the catalog into every session, marking what the repo lacks), `thread-check.sh` (repeats the session's thread before every message), `stop-cycle.sh` (no finishing a cycle that had commits without next-step options and a harvest reminder), `bash-guard.sh` (refuses shell commands that already broke sessions) |
+| `scripts/` | `context_monitor.py` (warns before the context window fills, with tests), `check-catalog.sh` (CI: every skill, agent and command has a catalog row), `bash-guard.test.py` (allow/block table for `bash-guard.sh`), `kit-sync.sh` (install missing items into a project, update drifted copies and the kit hooks (session-start too), flag hooks settings.json does not run, honour `.claude/kit-local`), `orphan-branches.sh` |
 | `docs/playbook/` | `COLLABORATION.md` (the cross-project rules the hooks refer to), `HARVEST.md` (ledger of extracted lessons) |
 
 ## Hooks setup
@@ -207,7 +207,20 @@ cp ~/claude-code-kit/settings.example.json .claude/settings.json   # or merge in
 | `UserPromptSubmit` | `python3 .claude/scripts/task_profiler.py` | Suggests Haiku / Sonnet / Opus for the prompt |
 | `UserPromptSubmit` | `bash .claude/hooks/thread-check.sh` | Repeats the session's thread (`session-focus`) so a request for another goal is routed to a new session, not mixed in |
 | `UserPromptSubmit` | `python3 .claude/scripts/context_monitor.py` | Warns at 70 % context, hands over a new-session prompt at 85 % |
+| `PreToolUse` (matcher `Bash`) | `bash "$CLAUDE_PROJECT_DIR/.claude/hooks/bash-guard.sh"` | Blocks commands that already broke sessions: `pkill -f` (kills its own shell), a test or ship step piped into `grep`/`tail` and chained with `&&` (the filter's exit code hides the failure), `git push origin main` from another branch (pushes the stale local main), force push (`--force-with-lease` stays allowed off main/master). Each refusal says what to run instead |
 | `Stop` | `bash .claude/hooks/stop-cycle.sh` | Blocks the end of a cycle that committed without three next-step options |
+
+`bash-guard.sh` is registered with an absolute path: with a relative one the hook is not
+found once the session `cd`s away, and a hook that cannot start lets the command through.
+`kit-sync.sh install hooks/bash-guard.sh` copies the file and `kit-sync.sh status` reports
+`not wired` until `.claude/settings.json` runs it; kit-sync never edits settings.json. A
+project adds its own refusals in `.claude/hooks/guard-patterns.txt`, one per line,
+`<extended regex><TAB><reason>` (`#` lines are comments), matched against the command with
+quoted text and heredoc bodies blanked out:
+
+```text
+prettier[^|;&]*--write	Prettier is not used here; formatting is manual.
+```
 
 The hooks need `bash` and `python3`; `session-start.sh` uses `jq` when present.
 `context_monitor.py` assumes a 1M-token window; set `CONTEXT_LIMIT_TOKENS` to change it,
