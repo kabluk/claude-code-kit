@@ -38,9 +38,19 @@ to that repo, the steps below still say what to check by hand.
    once the canon has really landed). Translations of the playbook (English
    copies, including this kit's) stay out of the collection: their blocks
    will never match a Russian one.
-5. **Report.** `python3 scripts/portfolio_audit.py --kit <clone of the kit> <clones…> > docs/portfolio/AUDIT.md`:
-   how far each copy lags, hooks present and wired, skills against the kit,
-   branches ahead of `main`.
+5. **Report.** Write to a temp file and copy only on success:
+   `python3 scripts/portfolio_audit.py --kit <clone of the kit> <clones…> > <scratch>/AUDIT.md && cp <scratch>/AUDIT.md docs/portfolio/AUDIT.md`
+   (a redirect straight into the report empties it first, so a dropped
+   connection mid-run wipes last week's report). The report shows how far each
+   copy lags, hooks present and wired, skills against the kit, branches ahead
+   of `main`, and the **project registry**: a warning on its first line when
+   the registry's "updated" date is older than a week, and a "no registry row"
+   item for every audited repo the registry does not name.
+5b. **Registry.** On that warning, refresh each registry row from the repo's
+   own STATUS/HANDOFF (only what they say; note when a STATUS is older than the
+   repo's last commits), check the live sites, set today's date in the header,
+   and ship it in the same HQ PR. A registry nobody re-reads drifts within two
+   weeks: it is what other agents read first.
 6. **Decisions go to the owner, not done silently.** A branch with code ahead
    of `main`: merge it or close it. A skill marked "≠": whose version is newer.
    A copy that "lags": whether to roll the canon into that repo (that is a PR
