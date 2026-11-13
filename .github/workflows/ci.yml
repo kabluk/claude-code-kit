@@ -23,6 +23,9 @@ jobs:
       - name: bash-guard hook allow/block table
         run: python scripts/bash-guard.test.py
 
+      - name: stop-cycle hook, incl. unattended runs
+        run: python scripts/stop-cycle.test.py
+
       - name: Python syntax
         run: python -m py_compile scripts/*.py
 
