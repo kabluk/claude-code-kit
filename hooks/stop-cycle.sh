@@ -13,10 +13,20 @@
 #
 # Loop guard: when stop_hook_active is set we exit at once — we block exactly
 # once, after that the model decides.
+#
+# Unattended runs. A scheduled Routine runs with nobody there: a hook that
+# demands AskUserQuestion leaves the session waiting for an answer that never
+# comes. Such prompts start with the marker [[unattended]], and the hook stays
+# silent for that cycle (skills/project-pulse, point 4). The marker arrives by
+# two channels: as the opening user string, or as a notification body inside
+# a ReadNotifications tool_result, right after its "--- Notification N of M"
+# delimiter. It counts only when it came after the owner's last real message,
+# so a marker quoted in tool output (a printed trigger listing) or an owner
+# who writes later keeps the check on.
 set -u
 IN=$(cat)
 python3 - "$IN" <<'PY'
-import json, sys
+import json, re, sys
 try:
     ev = json.loads(sys.argv[1])
 except Exception:
@@ -29,16 +39,47 @@ try:
 except Exception:
     sys.exit(0)                      # no transcript: do not interfere
 
-# Index of the owner's last TEXT message: the cycle starts there.
-start = 0
+MARKER = "[[unattended]]"
+DELIM = re.compile(r"^--- Notification \d+ of \d+ .*---\s*$")
+
+def delivered_marker(text):
+    """A notification body that starts with the marker, right after its delimiter."""
+    prev_delim = False
+    for line in text.splitlines():
+        if prev_delim and line.lstrip().startswith(MARKER):
+            return True
+        prev_delim = bool(DELIM.match(line))
+    return False
+
+# Index of the owner's last real TEXT message (the cycle starts there) and of
+# the last marker delivery, by either channel.
+owner = marker = -1
 for i, l in enumerate(lines):
     try:
         r = json.loads(l)
     except Exception:
         continue
-    m = r.get("message") or {}
-    if r.get("type") == "user" and isinstance(m.get("content"), str):
-        start = i
+    if r.get("type") != "user":
+        continue
+    c = (r.get("message") or {}).get("content")
+    if isinstance(c, str):
+        if c.lstrip().startswith(MARKER):
+            marker = i
+        elif not r.get("isMeta"):
+            owner = i
+    elif isinstance(c, list):
+        for b in c:
+            if not (isinstance(b, dict) and b.get("type") == "tool_result"):
+                continue
+            t = b.get("content")
+            if not isinstance(t, str):
+                t = " ".join(x.get("text", "") for x in (t or []) if isinstance(x, dict))
+            if delivered_marker(t):
+                marker = i
+
+if marker > owner:
+    sys.exit(0)                      # unattended: nobody to ask
+start = max(owner, 0)
 
 worked = asked = harvested = False
 WORK = ("git commit", "git push", "merge_pull_request")
