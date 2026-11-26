@@ -130,6 +130,7 @@ vendored into the kit is **kit** and carries its `LICENSE` and a `NOTICE.md`
 | `community-marketing` | skill | Word of mouth through a community or ambassadors (Telegram, Discord, forum): design, seed, run it. | kit |
 | `referrals` | skill | Users or partners should bring users: referral or affiliate programme, review campaign, replies to bad reviews. | kit |
 | `free-tools` | skill | A free calculator, generator or checker as a lead and traffic magnet: whether to build one, which, how to judge it. | kit |
+| `directory-inbox` | skill | Letters arrive at a directory we run (claim listing, "add us", replies to our outreach, inbox screenshots): classify, check the sender (RDAP age, DataForSEO rank, already listed), decide, reply with the badge as an option only, hand the change to the directory's repo, log it. | kit |
 
 ### 6. Writing and copywriting
 
